@@ -1,4 +1,8 @@
 <?
+
+error_reporting(0);
+ini_set("display_item",0);
+
 require_once("Eksigator.php");
 
 $eksigator = new Eksigator();
