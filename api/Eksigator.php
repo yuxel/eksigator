@@ -12,17 +12,31 @@ class Eksigator{
     const STATUS_UNREAD = 1;
     const MAX_ID = 2099999999;
     const CACHE_TIME = 3600; //seconds
+    const USER_CACHE_FILE_PREFIX = "/tmp/eksigator_";
 
+    /**
+     * init db and fetcher
+     */
     function __construct(){
         $this->connectDb(); 
         $this->fetcher = new SourPHP();
     }
 
+    /**
+     * connect to db
+     */
     function connectDb(){
         $this->dbLink = mysql_pconnect ( DB_HOST, DB_USER, DB_PASS ) ;
         $db_selected = mysql_select_db( DB_NAME, $this->dbLink);
     }
 
+    /**
+     * authenticate user via username and apiKey
+     *
+     * @param string $userName  username as email
+     * @param string $apiKey apiKey
+     * @return boolean
+     */
     function authenticateUser($userName, $apiKey){
         $userName = addslashes ( $userName );
         $apiKey   = addslashes ( $apiKey );
@@ -40,9 +54,12 @@ class Eksigator{
     }
 
 
+    /**
+     * get users subscriptionList from db
+     */
     function getUserSubscriptionList(){
 
-        $sql = "select * from entries where userId='" . $this->userId . "'";
+        $sql = "select title, lastRead, status, lastId from entries where userId='" . $this->userId . "'";
         $result = mysql_query($sql, $this->dbLink);
 
         $subscriptionLists = array();
@@ -53,21 +70,28 @@ class Eksigator{
         return $subscriptionLists;
     }
 
+    /**
+     * update title of user 
+     *
+     * @param string $title entry title
+     * @param int $lastRead timestamp of last read entry
+     * @param int $status , read = 0, unread = 1
+     * @param int $lastId id of last read entry
+     */
     function updateUserTitle ( $title, $lastRead, $status, $lastId ) {
         $title = addslashes ( $title);
         $lastRead = (int) $lastRead;
         $status = (int) $status;
         $lastId = (int) $lastId;
 
-
         $sql = "update entries set 
-            title = '$title',
-                  lastRead = '$lastRead',
-                  status = '$status',
-                  lastId = '$lastId'
-                      where 
-                      title='$title'
-                      and userId='$this->userId'";
+                title = '$title',
+                lastRead = '$lastRead',
+                status = '$status',
+                lastId = '$lastId'
+                where 
+                title='$title'
+                and userId='$this->userId'";
 
         mysql_query($sql, $this->dbLink);
 
@@ -79,18 +103,29 @@ class Eksigator{
     }
 
 
+    /**
+     * remove title from database
+     *
+     * @param string $title entry title
+     */
     function removeFromList ( $title ) {
         $title = addslashes ( $title);
 
         $sql = "delete from entries
-            where title='$title'
-            and userId ='$this->userId'";
+                where title='$title'
+                and userId ='$this->userId'";
 
         mysql_query($sql, $this->dbLink);
     }
 
 
+    /**
+     * add entry to list
+     *
+     * @param string $title entry title
+     */
     function addToList( $title ) {
+        //remove first
         $this->removeFromList( $title ) ;
         $title = addslashes ( $title);
         $lastRead = (int) time();
@@ -103,6 +138,11 @@ class Eksigator{
         mysql_query($sql, $this->dbLink);
     }
 
+    /**
+     * set title as read
+     *
+     * @param string $title entry title
+     */
     function setItemAsRead($title){
         $lastRead = (int) time();
         $status = 0;
@@ -110,10 +150,16 @@ class Eksigator{
         $this->updateUserTitle ( $title, $lastRead, $status, $lastId );
     }
 
-    function toJson($text){
-        $data = json_encode($text);
+    /**
+     * output data as json
+     * 
+     * @param mixed array 
+     */
+    function toJson($array){
+        $data = json_encode($array);
         header("Content-type: application/x-javascript"); 
 
+        //JSONP
         if($_GET['jsoncallback'] ) {
             echo $_GET['jsoncallback'] . '(' . $data . ');';
         }
@@ -123,10 +169,13 @@ class Eksigator{
     }
 
 
+    /**
+     * fetches new entries if cache time expired
+     */
     function getSubscriptionStatus() {
 
         $cacheTime = self::CACHE_TIME; //seconds
-        $this->userCacheFile = "/tmp/eksigator_". $this->userId;
+        $this->userCacheFile =  self::USER_CACHE_FILE_PREFIX.$this->userId;
 
         $mtime = @filemtime($this->userCacheFile);
         $now = time();
@@ -141,11 +190,14 @@ class Eksigator{
                 $lastRead = $value['lastRead'];
                 $status = $value['status'];
 
+                //if not read yet, skip
                 if($status == self::STATUS_READ) {
+                    //fetch new entries
                     $changeStatus = $this->fetcher->getEntriesByTitleAfterGivenTime($title, $lastRead);
+                    //get first entry
                     $changeStatus = $changeStatus[0];
 
-                    if($changeStatus) {
+                    if($changeStatus) { //if entry changed
                         $newStatus   = (string) self::STATUS_UNREAD;
                         $newId       = (string) $changeStatus['entryId'];
                         $newLastRead = (string) $changeStatus['dateCreated'];
@@ -160,9 +212,9 @@ class Eksigator{
                 }
 
             }
+            //update userCache
             @touch($this->userCacheFile);  
         }
-
 
         return $list;
     }
