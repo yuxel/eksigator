@@ -67,9 +67,13 @@ class Eksigator{
         $sql = "select title, lastRead, status, lastId from entries where userId='" . $this->userId . "'";
         $result = mysql_query($sql, $this->dbLink);
 
+
         $subscriptionLists = array();
+        $count = 0;
         while ($row = mysql_fetch_assoc($result)) {
-            $subscriptionLists[] = stripslashes( $row );
+            $subscriptionLists[$count] = $row;
+            $subscriptionLists[$count]['title'] = stripslashes ( $row['title'] );
+            $count++;
         }
 
         return $subscriptionLists;
@@ -101,7 +105,7 @@ class Eksigator{
         mysql_query($sql, $this->dbLink);
 
         return array("userId"=>$this->userId,
-                     "title"=> stripslashes( $title ),
+                     "title"=> stripslashes ( $title ),
                      "lastRead"=> (string) $lastRead,
                      "status"=> (string) $status,
                      "lastId"=> (string) $lastId);
