@@ -1,6 +1,8 @@
 <?
 require_once("../SourPHP/classes/SourPHP.php");
 
+include_once("mysqlConf.php"); //db conf
+
 /**
  * Eksigator
  *
@@ -10,8 +12,11 @@ class Eksigator{
 
     const STATUS_READ = 0;
     const STATUS_UNREAD = 1;
+
     const MAX_ID = 2099999999;
+
     const CACHE_TIME = 3600; //seconds
+
     const USER_CACHE_FILE_PREFIX = "/tmp/eksigator_";
 
     /**

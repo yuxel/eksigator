@@ -1,11 +1,4 @@
 <?
-
-//@todo this should be moved to a config file
-define ('DB_HOST', "localhost" );
-define ('DB_USER', "root");
-define ('DB_PASS', "12345678");
-define ('DB_NAME', "eksigator");
-
 require_once("Eksigator.php");
 
 $eksigator = new Eksigator();
