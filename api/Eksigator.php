@@ -69,7 +69,7 @@ class Eksigator{
 
         $subscriptionLists = array();
         while ($row = mysql_fetch_assoc($result)) {
-            $subscriptionLists[] = $row;
+            $subscriptionLists[] = stripslashes( $row );
         }
 
         return $subscriptionLists;
@@ -101,7 +101,7 @@ class Eksigator{
         mysql_query($sql, $this->dbLink);
 
         return array("userId"=>$this->userId,
-                     "title"=> $title,
+                     "title"=> stripslashes( $title ),
                      "lastRead"=> (string) $lastRead,
                      "status"=> (string) $status,
                      "lastId"=> (string) $lastId);
