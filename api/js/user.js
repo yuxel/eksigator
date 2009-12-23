@@ -5,8 +5,8 @@
 // ==/UserScript==
 
 
-var userName = "yuxel@sonsuzdongu.com";
-var userApiKey = "5695743ebdebd5b05a0e756c26f63cc3";
+var userName = "demo";
+var userApiKey = "demo";
 
 function include(file)
 {
