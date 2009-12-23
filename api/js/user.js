@@ -1,10 +1,12 @@
-/**
- * user javascript
- *
- * replace these strings below
- */
-var userName = "replaceThisWithUsername";
-var userApiKey = "replaceThisWithApiKey";
+// ==UserScript==
+// @include http://*/show.asp*
+// @include http://*/cc.asp*
+// @include http://*/stats.asp*
+// ==/UserScript==
+
+
+var userName = "yuxel@sonsuzdongu.com";
+var userApiKey = "5695743ebdebd5b05a0e756c26f63cc3";
 
 function include(file)
 {
