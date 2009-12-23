@@ -5,101 +5,100 @@ var currentOrder = 0;
 var maxId = 2099999999;
 var itemId = maxId;
 
+var baseUrl="http://sozluk.sourtimes.org/";
+var apiURL = "http://eksigator.sonsuzdongu.com/api/";
+var sourPHPUrl=apiURL+ userName + "/" + userApiKey +"/";
 
-function whenPageLoaded(){
+ $(document).ready( function() {
 
-     $(document).ready( function() {
+    panel = $("#panel").html();
+    if(panel == null) return false; //iframe instance'lari gelmesin
 
+    $("#panel").prepend('<div id="sourPHP_panel">Liste alınıyor...</div>');
+    getSubscriptionListData();
 
-        panel = $("#panel").html();
-        if(panel == null) return false; //iframe instance'lari gelmesin
+    //$("#el").append("<a name=\"d"+maxId+"\"></a>");
 
-        $("#panel").prepend('<div id="sourPHP_panel">Liste alınıyor...</div>');
-        getSubscriptionListData();
+    header = $("h1.title");
 
-        //$("#el").append("<a name=\"d"+maxId+"\"></a>");
+    header.hover( function() {
+        $(".sourPHP_subscribe").show();
+    },
+    function() {
+        $(".sourPHP_subscribe").hide();
+    });
 
-        header = $("h1.title");
+    pageTitle="";
+    $("a",header).each( function() {
+        isSup = ( $(this).parent("sup").html() == null ) ? false : true;
+        if(!isSup) {
+            pageTitle += $(this).text()+" ";
+        }
+    });
 
-        header.hover( function() {
-            $(".sourPHP_subscribe").show();
-        },
-        function() {
-            $(".sourPHP_subscribe").hide();
-        });
+    pageTitle = pageTitle.replace(/^\s*/, "").replace(/\s*$/, "");
 
-        pageTitle="";
-        $("a",header).each( function() {
-            isSup = ( $(this).parent("sup").html() == null ) ? false : true;
-            if(!isSup) {
-                pageTitle += $(this).text()+" ";
+    $("body").bind("dataLoaded", function() {
+
+        panelCSS = "text-align:center; display:block; cursor:pointer;font-weight:bold; background:#5b7118"; 
+        listDiv = '<div style="border:1px solid #5b7118;display:none; background:#a6b255;" id="sourPHP_listDiv"></div>';
+        $("#sourPHP_panel").html(listDiv + '<a style="'+panelCSS+'" class="sourPHP_subscriptionList">Ek$igator</a>');
+        isOnList = isTitleOnList(pageTitle);
+       
+        if(isOnList == false) {
+            subscribeText = "[Takibe al]";
+        }
+        else {
+            $("#d"+itemId).prepend("<a name=\"d"+itemId+"\"></a>");
+            window.location.href = window.location.href +"#d"+itemId;
+            if(itemStatus == 1 ) {
+                setItemAsRead(pageTitle);
             }
-        });
+            subscribeText = "[Takipten çıkar]";
+        }
 
-        pageTitle = pageTitle.replace(/^\s*/, "").replace(/\s*$/, "");
+        
+        titleCSS = "cursor:pointer; font-weight:bold; background-color:#5b7118; display:none; color:#FFF; padding:0 4px 0 4px; margin:0 5px 0 5px;"; 
 
-        $("body").bind("dataLoaded", function() {
+        $("h1.title").append(' <span style="'+titleCSS+'" class="sourPHP_subscribe">'+subscribeText+'</span> ');
 
-            panelCSS = "text-align:center; display:block; cursor:pointer;font-weight:bold; background:#5b7118"; 
-            listDiv = '<div style="border:1px solid #5b7118;display:none; background:#a6b255;" id="sourPHP_listDiv"></div>';
-            $("#sourPHP_panel").html(listDiv + '<a style="'+panelCSS+'" class="sourPHP_subscriptionList">Ek$igator</a>');
-            isOnList = isTitleOnList(pageTitle);
-           
-            if(isOnList == false) {
+
+        $(".sourPHP_subscribe").click( function() {
+
+            if(isOnList == true) {
+                removeFromList(pageTitle);
                 subscribeText = "[Takibe al]";
+                text = "'"+pageTitle+"'"+ " basligi takip listenizden çıkarıldı";
+                isOnList = false;
             }
-            else {
-                $("#d"+itemId).prepend("<a name=\"d"+itemId+"\"></a>");
-                window.location.href = window.location.href +"#d"+itemId;
-                if(itemStatus == 1 ) {
-                    setItemAsRead(pageTitle);
-                }
+            else{
+                addToList(pageTitle);
                 subscribeText = "[Takipten çıkar]";
+                text = "'"+pageTitle+"'"+ " basligi takip listenize eklendi";
+                isOnList = true;
             }
-
-            
-            titleCSS = "cursor:pointer; font-weight:bold; background-color:#5b7118; display:none; color:#FFF; padding:0 4px 0 4px; margin:0 5px 0 5px;"; 
-
-            $("h1.title").append(' <span style="'+titleCSS+'" class="sourPHP_subscribe">'+subscribeText+'</span> ');
+            alert(text);
+            $(".sourPHP_subscribe").html(subscribeText);
+        });
 
 
-            $(".sourPHP_subscribe").click( function() {
-
-                if(isOnList == true) {
-                    removeFromList(pageTitle);
-                    subscribeText = "[Takibe al]";
-                    text = "'"+pageTitle+"'"+ " basligi takip listenizden çıkarıldı";
-                    isOnList = false;
-                }
-                else{
-                    addToList(pageTitle);
-                    subscribeText = "[Takipten çıkar]";
-                    text = "'"+pageTitle+"'"+ " basligi takip listenize eklendi";
-                    isOnList = true;
-                }
-                alert(text);
-                $(".sourPHP_subscribe").html(subscribeText);
-            });
-
-
-            $(".sourPHP_subscriptionList").click( function() {
-                if ( userList == null) {
-                    alert('Listeniz boş, başlıkların sağındaki düğmelerden ekleyebilirsiniz');
-                    return false;
-                }
-                else if($(userList).attr("message") == "AUTH_FAILED") {
-                    alert('Yetkilendirme basarisiz, API anahtariniz yanlis olabilir mi?');
-                    return false;
-                 }
-                outputListAsHtml();
-                $("#sourPHP_listDiv").toggle("fast");
-            });
-
+        $(".sourPHP_subscriptionList").click( function() {
+            if ( userList == null) {
+                alert('Listeniz boş, başlıkların sağındaki düğmelerden ekleyebilirsiniz');
+                return false;
+            }
+            else if($(userList).attr("message") == "AUTH_FAILED") {
+                alert('Yetkilendirme basarisiz, API anahtariniz yanlis olabilir mi?');
+                return false;
+             }
+            outputListAsHtml();
+            $("#sourPHP_listDiv").toggle("fast");
         });
 
     });
 
-}
+});
+
 
 
 
