@@ -4,33 +4,87 @@ var pageTitle = false;
 var currentOrder = 0;
 var maxId = 2099999999;
 var itemId = maxId;
+var pageTitle = "";
+var isOnList = false;
+var removeSpan = "<span class=\"eksigator_remove\"> x </span>";
 
 var baseUrl="http://sozluk.sourtimes.org/";
 var apiURL = "http://eksigator.sonsuzdongu.com/api/";
 var sourPHPUrl=apiURL+ userName + "/" + userApiKey +"/";
 
- $(document).ready( function() {
+//language constants
+var _FETCHING_LIST="Liste alınıyor";
+var _AUTH_FAILED = "Yetkilendirme başarısız, API anahtarınız yanlış olabilir mi?";
+var _PANEL_BUTTON = "Ek$igator";
+var _SUBSCRIBE = "[ Takibe al ]";
+var _UNSUBSCRIBE = "[ Takipten çıkar ]";
+var _TITLE_UNSUBSCRIBED = "'%s' başlığı takip listenizden çıkarıldı";
+var _TITLE_SUBSCRIBED = "'%s' başlığı takip listenize eklendi";
+var _YOUR_LIST_EMPTY = 'Listeniz boş, başlıkların sağındaki düğmeleri kullanarak ekleyebilirsiniz';
 
-    panel = $("#panel").html();
-    if(panel == null) return false; //iframe instance'lari gelmesin
 
-    $("#panel").prepend('<div id="sourPHP_panel">Liste alınıyor...</div>');
-    getSubscriptionListData();
+$(document).ready( function() {
+   includeCSS();
+   initElements(); //title and panel
+   getSubscriptionListData(); //read data
 
-    //$("#el").append("<a name=\"d"+maxId+"\"></a>");
+   //if data loaded
+   $(document).bind("dataLoaded", function() { 
 
+       //if authorization failed
+       if ( !isAuthorized ( userList ) ) {
+           alert(_AUTH_FAILED);
+           return false;
+       }
+
+       panelButton = "<a class=\"eksigator_panel_button\">"+_PANEL_BUTTON+"<span></span></a>";
+       itemListDiv = "<div id=\"eksigator_item_list\">&nbsp;</div>";
+       
+       $("#eksigator_panel").html(itemListDiv + panelButton);
+    
+
+       //get isOnlist, lastId  and itemStatus
+       getTitleStatus ( pageTitle );
+
+       if(itemStatus == 1 ) {
+           //if this page is on our list
+           setItemAsRead(pageTitle);
+       }
+
+       //init susbcriber buttons near title
+       initTitleSubscriber ( pageTitle ); 
+       
+       $(".eksigator_subscribe").click( titleSubscribeButtonClicked ); 
+
+       $(".eksigator_panel_button").click( panelButtonClicked );
+
+       outputListAsHtml();
+
+       $(".eksigator_item_ul.read").hide();
+   });
+
+});
+
+/**
+ * init pages default elements like panel and header
+ */
+function initElements() {
+    //panel
+    $("#panel").prepend('<div id="eksigator_panel">'+_FETCHING_LIST+'</div>');
+
+    //header
     header = $("h1.title");
-
     header.hover( function() {
-        $(".sourPHP_subscribe").show();
+        $(".eksigator_subscribe").show();
     },
     function() {
-        $(".sourPHP_subscribe").hide();
+        $(".eksigator_subscribe").hide();
     });
 
-    pageTitle="";
+    //get title without superscript
     $("a",header).each( function() {
         isSup = ( $(this).parent("sup").html() == null ) ? false : true;
+        //we need to remove superscript elements
         if(!isSup) {
             pageTitle += $(this).text()+" ";
         }
@@ -38,91 +92,106 @@ var sourPHPUrl=apiURL+ userName + "/" + userApiKey +"/";
 
     pageTitle = pageTitle.replace(/^\s*/, "").replace(/\s*$/, "");
 
-    $("body").bind("dataLoaded", function() {
-
-        panelCSS = "text-align:center; display:block; cursor:pointer;font-weight:bold; background:#5b7118"; 
-        listDiv = '<div style="border:1px solid #5b7118;display:none; background:#a6b255;" id="sourPHP_listDiv"></div>';
-        $("#sourPHP_panel").html(listDiv + '<a style="'+panelCSS+'" class="sourPHP_subscriptionList">Ek$igator</a>');
-        isOnList = isTitleOnList(pageTitle);
-       
-        if(isOnList == false) {
-            subscribeText = "[Takibe al]";
-        }
-        else {
-            $("#d"+itemId).prepend("<a name=\"d"+itemId+"\"></a>");
-            window.location.href = window.location.href +"#d"+itemId;
-            if(itemStatus == 1 ) {
-                setItemAsRead(pageTitle);
-            }
-            subscribeText = "[Takipten çıkar]";
-        }
-
-        
-        titleCSS = "cursor:pointer; font-weight:bold; background-color:#5b7118; display:none; color:#FFF; padding:0 4px 0 4px; margin:0 5px 0 5px;"; 
-
-        $("h1.title").append(' <span style="'+titleCSS+'" class="sourPHP_subscribe">'+subscribeText+'</span> ');
+}
 
 
-        $(".sourPHP_subscribe").click( function() {
+/**
+ * check if user authorized
+ */
+function isAuthorized ( userList ){
+    if($(userList).attr("message") == "AUTH_FAILED") {
+        return false;
+    }
+    return true;
+}
 
-            if(isOnList == true) {
-                removeFromList(pageTitle);
-                subscribeText = "[Takibe al]";
-                text = "'"+pageTitle+"'"+ " basligi takip listenizden çıkarıldı";
-                isOnList = false;
-            }
-            else{
-                addToList(pageTitle);
-                subscribeText = "[Takipten çıkar]";
-                text = "'"+pageTitle+"'"+ " basligi takip listenize eklendi";
-                isOnList = true;
-            }
-            alert(text);
-            $(".sourPHP_subscribe").html(subscribeText);
-        });
-
-
-        $(".sourPHP_subscriptionList").click( function() {
-            if ( userList == null) {
-                alert('Listeniz boş, başlıkların sağındaki düğmelerden ekleyebilirsiniz');
-                return false;
-            }
-            else if($(userList).attr("message") == "AUTH_FAILED") {
-                alert('Yetkilendirme basarisiz, API anahtariniz yanlis olabilir mi?');
-                return false;
-             }
-            outputListAsHtml();
-            $("#sourPHP_listDiv").toggle("fast");
-        });
-
-    });
-
-});
+/**
+ * go to entry id
+ */
+function goToAnchor ( itemId ) {
+    if ( itemId != maxId ) {
+        $("#d"+itemId).prepend("<a name=\"d"+itemId+"\"></a>");
+        window.location.href = window.location.href +"#d"+itemId;
+    }
+}
 
 
+/**
+ * subscriber near title bar
+ */
+function initTitleSubscriber ( pageTitle ) {
+
+    //if its on our list
+    if(isOnList == false) {
+        itemText = _SUBSCRIBE;
+    }
+    else {
+        goToAnchor ( itemId );
+        itemText = _UNSUBSCRIBE;
+    }
+
+    title_subscriber = "<span class=\"eksigator_subscribe\">"+itemText+"</span>";
+    $("h1.title").append( title_subscriber );
+}
 
 
+/**
+ * when clicked to subscribe or unsubscribe
+ * button near title
+ */
+function titleSubscribeButtonClicked ( ) {
+
+    if(isOnList == true) {
+        //if its on our list , remove it
+        removeFromList(pageTitle);
+        subscribeText = _SUBSCRIBE;
+        text = _TITLE_UNSUBSCRIBED.replace(/%s/, pageTitle);
+        isOnList = false;
+    }
+    else{
+        //if not in list, add to our list
+        addToList(pageTitle);
+        subscribeText = _UNSUBSCRIBE;
+        text = _TITLE_SUBSCRIBED.replace(/%s/, pageTitle);
+        isOnList = true;
+    }
+    alert(text);
+    $(".eksigator_subscribe").html(subscribeText);
+}
+
+/**
+ * when clicked to panel button ek$igator
+ */
+function panelButtonClicked() {
+    //if list is empty
+    if ( userList == null) {
+       alert(_YOUR_LIST_EMPTY);
+       return false;
+    }
+
+    readItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
+
+    outputListAsHtml();
+
+    //toggle item
+    if( readItemsStatus == true ) {
+        $(".eksigator_item_ul.read").show('fast');
+    }
+    else{
+        $(".eksigator_item_ul.read").hide('fast');
+    }
+}
 
 
 
 function getSubscriptionListData(){
-
-    //@todo cookie'den de bakabilmeli
     url = sourPHPUrl + "getList/";
     url += "?&jsoncallback=?";
 
-    if(!userList) {
-        //data = readCookie("userList");
-        $.getJSON(url , function(data){
-                userList = data;
-                if($(userList).attr("message") == "AUTH_FAILED") {
-                    alert('Yetkilendirme basarisiz, API anahtariniz yanlis olabilir mi?');
-                }
-                //createCookie("userList", userList); 
-                $("body").trigger("dataLoaded");
-        });
-    }
-
+    $.getJSON(url , function(data){
+            userList = data;
+            $(document).trigger("dataLoaded");
+    });
 }
 
 
@@ -137,7 +206,8 @@ function addToList(pageTitle){
 }
 
 
-function clickRemove(title) {
+function clickRemove(parentLi) {
+    title = $("a", parentLi).attr("title");
     var wantToDelete = confirm("Başlığı takipten çıkarmak istiyor musunuz?")
     if (wantToDelete){
         removeFromList(title);
@@ -168,71 +238,96 @@ function setItemAsRead(pageTitle){
 }
 
 
+function getItemsAsHtml (readStatus ) {
+
+    if(readStatus == "read")  {
+        itemsWanted = 0;
+    }
+    else{
+        itemsWanted = 1;
+    }
+
+    output = "";
+    count = 0;
+    for(var i=0; i< foundCount; i++) {
+
+        item = $(userList[i]);
+        itemStatus = item.attr("status");
+
+        if( itemStatus == itemsWanted ) {
+            count ++;
+            itemTitle = item.attr("title");
+            itemUrl = baseUrl + "show.asp?t="+itemTitle+"&i="+item.attr("lastId");
+
+            itemTitleTruncated = itemTitle;
+            if(itemTitleTruncated.length > 20) {
+                itemTitleTruncated = itemTitleTruncated.substr(0,18) + "...";
+            }
+
+            text = "<a title=\""+itemTitle+"\" href=\""+itemUrl+"\">"+itemTitleTruncated+"</a>";
+            output += "<li>"+ removeSpan + text+"</li>";
+        }
+    }
+
+    $(".eksigator_panel_button span").empty();
+    if( count > 0  ){
+        if( readStatus == 'unread' ){
+            $(".eksigator_panel_button span").html(" ("+count+")");
+        }
+        return "<ul class=\"eksigator_item_ul "+readStatus+"\">" + output + "</ul>";
+    }
+
+    return false;
+}
+
 function outputListAsHtml() {
 
-        if(!userList) {
-            $("#sourPHP_listDiv").empty();
-            return false;
+    foundCount = userList.length;
+
+    previousReadItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
+
+    $("#eksigator_item_list").empty();
+    if(foundCount >  0 ) {
+
+        readItems = getItemsAsHtml( 'read');
+        unreadItems = getItemsAsHtml( 'unread');
+
+        if(unreadItems) {
+            $("#eksigator_item_list").append(unreadItems);
         }
 
-        ulCSS = "margin:0; padding:0;";
-        liCSS = "margin:0; padding:0; list-style-type:none;";
-        removeSpan = "<span class=\"sourPHP_remove\" style=\"color:#c5050c; cursor:pointer; font-weight:bold\"> x </span>";
 
-
-        foundCount = userList.length;
-
-        if(foundCount == 0 ) {
-            output = "---Liste boş --";
+        if(readItems) {
+            $("#eksigator_item_list").append(readItems);
         }
-        else{
-            output = "<ul style=\""+ulCSS+"\">";
-
-            for(var i=0; i< foundCount; i++) {
-                item = $(userList[i]);
-                itemTitle = item.attr("title");
-                itemUrl = baseUrl + "show.asp?t="+itemTitle+"&i="+item.attr("lastId");
-
-                order = item.attr("order");
-                readCSS = "";
-
-                itemStatus = item.attr("status");
-
-                if(itemStatus == 1) {
-                    readCSS = "color:green !important; font-weight:bold";
-                }
-
-
-                itemTitleTruncated = itemTitle;
-                if(itemTitleTruncated.length > 20) {
-                    itemTitleTruncated = itemTitleTruncated.substr(0,18) + "...";
-                }
-
-                text = "<a style=\""+readCSS+"\" title=\""+itemTitle+"\" href=\""+itemUrl+"\">"+itemTitleTruncated+"</a>";
-                output += "<li style=\""+liCSS+"\">"+removeSpan + text+"</li>";
-            }
-            output += "</ul>";
-        }
-        $("#sourPHP_listDiv").html(output);
-        $(".sourPHP_remove").click( function() {
-              parentLi = $(this).parent();
-              title = $("a", parentLi).attr("title");
-              clickRemove(title);
-
+           
+        $(".eksigator_remove").click( function() {
+          parentLi = $(this).parent();
+          clickRemove(parentLi);
         });
+
+        $(".eksigator_item_ul.unread").show("fast");
+
+    }
+
+    //if read item is hidden previously
+    if(previousReadItemsStatus == true) {
+        $(".eksigator_item_ul.read").hide();
+    }
 }
 
 
-function isTitleOnList(pageTitle){
+function getTitleStatus(pageTitle){
         if(!userList) return false;
-
         foundCount = userList.length;
+
         for(var i=0; i< foundCount; i++) {
             text = $(userList[i]).attr("title");
-            itemId = $(userList[i]).attr("lastId");
             itemStatus = $(userList[i]).attr("status");
+            itemId = $(userList[i]).attr("lastId");
 
             if(text == pageTitle) {
+                isOnList = true;
                 return true;
             }
         }
@@ -264,4 +359,15 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
+/**
+ * load eksigator.css from remote host
+ */
+function includeCSS(){
+  var fileref=document.createElement("link");
+  linkHref = apiURL + "css/eksigator.css";
+  fileref.setAttribute("rel", "stylesheet");
+  fileref.setAttribute("type", "text/css");
+  fileref.setAttribute("href", linkHref);
+  document.getElementsByTagName("head")[0].appendChild(fileref);
+}
 
