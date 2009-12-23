@@ -284,13 +284,14 @@ function getItemsAsHtml (readStatus ) {
 
 function outputListAsHtml() {
 
+    previousReadItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
     $("#eksigator_item_list").empty();
+    
     if(!userList) {
         return false;
     }
-    foundCount = userList.length;
 
-    previousReadItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
+    foundCount = userList.length;
 
     if(foundCount >  0 ) {
 
