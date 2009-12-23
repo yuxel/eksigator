@@ -52,6 +52,7 @@ $(document).ready( function() {
            setItemAsRead(pageTitle);
        }
 
+
        //init susbcriber buttons near title
        initTitleSubscriber ( pageTitle ); 
        
@@ -165,7 +166,7 @@ function titleSubscribeButtonClicked ( ) {
  */
 function panelButtonClicked() {
     //if list is empty
-    if ( userList == null) {
+    if ( !userList) {
        alert(_YOUR_LIST_EMPTY);
        return false;
     }
@@ -283,11 +284,14 @@ function getItemsAsHtml (readStatus ) {
 
 function outputListAsHtml() {
 
+    $("#eksigator_item_list").empty();
+    if(!userList) {
+        return false;
+    }
     foundCount = userList.length;
 
     previousReadItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
 
-    $("#eksigator_item_list").empty();
     if(foundCount >  0 ) {
 
         readItems = getItemsAsHtml( 'read');
@@ -319,9 +323,10 @@ function outputListAsHtml() {
 
 
 function getTitleStatus(pageTitle){
-        if(!userList) return false;
+        if(!userList) {
+            return false;
+        }
         foundCount = userList.length;
-
         for(var i=0; i< foundCount; i++) {
             text = $(userList[i]).attr("title");
             itemStatus = $(userList[i]).attr("status");
