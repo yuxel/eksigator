@@ -146,19 +146,14 @@ function titleSubscribeButtonClicked ( ) {
     if(isOnList == true) {
         //if its on our list , remove it
         removeFromList(pageTitle);
-        subscribeText = _SUBSCRIBE;
         text = _TITLE_UNSUBSCRIBED.replace(/%s/, pageTitle);
-        isOnList = false;
     }
     else{
         //if not in list, add to our list
         addToList(pageTitle);
-        subscribeText = _UNSUBSCRIBE;
         text = _TITLE_SUBSCRIBED.replace(/%s/, pageTitle);
-        isOnList = true;
     }
     alert(text);
-    $(".eksigator_subscribe").html(subscribeText);
 }
 
 /**
@@ -204,6 +199,9 @@ function addToList(pageTitle){
     $.getJSON(url , function(data){
             userList = data;
             outputListAsHtml();
+            subscribeText = _UNSUBSCRIBE;
+            isOnList = true;
+            $(".eksigator_subscribe").html(subscribeText);
     });
 }
 
@@ -226,6 +224,9 @@ function removeFromList(pageTitle){
     $.getJSON(url , function(data){
             userList = data;
             outputListAsHtml();
+            subscribeText = _SUBSCRIBE;
+            isOnList = false;
+            $(".eksigator_subscribe").html(subscribeText);
     });
 }
 
