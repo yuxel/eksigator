@@ -1,5 +1,10 @@
-var userName = "yuxel@sonsuzdongu.com";
-var userApiKey = "foo";
+/**
+ * user javascript
+ *
+ * replace these strings below
+ */
+var userName = "replaceThisWithUsername";
+var userApiKey = "replaceThisWithApiKey";
 
 function include(file)
 {
