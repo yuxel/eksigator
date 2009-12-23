@@ -7,6 +7,7 @@ var itemId = maxId;
 var pageTitle = "";
 var isOnList = false;
 var removeSpan = "<span class=\"eksigator_remove\"> x </span>";
+var itemStatus = 0;
 
 var baseUrl="http://sozluk.sourtimes.org/";
 var apiURL = "http://eksigator.sonsuzdongu.com/api/";

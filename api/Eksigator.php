@@ -225,7 +225,7 @@ class Eksigator{
             @touch($this->userCacheFile);  
         }
 
-        return $list;
+        return empty($list) ? null : $list;
     }
 
 
