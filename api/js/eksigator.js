@@ -22,7 +22,7 @@ var _UNSUBSCRIBE = "[ Takipten çıkar ]";
 var _TITLE_UNSUBSCRIBED = "'%s' başlığı takip listenizden çıkarıldı";
 var _TITLE_SUBSCRIBED = "'%s' başlığı takip listenize eklendi";
 var _YOUR_LIST_EMPTY = 'Listeniz boş, başlıkların sağındaki düğmeleri kullanarak ekleyebilirsiniz';
-
+var _ARE_YOU_SURE_UNSUBSCRIBE = "Başlığı takipten çıkarmak istiyor musunuz?";
 
 $(document).ready( function() {
    includeCSS();
@@ -180,7 +180,9 @@ function panelButtonClicked() {
 }
 
 
-
+/**
+ * get subscription list of user
+ */
 function getSubscriptionListData(){
     url = sourPHPUrl + "getList/";
     url += "?&jsoncallback=?";
@@ -191,14 +193,22 @@ function getSubscriptionListData(){
     });
 }
 
-
+/**
+ * add pageTitle to users list
+ *
+ * @param string pageTitle
+ */
 function addToList(pageTitle){
     url = sourPHPUrl + "addToList/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
     $.getJSON(url , function(data){
             userList = data;
+
+            //reload list
             outputListAsHtml();
+
+            //change title status
             subscribeText = _UNSUBSCRIBE;
             isOnList = true;
             $(".eksigator_subscribe").html(subscribeText);
@@ -206,9 +216,14 @@ function addToList(pageTitle){
 }
 
 
+/**
+ * when cliecked to remove button on list
+ */
 function clickRemove(parentLi) {
     title = $("a", parentLi).attr("title");
-    var wantToDelete = confirm("Başlığı takipten çıkarmak istiyor musunuz?")
+    //confirm deletion
+    var wantToDelete = confirm(_ARE_YOU_SURE_UNSUBSCRIBE);
+
     if (wantToDelete){
         removeFromList(title);
     }
@@ -217,36 +232,61 @@ function clickRemove(parentLi) {
     }
 }
 
+/**
+ * remove pageTitle from users list
+ *
+ * @param string pageTitle
+ */
 function removeFromList(pageTitle){
     url = sourPHPUrl + "removeFromList/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
     $.getJSON(url , function(data){
             userList = data;
+
+            //reload list
             outputListAsHtml();
+
+            //alter subscription list at title
             subscribeText = _SUBSCRIBE;
             isOnList = false;
             $(".eksigator_subscribe").html(subscribeText);
     });
 }
 
+/**
+ * set item as read
+ *
+ * @todo there's a bug related to time difference between our server and eksisozluk
+ *
+ * @param string pageTitle
+ */
 function setItemAsRead(pageTitle){
     url = sourPHPUrl + "setItemAsRead/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
     $.getJSON(url , function(data){
             userList = data;
+
+            //reload list
             outputListAsHtml();
     });
 }
 
 
+/**
+ * get elements as Html such <ul><li><a href="foo">bar</a></li></ul>
+ *
+ * @param enum readStatus "read"|"unread"
+ */
 function getItemsAsHtml (readStatus ) {
 
     if(readStatus == "read")  {
+        //read's status is 0
         itemsWanted = 0;
     }
     else{
+        //unread's status is 1
         itemsWanted = 1;
     }
 
@@ -272,20 +312,28 @@ function getItemsAsHtml (readStatus ) {
         }
     }
 
-    $(".eksigator_panel_button span").empty();
+    $(".eksigator_panel_button span").empt
     if( count > 0  ){
+        //put unread item count near button like ( 2 )
         if( readStatus == 'unread' ){
             $(".eksigator_panel_button span").html(" ("+count+")");
         }
+        //if found any item, return output
         return "<ul class=\"eksigator_item_ul "+readStatus+"\">" + output + "</ul>";
     }
 
     return false;
 }
 
+
+/**
+ * fetch unread items and read items and generate html 
+ */
 function outputListAsHtml() {
 
+    // readItemsStatus should be same
     previousReadItemsStatus = $(".eksigator_item_ul.read").is(':hidden');
+
     $("#eksigator_item_list").empty();
     
     if(!userList) {
@@ -299,20 +347,24 @@ function outputListAsHtml() {
         readItems = getItemsAsHtml( 'read');
         unreadItems = getItemsAsHtml( 'unread');
 
+        //append unreadItems
         if(unreadItems) {
             $("#eksigator_item_list").append(unreadItems);
         }
 
 
+        //append readItems
         if(readItems) {
             $("#eksigator_item_list").append(readItems);
         }
            
+        //when cliked to remove button on list
         $(".eksigator_remove").click( function() {
           parentLi = $(this).parent();
           clickRemove(parentLi);
         });
 
+        //unread items are always shown
         $(".eksigator_item_ul.unread").show("fast");
 
     }
@@ -323,13 +375,21 @@ function outputListAsHtml() {
     }
 }
 
-
+/**
+ * get title's status for this page 
+ *
+ * @param string pageTitle
+ */
 function getTitleStatus(pageTitle){
         if(!userList) {
             return false;
         }
+
         foundCount = userList.length;
+
+        //try to find this title on users list
         for(var i=0; i< foundCount; i++) {
+        
             text = $(userList[i]).attr("title");
             itemStatus = $(userList[i]).attr("status");
             itemId = $(userList[i]).attr("lastId");
