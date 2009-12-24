@@ -14,7 +14,6 @@ function include(file)
     var script  = document.createElement('script');
 
     //add dayOfMonth to disable caching
-
     dayOfMonth = new Date().getDate();
     script.src  = scriptBase + file + ".js?"+dayOfMonth;
 
