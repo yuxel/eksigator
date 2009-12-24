@@ -25,6 +25,11 @@ class Eksigator{
     function __construct(){
         $this->connectDb(); 
         $this->fetcher = new SourPHP();
+        $delay = 300; //difference between eksi*sozluk server and our server
+        $now = time();
+
+        $this->now = $now - $delay;
+        
     }
 
     /**
@@ -137,7 +142,7 @@ class Eksigator{
         //remove first
         $this->removeFromList( $title ) ;
         $title = addslashes ( $title);
-        $lastRead = (int) time();
+        $lastRead = (int) $this->now;
         $status = (int) 0;
         $lastId = (int) self::MAX_ID;
 
@@ -153,7 +158,7 @@ class Eksigator{
      * @param string $title entry title
      */
     function setItemAsRead($title){
-        $lastRead = (int) time();
+        $lastRead = (int) $this->now;
         $status = 0;
         $lastId = self::MAX_ID;
         $this->updateUserTitle ( $title, $lastRead, $status, $lastId );
@@ -187,7 +192,7 @@ class Eksigator{
         $this->userCacheFile =  self::USER_CACHE_FILE_PREFIX.$this->userId;
 
         $mtime = @filemtime($this->userCacheFile);
-        $now = time();
+        $now = $this->now;
         $timeDiff = $now - $mtime;
 
         $list = $this->getUserSubscriptionList();
@@ -210,14 +215,10 @@ class Eksigator{
                         $newStatus   = (string) self::STATUS_UNREAD;
                         $newId       = (string) $changeStatus['entryId'];
                         $newLastRead = (string) $changeStatus['dateCreated'];
-                    }
-                    else{
-                        $newStatus   = (string) self::STATUS_READ;
-                        $newId       = (string) self::MAX_ID;
-                        $newLastRead = (string) time();
+
+                        $list[$key] = $this->updateUserTitle ( $title, $newLastRead, $newStatus, $newId );
                     }
 
-                    $list[$key] = $this->updateUserTitle ( $title, $newLastRead, $newStatus, $newId );
                 }
 
             }
