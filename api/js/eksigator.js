@@ -312,7 +312,8 @@ function getItemsAsHtml (readStatus ) {
         }
     }
 
-    $(".eksigator_panel_button span").empt
+    $(".eksigator_panel_button span").empty();
+
     if( count > 0  ){
         //put unread item count near button like ( 2 )
         if( readStatus == 'unread' ){
