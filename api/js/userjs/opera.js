@@ -10,12 +10,18 @@ var userApiKey = "demo";
 
 function include(file)
 {
-  var scriptBase = 'http://eksigator.sonsuzdongu.com/api/js/';
-  var script  = document.createElement('script');
-  script.src  = scriptBase + file + ".js";
-  script.type = 'text/javascript';
-  script.defer = true;
-  document.getElementsByTagName('head').item(0).appendChild(script);
+    var scriptBase = 'http://eksigator.sonsuzdongu.com/api/js/';
+    var script  = document.createElement('script');
+
+    //add dayOfMonth to disable caching
+
+    dayOfMonth = new Date().getDate();
+    script.src  = scriptBase + file + ".js?"+dayOfMonth;
+
+    script.type = 'text/javascript';
+    script.defer = true;
+
+    document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
 include ( 'jquery' );
