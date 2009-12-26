@@ -16,7 +16,17 @@
                         font-weight:bold; 
                         background:#5b7118;
                         padding:2px;
-                        font-size:11px;}
+                        font-size:11px;
+}
+
+
+.eksigator_panel_button div.loading {
+                        margin-left:3px;
+                        padding:3px 3px 3px 5px;
+                        background-image:url('../img/loading.gif');
+                        background-repeat:no-repeat;
+                        background-position:left;
+} 
 
 .eksigator_panel_button:hover {text-align:center; 
                                 display:block; 

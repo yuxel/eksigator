@@ -6,7 +6,6 @@ var maxId = 2099999999;
 var itemId = maxId;
 var pageTitle = "";
 var isOnList = false;
-var removeSpan = "<span class=\"eksigator_remove\"> x </span>";
 var itemStatus = 0;
 
 var baseUrl="http://sozluk.sourtimes.org/";
@@ -24,8 +23,9 @@ var _TITLE_SUBSCRIBED = "'%s' başlığı takip listenize eklendi";
 var _YOUR_LIST_EMPTY = 'Listeniz boş, başlıkların sağındaki düğmeleri kullanarak ekleyebilirsiniz';
 var _ARE_YOU_SURE_UNSUBSCRIBE = "Başlığı takipten çıkarmak istiyor musunuz?";
 
+includeCSS();
+
 $(document).ready( function() {
-   includeCSS();
    initElements(); //title and panel
    getSubscriptionListData(); //read data
 
@@ -72,7 +72,8 @@ $(document).ready( function() {
  */
 function initElements() {
     //panel
-    $("#panel").prepend('<div id="eksigator_panel">'+_FETCHING_LIST+'</div>');
+    loading = '<div class="eksigator_panel_button"><div class="loading">'+ _FETCHING_LIST +'</div></div>';
+    $("#panel").prepend('<div id="eksigator_panel">'+ loading +'</div>');
 
     //header
     header = $("h1.title");
@@ -308,6 +309,8 @@ function getItemsAsHtml (readStatus ) {
             }
 
             text = "<a title=\""+itemTitle+"\" href=\""+itemUrl+"\">"+itemTitleTruncated+"</a>";
+
+            removeSpan = "<span class=\"eksigator_remove\"> x </span>";
             output += "<li>"+ removeSpan + text+"</li>";
         }
     }
