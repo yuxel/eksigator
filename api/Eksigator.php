@@ -55,6 +55,10 @@ class Eksigator{
 
         //if existed on session dont ask to mysql
         if( $_SESSION[$apiKey] == $userName ) {
+
+            $this->userId = $_SESSION['eksigatorApi']['userId'];
+            $this->userApiKey = $_SESSION['eksigatorApi']['apiKey'];
+
             return true;
         }
 
@@ -66,7 +70,10 @@ class Eksigator{
             $this->userApiKey = $row['apiKey'];
         
             $_SESSION[$apiKey] = $userName;
-        
+            $_SESSION['eksigatorApi']['apiKey'] = $row['apiKey'];
+            $_SESSION['eksigatorApi']['userId'] = $row['id'];
+
+
             return true;
         }
 
