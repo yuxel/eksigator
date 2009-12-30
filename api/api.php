@@ -1,4 +1,5 @@
 <?
+header("Cache-Control: no-cache, must-revalidate");
 
 error_reporting(0);
 ini_set("display_item",0);
