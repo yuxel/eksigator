@@ -23,6 +23,8 @@ class Eksigator{
      * init db and fetcher
      */
     function __construct(){
+        session_start();
+
         $this->connectDb(); 
         $this->fetcher = new SourPHP();
         $delay = 300; //difference between eksi*sozluk server and our server
@@ -51,12 +53,20 @@ class Eksigator{
         $userName = addslashes ( $userName );
         $apiKey   = addslashes ( $apiKey );
 
+        //if existed on session dont ask to mysql
+        if( $_SESSION[$apiKey] == $userName ) {
+            return true;
+        }
+
         $sql = "select id from users where email='$userName' and apiKey ='$apiKey' limit 1";
         $result = mysql_query($sql, $this->dbLink);
 
         while ($row = mysql_fetch_assoc($result)) {
             $this->userId = $row['id'];
             $this->userApiKey = $row['apiKey'];
+        
+            $_SESSION[$apiKey] = $userName;
+        
             return true;
         }
 
