@@ -18,6 +18,7 @@ CREATE TABLE `entries` (
    INDEX userId (userId)
 );
 
+alter table users add column auth tinyint(2) default 0;
 alter table entries add column added int(11) after lastRead;
-alter table entries add column deleted tinyint(2) default '0';
+alter table entries add column deleted int(11) default '0';
 alter table entries add KEY deleted(deleted);

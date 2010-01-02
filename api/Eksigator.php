@@ -1,5 +1,6 @@
 <?
 require_once("../SourPHP/classes/SourPHP.php");
+require_once("../SourPHP/classes/SourPHPUrlCacheToFile.php");
 
 include_once("mysqlConf.php"); //db conf
 
@@ -18,6 +19,9 @@ class Eksigator{
     const CACHE_TIME = 3600; //seconds
 
     const USER_CACHE_FILE_PREFIX = "/tmp/eksigator_";
+    
+    const URL_CACHE_PREFIX = "/tmp/url_";
+
 
     /**
      * init db and fetcher
@@ -27,7 +31,13 @@ class Eksigator{
 
         $this->connectDb(); 
         $this->fetcher = new SourPHP();
-        $delay = 300; //difference between eksi*sozluk server and our server
+        $cacheHandler = new SourPHPUrlCacheToFile();
+
+        $this->fetcher->setCacheLifeTime( self::CACHE_TIME );
+        $this->fetcher->setCacheHandler ( $cacheHandler );
+        $this->fetcher->setCachePrefix ( self::URL_CACHE_PREFIX );
+
+        $delay = 300; //difference between eksisozluk's server and our server
         $now = time();
 
         $this->now = $now - $delay;
@@ -86,7 +96,7 @@ class Eksigator{
      */
     function getUserSubscriptionList(){
 
-        $sql = "select title, lastRead, status, lastId from entries where userId='" . $this->userId . "'";
+        $sql = "select title, lastRead, status, lastId from entries where userId='" . $this->userId . "' and deleted=0";
         $result = mysql_query($sql, $this->dbLink);
 
 
@@ -122,6 +132,7 @@ class Eksigator{
                 lastId = '$lastId'
                 where 
                 title='$title'
+                and deleted=0
                 and userId='$this->userId'";
 
         mysql_query($sql, $this->dbLink);
@@ -142,8 +153,10 @@ class Eksigator{
     function removeFromList ( $title ) {
         $title = addslashes ( $title);
 
-        $sql = "delete from entries
+        $sql = "update entries
+                set deleted = $this->now 
                 where title='$title'
+                and deleted=0
                 and userId ='$this->userId'";
 
         mysql_query($sql, $this->dbLink);
@@ -163,8 +176,8 @@ class Eksigator{
         $status = (int) 0;
         $lastId = (int) self::MAX_ID;
 
-        $sql = "insert into entries (userId, title, lastRead, status, lastId )
-            values ( '$this->userId', '$title', '$lastRead', '$status', '$lastId')";
+        $sql = "insert into entries (userId, title, lastRead, status, lastId,  added)
+            values ( '$this->userId', '$title', '$lastRead', '$status', '$lastId', '". $this->now."')";
 
         mysql_query($sql, $this->dbLink);
     }
@@ -244,6 +257,31 @@ class Eksigator{
         }
 
         return empty($list) ? null : $list;
+    }
+
+
+    /**
+     * fetches all url's last page
+     *
+     * @todo this should only avaliable for admins
+     */
+    function fetchAll(){
+
+        //disable url caching
+        $this->fetcher->setCacheLifeTime( -1 );
+
+        $sql = "select distinct(title) from entries where deleted=0";
+        $result = mysql_query($sql, $this->dbLink);
+        $now = time();
+
+        while ($row = mysql_fetch_assoc($result)) {
+            $title = $row['title'];
+            //$this->fetcher->getEntriesByTitleAfterGivenTime($title, $now);
+            echo $title."<br/>";
+        }
+
+
+
     }
 
 
