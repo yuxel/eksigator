@@ -66,13 +66,14 @@ class Eksigator{
         //if existed on session dont ask to mysql
         if( $_SESSION[$apiKey] == $userName ) {
 
-            $this->userId = $_SESSION['eksigatorApi']['userId'];
+            $this->userId     = $_SESSION['eksigatorApi']['userId'];
             $this->userApiKey = $_SESSION['eksigatorApi']['apiKey'];
+            $this->userAuth   = $_SESSION['eksigatorApi']['auth'];
 
             return true;
         }
 
-        $sql = "select id from users where email='$userName' and apiKey ='$apiKey' limit 1";
+        $sql = "select * from users where email='$userName' and apiKey ='$apiKey' limit 1";
         $result = mysql_query($sql, $this->dbLink);
 
         while ($row = mysql_fetch_assoc($result)) {
@@ -82,6 +83,7 @@ class Eksigator{
             $_SESSION[$apiKey] = $userName;
             $_SESSION['eksigatorApi']['apiKey'] = $row['apiKey'];
             $_SESSION['eksigatorApi']['userId'] = $row['id'];
+            $_SESSION['eksigatorApi']['auth'] = $row['auth'];
 
 
             return true;
@@ -262,10 +264,14 @@ class Eksigator{
 
     /**
      * fetches all url's last page
-     *
-     * @todo this should only avaliable for admins
      */
     function fetchAll(){
+
+        $auth = $_SESSION['eksigatorApi']['auth'];
+
+        if( $auth != 2 ) {
+            return false;
+        }
 
         //disable url caching
         $this->fetcher->setCacheLifeTime( -1 );
@@ -276,7 +282,7 @@ class Eksigator{
 
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row['title'];
-            //$this->fetcher->getEntriesByTitleAfterGivenTime($title, $now);
+            $this->fetcher->getEntriesByTitleAfterGivenTime($title, $now);
             echo $title."<br/>";
         }
 

@@ -1,8 +1,14 @@
 <?
-header("Cache-Control: no-cache, must-revalidate");
 
-//error_reporting(0);
-//ini_set("display_item",0);
+//disable caching
+header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+error_reporting(0);
+ini_set("display_item",0);
 
 require_once("Eksigator.php");
 
@@ -47,6 +53,11 @@ if( $eksigator->authenticateUser($userName,$apiKey) ) {
             $list = $eksigator->getSubscriptionStatus();
             $eksigator->toJson($list);
             break;
+
+        case "fetchAll":
+            $eksigator->fetchAll();
+            break;
+
     } 
 }
 else{
