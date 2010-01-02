@@ -1,0 +1,26 @@
+#main.main_page {
+        width:700px;
+        height:424px;
+        background:url('../../../../templates/images/bubble.jpg') no-repeat;
+        color:#457801;
+}
+
+.bubble a {line-height:25px;  text-decoration:none; white-space:nowrap;}
+.bubble a:hover { text-decoration:underline;}
+
+
+.bubble_items1{
+        padding-left:15px;
+        width:450px;
+        height:180px;
+        padding-top:60px;
+        margin-left:100px;
+
+}
+.bubble_items2{
+        width:350px;
+        height:80px;
+}
+
+
+

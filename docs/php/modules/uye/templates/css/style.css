@@ -1,0 +1,27 @@
+.loginError {
+    width:670px;
+    background:#b42419;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:20px;
+    padding:20px;
+    text-align:center;
+}
+
+.info {
+    background:#88c73c;
+     color:#FFFFFF;
+    font-weight:bold;
+    font-size:20px;
+    padding:20px;
+    text-align:center;
+}
+
+
+
+.white {
+    width:670px; 
+    background:#FFFFFF;
+    color:#000000;
+    
+}

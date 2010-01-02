@@ -1,0 +1,68 @@
+<div class="header">API</div>
+Ek$igator, bu altyapıyı kullanarak kendi uygulamalarını geliştirmek isteyen yazılım geliştiriciler için
+bir <a href="http://sozluk.sourtimes.org/show.asp?t=jsonp" class="_blank">JSONP</a> API sunar. <br/>
+
+Belirtilen API adresine yapılan HTTP isteklerinden donen JSON verilerini kendi uygulamanızda kullanabilirsiniz. <br/>
+
+API iki ana işlem içerir : <br/>
+<b>1 - Kimlik Doğrulama </b> <br/>
+    API komutlarını kullanabilmek için, kullanıcının giriş yaptırılması gerekmektedir. <br/>
+    Bunun için belirtilen API adresine <b>/eposta@adresi.com/API_Anahtarı/</b> şeklinde bir istek göndermelisiniz. <br/>
+    <br/>
+    Örneğin, <br/>
+    <span class="code">http://eksigator.com/api/</span> <br/>
+    olarak belirtilen API adresine <br/> 
+    <span class="code">http://eksigator.com/api/foo@bar.com/785e8695f2a951d2d566d2abe66a665b/</span> <br/>
+    şeklinde istek göndermelisiniz. <br/>
+
+
+    Eğer belirtilen e-posta adresi ve API anahtarı sistemde bulunmuyorsa <br/>
+    <span class="code">{ldelim}"message":"AUTH_FAILED"{rdelim}</span> <br/> şeklinde bir JSON verisi dönecektir.
+    Eğer giriş başarılı ise herhangi bir mesaj dönmeeycektir. <br/>
+
+
+<br/>
+<b>2 - Komutlar </b> <br/>
+Bu komutları ve parametreleri "Kimlik Doğrulama" bölümünde eklenen parametrelerden sonra eklemelisiniz. <br/>
+Örn : <span class="code">http://eksigator.com/api/foo@bar.com/785e8695f2a951d2d566d2abe66a665b/<span
+style="color:red">komut</span>/<span style="color:blue">parametre</span></span> <br/> <br/>
+
+<table class="api_code_table">
+    <tr><th>İşlem</th><th style="color:red">Komut</th><th style="color:blue">Parametre</th></tr>
+    <tr>
+        <td>Listeyi almak</td>
+        <td>getList</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Listeye başlık eklemek</td>
+        <td>addToList</td>
+        <td>başlık</td>
+    </tr>
+    <tr>
+        <td>Listeden başlık çıkarmak</td>
+        <td>removeFromList</td>
+        <td>başlık</td>
+    </tr>
+    <tr>
+        <td>Başlığı okundu olarak işaretlemek</td>
+        <td>setItemAsRead</td>
+        <td>başlık</td>
+    </tr>
+</table>
+
+Bu komutların hepsi listenin son durumunu aşağıdaki JSON yapısında bir Javascript Array'i olarak döndürür <br/>
+{ldelim} <br/>
+&nbsp; &nbsp;    "title": "avatar",<br/>
+
+ &nbsp; &nbsp;     "lastRead": "1261694100",<br/>
+
+ &nbsp; &nbsp;     "status": "1",<br/>
+
+ &nbsp; &nbsp;     "lastId": "17604247"<br/>
+
+{rdelim}
+<br/>
+Burada <b>"title"</b> başlığı, <b>"lastRead"</b> son okunduğu zamanın 
+<a href="http://sozluk.sourtimes.org/show.asp?t=unix+time+stamp" class="_blank">Unix Timestamp</a> karşlığı, 
+<b>"status"</b> okunup okunmadığını, <b>"lastId"</b> ise son okunan entry numarasını bildirir.

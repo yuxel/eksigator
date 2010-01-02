@@ -1,0 +1,7 @@
+for i in `find *| grep -i php | grep -v templates_c | grep -v 3rdParty`
+do 
+temp=$i.tmp
+cat $i | sed -e 's/mastermovie/eksigator/g' | sed -e 's/masterMovie/eksigator/g' | sed -e 's/MasterMovie/Eksigator/g' > $temp
+mv $temp $i
+echo $i
+done

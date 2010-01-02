@@ -1,0 +1,72 @@
+{literal}
+<script type="text/javascript">
+    <!--
+    var okImage = '<img src="{/literal}{$URL}{literal}templates/images/apply.png" alt="ok"/>';
+    var nameError = {/literal}{'contact/nameError'|lang|@json_encode}{literal};    
+    var emailError = {/literal}{'contact/emailError'|lang|@json_encode}{literal};    
+    var messageError = {/literal}{'contact/messageError'|lang|@json_encode}{literal};    
+    -->
+</script>
+{/literal}
+
+
+
+
+
+<div id="contact_module">
+
+    <div class="header">İletişim</div>
+
+       
+        <div class="contactForm">
+    
+
+            <a name="form"></a>
+
+            {if $mailSent}
+                <div class="mailSent">
+                    {'contact/mailSentMessage'|lang}
+                </div>
+            {else}
+            <form method="post" action="{$URL}{$URLStrings}#form">
+
+                 <div class="clear">
+                    <div class="b1">{'contact/yourName'|lang}</div>
+                    <div class="b2">
+                        <input type="text" name="nameSurname" id="checkNameSurname"/>
+                        <span class="nameSurnameError formError"></span>
+                    </div>
+                 </div> <!-- row -->
+
+                  <div class="clear">
+                    <div class="b1">{'contact/yourMail'|lang}</div>
+                    <div class="b2">
+                        <input type="text" name="eMail" id="checkEmail"/>
+                        <span class="emailError formError"></span>
+                    </div>
+                 </div> <!-- row -->
+
+              
+                 <div class="clear">
+                    <div class="b1">{'contact/yourMessage'|lang}</div>
+                    <div class="b2"><textarea id="checkMessage" rows="10" cols="50" name="message"></textarea></div>
+                 </div> <!-- row -->
+
+
+                 <div class="clear">
+                    <input class="submitButton" type="submit" value="{'contact/submitButton'|lang}"/>
+                    <span class="messageError formError"></span>
+                 </div>
+            
+            </form>
+            {/if}
+
+
+        </div> <!-- contactForm -->
+
+
+
+    <div class="clear"></div>
+</div> 
+
+

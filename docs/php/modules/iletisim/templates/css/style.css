@@ -1,0 +1,28 @@
+#main.iletisim {
+    width:690px;
+    background:#FFFFFF;
+    padding:10px 10px 20px 10px;
+    color:#000000;
+    line-height:18px;
+}
+
+
+#contact_module .header {font-weight:bold; font-size:1.5em}
+
+#contact_module .contactForm .clear .b1 {float:left; width:70px}
+#contact_module .contactForm .clear .b2 {float:left; width:240px}
+
+
+#contact_module .contactForm .mailSent { border:2px dotted #188500 ; margin:30px; padding:20px; background:#dcffac}
+
+#contact_module .contactForm form {margin-top:10px}
+
+#contact_module .contactForm form .submitButton {padding:4px; margin-left:120px}
+
+#contact_module .contactForm form .clear {padding:4px 0 4px 0; }
+#contact_module .contactForm form .clear .b1 {float:left; width:120px}
+#contact_module .contactForm form .clear .b2 {float:left; width:440px}
+
+#contact_module .contactForm .formError {color:#ce0000; font-weight:bold;}
+
+

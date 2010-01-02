@@ -1,0 +1,163 @@
+body {
+	color:#FFFFFF;
+	font:12px  Helvetica, sans-serif;
+    background:#88c73c url('../images/bg.jpg') repeat-x top;
+	margin:0px; 
+    padding:0px;
+}
+
+.clear{
+	clear: both;
+}
+
+.hidden {display:none}
+
+.float_left {float:left}
+.float_right {float:right}
+
+
+a {
+color:#2c300d;
+font-weight:bold;
+cursor:pointer;
+}
+
+strong {
+color:#2c300d;
+}
+
+
+a:hover {
+text-decoration:none;
+}
+
+.center {width:960px;
+        margin:0 auto;
+}
+
+.left_space {width:250px}
+
+#top {height:424px} 
+
+.logo {width:128px; 
+        height:146px; 
+        background:url('../images/logo.jpg') no-repeat;
+}
+
+.footer_text {padding-top:110px;
+              font-size:14px;
+}
+
+.menu {
+        width:234px;
+        min-height:100px;
+        height:auto !important;
+        height:100px;
+        background:url('../images/menu.jpg') no-repeat bottom center;
+}
+
+.menu .menu_items {
+        padding:0 20px 20px 20px;
+}
+
+
+.menu .menu_items .menu_logo {
+        
+        font-weight:bold;
+        text-align:center;
+        font-size:16px;
+        padding:10px;
+}
+
+.menu .menu_items .menu_logo a{
+        color:#FFFFFF;
+        text-decoration:none;
+}
+
+
+
+
+.menu .inputText.focus {
+            color:#000000;
+}
+
+.menu .inputText {
+            width:185px; 
+            font-size:12px;
+            margin-bottom:5px;
+            background:#dcffac;
+            border:none;
+            font-weight:bold;
+            padding:4px;
+            color:#89c83d;
+}
+
+
+.menu .inputButton {
+            background:#88c73c; 
+            border:1px solid #dcffac;
+            color:#457801;
+            width:100px;
+            margin-left:45px;
+            padding:5px;
+            font-weight:bold;
+            text-align:center;
+}
+
+.menu .kayitParola {
+            text-align:center;
+            margin-top:5px;
+}
+
+.menu .apiKey {
+    font-size:10px;
+}
+
+
+.menu .kayitParola a{
+            color:#ffffff;
+            text-decoration:none;
+}
+
+.menu .kayitParola a:hover  {
+            color:#89c83d;
+}
+
+.ads {
+    text-align:center;
+    color:#000;
+    font-weight:bold;
+    width: 210px;
+    margin:0 auto;
+    margin-right:30px;
+    border:1px solid #BBB;
+}
+
+
+.bottom_left {width:800px;}
+
+.footer_top {height:90px}
+
+.footer_bottom {
+                text-align:right;
+                height:50px;
+                padding:20px;
+}
+
+.footer_bottom ul {float:right}
+.footer_bottom li {
+                float:left; 
+                margin-left:40px;
+                font-weight:bold;
+                color:#dcffac;
+
+}
+
+.footer_bottom li a {
+                color:#457801;
+                text-decoration:none;
+}
+                    
+.footer_bottom li a:hover {
+                text-decoration:underline;
+}

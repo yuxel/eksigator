@@ -1,0 +1,86 @@
+#main.sayfa {
+    width:690px;
+    background:#FFFFFF;
+    padding:0px 10px 20px 10px;
+    color:#000000;
+    line-height:18px;
+overflow:auto;
+height:400px;
+
+}
+
+
+#main.sayfa .header {
+            color:#457801;
+            font-size:1.6em; 
+            font-weight:bold;
+            text-decoration:underline;
+            margin:10px 0;
+
+
+}
+
+
+#main.sayfa span.code {
+    background:#dcffac;
+}
+
+
+.api_code_table {width:80%}
+
+
+.api_code_table th {border:1px solid #457801; font-weight:bold; padding:4px}
+.api_code_table td {border:1px solid #457801; padding:3px}
+
+.browser_list li {
+            height:35px;
+            width:130px; 
+            float:left;
+            margin-left:4px;
+
+}
+
+.browser32 {
+    height:32px;
+    display:block;
+    padding-left:35px;
+    padding-top:13px;
+    text-decoration:none;
+}
+
+.browser32:hover {color:red ; text-decoration:underline}
+
+.opera32 {
+    background:url('../../img/opera.jpg') no-repeat left;
+}
+
+.firefox32 {
+    background:url('../../img/firefox.jpg') no-repeat left;
+}
+
+.explorer32 {
+    background:url('../../img/explorer.jpg') no-repeat left;
+}
+
+.chrome32 {
+    background:url('../../img/chrome.jpg') no-repeat left;
+}
+
+.safari32 {
+    background:url('../../img/safari.jpg') no-repeat left;
+}
+
+.browser_header {font-weight:bold;}
+.browser_item_content {margin:10px;}
+
+.paid_services { 
+        height:270px;
+        background:url('../../img/hizmetler.jpg') no-repeat right;
+        padding-right:300px;
+}
+
+
+.paid_services div{ 
+        padding-top:120px;
+        font-size:1.4em;
+}
