@@ -1,24 +1,33 @@
 $(document).ready( function() {
-        
-    $("#checkNameSurname").change( checkNameSurname ); 
-    $("#checkEmail").change( checkEmail ); 
+   
+      $("#checkEmail").change( checkEmail ); 
+      $("#checkPassword").change( checkPassword ); 
 
-    $(".submitButton").click( submitForm );
+      $("#submitButton").click( submitForm );
 
 });
 
 
-function checkNameSurname() {
-    value = $("#checkNameSurname").val();
+function checkPassword() {
 
-    if(value.length > 0) {
-        $(".nameSurnameError").html ( okImage );
+        value = $("#checkPassword").val();
+
+        if( value ) {
+
+            if(value.length > 5) {
+                $(".passwordError").html ( '' );
+                return true;
+            }
+            else {
+                $(".passwordError").html ( passwordError );
+                return false;
+            }
+
+        }
+
         return true;
-    }
-    else {
-        $(".nameSurnameError").html ( nameError );
-        return false;
-    }
+
+
 }
 
 
@@ -26,7 +35,8 @@ function checkEmail() {
     value = $("#checkEmail").val();
 
     if(value.length > 0 && validateEmail(value)) {
-        $(".emailError").html ( okImage );
+
+        $(".emailError").html ( '' );
         return true;
     }
     else {
@@ -37,29 +47,18 @@ function checkEmail() {
 }
 
 
-function checkMessage() {
-    value = $("#checkMessage").val();
-     if(value.length > 0) {
-        $(".messageError").html ( '' );
-        return true;
-    }
-    else {
-        $(".messageError").html ( messageError  );
-        return false;
-    }
-}
-
-
 function submitForm() {
-    nameSurnameStatus = checkNameSurname();
-    emailStatus = checkEmail();
-    messageStatus = checkMessage();
 
-    if(nameSurnameStatus && emailStatus && messageStatus ) {
+    emailStatus = checkEmail();
+
+    passwordStatus = checkPassword();
+
+
+    if(emailStatus && passwordStatus ) {
         //burda form gonderilir
     }
     else{
-        $(".submitButton").addClass("formError"); 
+        $("#submitButton").addClass("formError"); 
         return false;
     }
 }

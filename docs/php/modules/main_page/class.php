@@ -53,7 +53,7 @@ class module_main_page implements modules{
 
     public function getTagCloud(){
 
-        $sql = "SELECT title, count(userId) as count FROM `entries` where deleted=0 group by title order by count desc limit 25";
+        $sql = "SELECT title, count(userId) as count FROM `entries` where deleted=0 group by title order by count desc limit 20";
         $tags = $this->parent->model->fetch ( $sql );
         $first = current($tags);
         $last = end ( $tags );
