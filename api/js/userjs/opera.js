@@ -1,7 +1,19 @@
 // ==UserScript==
-// @include http://*/show.asp*
-// @include http://*/cc.asp*
-// @include http://*/stats.asp*
+// @include http://sozluk.sourtimes.org/show.asp*
+// @include http://sozluk.sourtimes.org/cc.asp*
+// @include http://sozluk.sourtimes.org/stats.asp*
+// @include http://sourtimes.org/show.asp*
+// @include http://sourtimes.org/cc.asp*
+// @include http://sourtimes.org/stats.asp*
+// @include http://eksisozluk.com/show.asp*
+// @include http://eksisozluk.com/cc.asp*
+// @include http://eksisozluk.com/stats.asp*
+// @include http://www.eksisozluk.com/show.asp*
+// @include http://www.eksisozluk.com/cc.asp*
+// @include http://www.eksisozluk.com/stats.asp*
+// @include http://188.132.200.200/show.asp*
+// @include http://188.132.200.200/cc.asp*
+// @include http://188.132.200.200/stats.asp*
 // ==/UserScript==
 
 var userName = "demo";

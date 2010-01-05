@@ -10,8 +10,7 @@ function checkReferrer(){
        referrer.indexOf("http://sourtimes.org") == 0 ||
        referrer.indexOf("http://eksisozluk.com") == 0 ||
        referrer.indexOf("http://www.eksisozluk.com") == 0 ||
-       referrer.indexOf("http://www.eksisozluk.com") == 0 ||
-       referrer.indexOf("188.132.200.200") == 0
+       referrer.indexOf("http://188.132.200.200") == 0
       ) {
 
         return true;
