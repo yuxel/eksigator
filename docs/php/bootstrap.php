@@ -1,5 +1,6 @@
 <?
 require_once 'conf/db.php';
+require_once 'conf/mail.php';
 require_once 'includes/moduleInterface.php'; //modules interface
 require_once 'includes/db.class.php';
 require_once '3rdParty/smarty/libs/Smarty.class.php';

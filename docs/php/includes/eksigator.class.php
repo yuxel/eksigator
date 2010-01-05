@@ -134,4 +134,50 @@ class Eksigator {
         return $_SESSION;
     }
 
+
+    function sendEmail($to,$subject,$message) {
+        include_once("class.phpmailer.php");
+
+        global $emailConf;
+
+        $mail             = new PHPMailer();
+
+        $message            = eregi_replace("[\]",'',$message);
+
+        $mail->IsSMTP();
+        $mail->SMTPAuth   = true;                  // enable SMTP authentication
+        $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+        $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
+
+        $mail->Username   = $emailConf['email'];  // GMAIL username
+        $mail->Password   = $emailConf['pass'];   // GMAIL password
+
+        var_dump ( $mail );
+        //$mail->AddReplyTo("yourusername@gmail.com","First Last");
+
+        $mail->From       = $emailConf['email'];
+        $mail->FromName   = $emailConf['from'];
+
+        $mail->Subject    = $subject;
+
+        //$mail->Body       = "Hi,<br>This is the HTML BODY<br>";                      //HTML Body
+        //$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+        $mail->WordWrap   = 50; // set word wrap
+
+        $mail->MsgHTML($message);
+
+        $mail->AddAddress($to);
+
+        $mail->IsHTML(true); // send as HTML
+
+        if(!$mail->Send()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
 }

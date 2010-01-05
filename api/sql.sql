@@ -19,6 +19,8 @@ CREATE TABLE `entries` (
 );
 
 alter table users add column auth tinyint(2) default 0;
+alter table users add column active tinyint(2) default 0;
+alter table users add column hash varchar(50) default 0;
 alter table entries add column added int(11) after lastRead;
 alter table entries add column deleted int(11) default '0';
 alter table entries add KEY deleted(deleted);

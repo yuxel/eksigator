@@ -162,8 +162,14 @@ class module_uye implements modules{
         elseif( !$this->emailExists($email) ) {
             $errors['email'] = 'notExists';
         }
-        
-       return ( empty($errors) ) ? null : $errors;        
+    
+        if( empty ( $errors ) ) {
+            $this->sendLostPasswordMail($email);
+            return null;
+        }
+        else{
+            return $errors;
+        }
     }
 
 
@@ -176,6 +182,11 @@ class module_uye implements modules{
     function sendRegistrationEmail($email){
 
 
+    }
+
+
+    function sendLostPasswordMail($email){
+           $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
     }
 
 }
