@@ -12,7 +12,7 @@ function checkPassword() {
 
         value = $("#checkPassword").val();
 
-        if( value ) {
+        if( value != undefined) {
 
             if(value.length > 5) {
                 $(".passwordError").html ( '' );
