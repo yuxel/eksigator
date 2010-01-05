@@ -196,7 +196,7 @@ class module_uye implements modules{
             $this->parent->view->assign ( "email", $email );
             
             $message = $this->parent->view->fetch("../modules/uye/mails/register.html");    
-            $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
+            $this->parent->sendEmail("yuxel@sonsuzdongu.com","Kayıt",$message); 
     }
 
 
@@ -205,7 +205,7 @@ class module_uye implements modules{
             $this->parent->view->assign ( "email", $email );
             
             $message = $this->parent->view->fetch("../modules/uye/mails/lostpassword.html");    
-            $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
+            $this->parent->sendEmail("yuxel@sonsuzdongu.com","Parola hatırlatma",$message); 
     }
 
 }
