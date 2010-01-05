@@ -9,7 +9,6 @@ var isOnList = false;
 var itemStatus = 0;
 
 var baseUrl="http://sozluk.sourtimes.org/";
-var apiURL = "http://eksigator.sonsuzdongu.com/api/";
 var sourPHPUrl=apiURL+ userName + "/" + userApiKey +"/";
 
 //language constants
