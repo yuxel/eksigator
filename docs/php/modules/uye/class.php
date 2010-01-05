@@ -165,7 +165,7 @@ class module_uye implements modules{
             $newHash = $this->getNewHash();
             $sql = "update users set hash='$newHash' where email='$email'";
             $this->parent->model->query($sql);
-            $this->sendLostPasswordMail($email);
+            $this->sendLostPasswordMail($email, $newHash);
             return null;
         }
         else{
