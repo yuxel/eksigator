@@ -4,9 +4,9 @@
 // @include http://*/stats.asp*
 // ==/UserScript==
 
-var userName = "yuxel@sonsuzdongu.com";
-var userApiKey = "5695743ebdebd5b05a0e756c26f63cc3";
-var apiURL = "http://eksigator.sonsuzdongu.com/api/";
+var userName = "demo";
+var userApiKey = "demo";
+var apiURL = "http://eksigator.com/api/";
 
 /**
  * include javascript file
@@ -26,6 +26,4 @@ function include(file)
 }
 
 include ( 'loader' );
-
-
 
