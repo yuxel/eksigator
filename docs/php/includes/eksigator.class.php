@@ -153,7 +153,7 @@ class Eksigator {
         $mail->Username   = $emailConf['email'];  // GMAIL username
         $mail->Password   = $emailConf['pass'];   // GMAIL password
 
-        var_dump ( $mail );
+        //var_dump ( $mail );
         //$mail->AddReplyTo("yourusername@gmail.com","First Last");
 
         $mail->From       = $emailConf['email'];
