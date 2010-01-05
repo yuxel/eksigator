@@ -22,7 +22,10 @@ class urlHandler{
 
         $rootDir = trim( substr($_SERVER['PHP_SELF'], 0, -9), "/");
 
-        $result =  "http://$host/$rootDir/";
+        if( $rootDir) {
+            $rootDir = $rootDir."/";
+        }
+        $result =  "http://$host/$rootDir";
 
         $this->docRoot = $result;
     }
