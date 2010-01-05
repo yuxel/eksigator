@@ -19,7 +19,7 @@ class module_iletisim implements modules{
     public function sendMail($nameSurname, $email, $message) {
         $this->parent->view->assign("senderNameSurname",  htmlspecialchars ( addslashes( $nameSurname ) ) );
         $this->parent->view->assign("senderEmail", htmlspecialchars ( addslashes( $email ) ));
-        $this->parent->view->assign("senderMessage", htmlspecialchars ( addslashes( $message ) ));
+        $this->parent->view->assign("senderMessage", nl2br(htmlspecialchars ( addslashes( $message ) )));
 
         
         $template = $this->parent->view->fetch("../modules/iletisim/mails/contact.html");    
