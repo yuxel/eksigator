@@ -51,9 +51,7 @@ class module_uye implements modules{
                     
                         if( isset($_POST['email'] ) ) {
                             $this->parent->view->assign("posted", true );
-
                             $lostPasswordErrors = $this->lostPassword($email);
-
 
                             $this->parent->view->assign("lostPasswordErrors", $lostPasswordErrors );
                         }
@@ -164,6 +162,9 @@ class module_uye implements modules{
         }
     
         if( empty ( $errors ) ) {
+            $newHash = $this->getNewHash();
+            $sql = "update users set hash='$newHash' where email='$email'";
+            $this->parent->model->query($sql);
             $this->sendLostPasswordMail($email);
             return null;
         }
@@ -173,20 +174,38 @@ class module_uye implements modules{
     }
 
 
+    function getNewHash() {
+        return substr( uniqid(), 0 ,20 );
+    }
+
     function registerUser($email, $password) {
+        $hash = $this->getNewHash();
+        $apiKey = md5($hash);
         $password = $this->encryptPassword ( $password);
-        $sql = "insert into users set";
 
+        $sql = "insert into users (email, password, apiKey, auth, hash, active) 
+            values ( '$email', '$password', '$apiKey',0, '$hash',0) ";
+
+        $this->parent->model->query ( $sql );
+
+        $this->sendRegistrationEmail ( $email , $hash );
     }
 
-    function sendRegistrationEmail($email){
-
-
+    function sendRegistrationEmail($email, $hash){
+            $this->parent->view->assign ( "hash", $hash );
+            $this->parent->view->assign ( "email", $email );
+            
+            $message = $this->parent->view->fetch("../modules/uye/mails/register.html");    
+            $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
     }
 
 
-    function sendLostPasswordMail($email){
-           $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
+    function sendLostPasswordMail($email, $hash){
+            $this->parent->view->assign ( "hash", $hash );
+            $this->parent->view->assign ( "email", $email );
+            
+            $message = $this->parent->view->fetch("../modules/uye/mails/lostpassword.html");    
+            $this->parent->sendEmail("yuxel@sonsuzdongu.com","deneme","bu da mesaj"); 
     }
 
 }
