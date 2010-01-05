@@ -23,7 +23,7 @@ class module_iletisim implements modules{
 
         
         $template = $this->parent->view->fetch("../modules/iletisim/mails/contact.html");    
-        $this->parent->sendEmail("eksigator@eksigator.com","Iletisim",$template); 
+        $this->parent->sendEmail("yuxel@sonsuzdongu.com","Iletisim",$template); 
 
         return true;
     }
