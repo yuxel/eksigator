@@ -16,8 +16,10 @@
 // @include http://188.132.200.200/stats.asp*
 // ==/UserScript==
 
+//replace these with your username and API key
 var userName = "demo";
 var userApiKey = "demo";
+
 var apiURL = "http://eksigator.com/api/";
 
 /**
