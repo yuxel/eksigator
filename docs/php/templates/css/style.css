@@ -1,6 +1,6 @@
 body {
 	color:#FFFFFF;
-	font:12px  Helvetica, sans-serif;
+	font:12px Arial, sans-serif;
     background:#88c73c url('../images/bg.jpg') repeat-x top;
 	margin:0px; 
     padding:0px;
@@ -62,13 +62,31 @@ text-decoration:none;
 
 
 .menu .menu_items .menu_logo {
-        
         font-weight:bold;
         text-align:center;
         font-size:16px;
         padding:10px;
 }
 
+
+.menu .menu_items .menu_logo a{
+    float:left; 
+    display:block;
+    width:100px;
+    margin-left:40px;
+}
+
+.menu .menu_items .space{
+    height:10px;
+
+}
+.menu .menu_items .menu_logo .staging{
+    margin-right:-15px;
+    margin-top:-5px;
+    font-size:5px;
+    float:right;
+
+}
 .menu .menu_items  a{
         color:#FFFFFF;
         text-decoration:none;
@@ -146,7 +164,7 @@ text-decoration:none;
 .footer_bottom ul {float:right}
 .footer_bottom li {
                 float:left; 
-                margin-left:15px;
+                margin-left:25px;
                 font-weight:bold;
                 color:#dcffac;
 
