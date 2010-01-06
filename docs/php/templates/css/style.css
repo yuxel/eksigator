@@ -160,3 +160,6 @@ text-decoration:none;
 .footer_bottom li a:hover {
                 text-decoration:underline;
 }
+
+
+.footer_bottom li .donate_image { margin-top:-9px; margin-right:10px}
