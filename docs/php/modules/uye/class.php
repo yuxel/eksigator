@@ -58,10 +58,40 @@ class module_uye implements modules{
 
                         return $this->parent->getModuleTemplate("lostPassword");
                     break;
+
+                case "aktiflestir":
+                        $email = $this->parent->url->urlStrings->param_2;
+                        $hash  = $this->parent->url->urlStrings->param_3;
+
+                        $activateStatus = $this->activateUser ( $email, $hash );
+
+                        $this->parent->view->assign ( "activateStatus", $activateStatus );
+
+                        return $this->parent->getModuleTemplate("activate");
+                    break;
+
         }
 
     }
 
+
+    function activateUser($email, $hash) {
+        $email = addslashes($email);
+        $hash  = addslashes($hash);
+        
+        $sql = "select id from users where email='$email' and hash='$hash'";
+        $result = $this->parent->model->fetch($sql);
+       
+        $result = empty($result) ? false : true;
+        
+        if($result ) {
+            $newHash = $this->getNewHash();
+            $sql_update = "update users set active = 1, hash='$newHash' where email='$email'";
+            $this->parent->model->query($sql_update);
+        }
+
+        return $result;
+    }
 
     function authenticate($email, $password) {
 
@@ -196,7 +226,7 @@ class module_uye implements modules{
             $this->parent->view->assign ( "email", $email );
             
             $message = $this->parent->view->fetch("../modules/uye/mails/register.html");    
-            $this->parent->sendEmail("yuxel@sonsuzdongu.com","Kayit",$message); 
+            $this->parent->sendEmail($email,"Kayit",$message); 
     }
 
 
