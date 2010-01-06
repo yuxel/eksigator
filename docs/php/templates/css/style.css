@@ -83,7 +83,8 @@ text-decoration:none;
 .menu .menu_items .menu_logo .staging{
     margin-right:-15px;
     margin-top:-5px;
-    font-size:5px;
+    font-size:8px;
+    letter-spacing:1px;
     float:right;
 
 }
