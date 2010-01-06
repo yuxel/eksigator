@@ -141,7 +141,7 @@ class module_uye implements modules{
         $password = addslashes( $password );
         $password = $this->encryptPassword( $password );
        
-        $sql = "select * from users where email='$email' and password='$password'";
+        $sql = "select * from users where email='$email' and password='$password' and active=1";
         $result = $this->parent->model->fetch($sql);
 
         if(!$result) {
