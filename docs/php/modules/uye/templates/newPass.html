@@ -1,0 +1,21 @@
+{if $passStatus eq "changed"}
+    <div class="white register">
+       <div class="mailSent">
+            Parolanız başarıyla değiştirildi
+       </div>
+    </div>
+{elseif $passStatus eq "authError"}
+    <div class="loginError">
+        Parolanız değiştirilemedi, lütfen e-posta adresinizi kontrol edin
+    </div>
+{else}
+    <div class="white register">
+        <div class="header">Yeni Parola
+        <form method="post" action="{$URL}{$URLStrings}">
+            <input type="text" name="newPass" />
+            <input type="submit" value="Parola değiştir"/>
+        </form>
+    </div>
+
+{/if}
+

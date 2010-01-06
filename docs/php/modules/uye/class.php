@@ -70,10 +70,52 @@ class module_uye implements modules{
                         return $this->parent->getModuleTemplate("activate");
                     break;
 
+                case "yeniParola":
+                        $email = $this->parent->url->urlStrings->param_2;
+                        $hash  = $this->parent->url->urlStrings->param_3;
+
+
+                        $newPassword = $_POST['newPass'];
+                        $passStatus = $this->newPassword ( $email, $hash, $newPassword );
+
+                        $this->parent->view->assign ( "passStatus", $passStatus );
+
+                        return $this->parent->getModuleTemplate("newPass");
+                    break;
         }
 
     }
 
+    function newPassword($email=null, $hash=null, $newPassword=null) {
+        $allow = false;
+
+        if( $_SESSION['eksigator'] ) {
+            $allow = true;
+        }
+        else{
+            $email = addslashes($email);
+            $hash  = addslashes($hash);
+
+            $sql = "select id from users where email='$email' and hash='$hash'";
+            $result = $this->parent->model->fetch($sql);
+
+            $allow = empty($result) ? false : true;
+        }
+
+        if( !$allow ) {
+            return "authError"; 
+        }
+
+        if( $allow && $newPassword ) {
+            $encryptPassword = $this->encryptPassword($newPassword);
+            $sql_update = "update users set password='$encryptPassword' where email='$email'";
+            $this->parent->model->query($sql_update);
+            return "changed";
+        }
+
+        return "allowed";
+
+    }
 
     function activateUser($email, $hash) {
         $email = addslashes($email);
@@ -235,7 +277,7 @@ class module_uye implements modules{
             $this->parent->view->assign ( "email", $email );
             
             $message = $this->parent->view->fetch("../modules/uye/mails/lostpassword.html");    
-            $this->parent->sendEmail("yuxel@sonsuzdongu.com","Parola hatirlatma",$message); 
+            $this->parent->sendEmail($email,"Parola hatirlatma",$message); 
     }
 
 }
