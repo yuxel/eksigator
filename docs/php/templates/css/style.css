@@ -163,3 +163,15 @@ text-decoration:none;
 
 
 .footer_bottom li .donate_image { margin-top:-9px; margin-right:10px}
+.footer_bottom .copyleft img {float:left}
+.footer_bottom .copyleft a {
+            color:#F1F1F1; 
+            display:block; 
+            width:100px; 
+            float:left;
+            text-align:left; 
+            margin-left:3px; 
+            margin-top:-1px;
+}
+
+.footer_bottom .copyleft a:hover { text-decoration:none}
