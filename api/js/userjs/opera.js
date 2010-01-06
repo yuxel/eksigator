@@ -20,7 +20,7 @@
 var userName = "demo";
 var userApiKey = "demo";
 
-var apiURL = "http://eksigator.com/api/";
+var apiURL = "http://api.eksigator.com/";
 
 /**
  * include javascript file
