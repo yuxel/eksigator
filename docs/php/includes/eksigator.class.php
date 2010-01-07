@@ -149,6 +149,7 @@ class Eksigator {
         $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
         $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
         $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
+        $mail->CharSet    = "utf-8";
 
         $mail->Username   = $emailConf['email'];  // GMAIL username
         $mail->Password   = $emailConf['pass'];   // GMAIL password
