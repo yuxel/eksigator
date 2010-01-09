@@ -72,7 +72,7 @@ $(document).ready( function() {
 function initElements() {
     //panel
     loading = '<div class="eksigator_panel_button"><div class="loading">'+ _FETCHING_LIST +'</div></div>';
-    $(".panel").prepend('<div id="eksigator_panel">'+ loading +'</div>');
+    $("div.panel").prepend('<div id="eksigator_panel">'+ loading +'</div>');
 
     //header
     header = $("h1.title");
