@@ -303,8 +303,8 @@ function getItemsAsHtml (readStatus ) {
             itemUrl = baseUrl + "show.asp?t="+itemTitle+"&i="+item.attr("lastId");
 
             itemTitleTruncated = itemTitle;
-            if(itemTitleTruncated.length > 20) {
-                itemTitleTruncated = itemTitleTruncated.substr(0,18) + "...";
+            if(itemTitleTruncated.length > 17) {
+                itemTitleTruncated = itemTitleTruncated.substr(0,15) + "...";
             }
 
             text = "<a title=\""+itemTitle+"\" href=\""+itemUrl+"\">"+itemTitleTruncated+"</a>";
