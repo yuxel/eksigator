@@ -1,12 +1,15 @@
 <div class="bubble_items1 bubble">
     {foreach from=$clouds.first item=tag}
         <a style="font-size:{$tag.ratio}em; font-weight:{$tag.fontWeight}"
-        href="http://sozluk.sourtimes.org/show.asp?t={$tag.title}">{$tag.title}</a>&nbsp; &nbsp;
+        href="http://sozluk.sourtimes.org/show.asp?t={$tag.title}"
+        title="{$tag.count} kişi takip ediyor">{$tag.title}</a>&nbsp; &nbsp;
     {/foreach}
     
     <div class="bubble_items2 bubble">
         {foreach from=$clouds.second item=tag}
-            <a style="font-size:{$tag.ratio}em; font-weight:{$tag.fontWeight}" href="http://sozluk.sourtimes.org/show.asp?t={$tag.title}" >{$tag.title}</a>&nbsp; &nbsp;
+            <a style="font-size:{$tag.ratio}em; font-weight:{$tag.fontWeight}" 
+            href="http://sozluk.sourtimes.org/show.asp?t={$tag.title}" 
+            title="{$tag.count} kişi takip ediyor">{$tag.title}</a>&nbsp; &nbsp;
 
         {/foreach}
     </div>

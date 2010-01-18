@@ -93,7 +93,8 @@ class module_main_page implements modules{
 
                 $cloud[] = array("title"=> $tag['title'],
                                  "ratio"=> $ratio,
-                                 "fontWeight" => $fontWeight );
+                                 "fontWeight" => $fontWeight,
+                                 "count"=> $tag['count'] );
         }
 
 
