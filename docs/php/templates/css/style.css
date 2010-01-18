@@ -206,6 +206,7 @@ text-decoration:none;
 .registerNote .noteLeft { float:left; width:100px; padding:8px 4px; font-size:13px}
 .registerNote .noteDot { float:left; width:3px; padding:8px 4px; font-size:13px; font-weight:bold}
 .registerNote .noteRight {  float:left; padding:4px; font-size:17px; font-weight:bold;}
+.white.register span.note {text-align:center; padding:15px; display:block; font-size:13px; font-weight:bold; }
 
 .registerTip  {font-size:11px; clear:both; text-align:center; padding:10px}
 .registerTip b {color:red; font-weight:bold;}
