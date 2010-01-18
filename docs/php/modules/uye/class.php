@@ -129,7 +129,7 @@ class module_uye implements modules{
         if($result ) {
             $newHash = $this->getNewHash();
             $sql_update = "update users set active = 1, hash='$newHash' where email='$email'";
-            //$this->parent->model->query($sql_update);
+            $this->parent->model->query($sql_update);
         }
 
         return $result;
