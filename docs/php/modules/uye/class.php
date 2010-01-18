@@ -26,12 +26,13 @@ class module_uye implements modules{
                 case "kayit":
                         $email = $_POST['email'];
                         $password = $_POST['password'];
+                        $passwordAgain = $_POST['passwordAgain'];
 
                     
                         if( isset($_POST['email'] ) ) {
                             $this->parent->view->assign("posted", true );
 
-                            $registerErrors = $this->register($email, $password);
+                            $registerErrors = $this->register($email, $password, $passwordAgain);
 
                             $this->parent->view->assign("registerErrors", $registerErrors );
                         }
@@ -76,7 +77,14 @@ class module_uye implements modules{
 
 
                         $newPassword = $_POST['newPass'];
-                        $passStatus = $this->newPassword ( $email, $hash, $newPassword );
+                        $newPasswordAgain = $_POST['newPassAgain'];
+
+                        if( $newPassword  != $newPasswordAgain ) {
+                            $passStatus = "notSame";
+                        }
+                        else {
+                            $passStatus = $this->newPassword ( $email, $hash, $newPassword );
+                        }
 
                         $this->parent->view->assign ( "passStatus", $passStatus );
 
@@ -167,9 +175,10 @@ class module_uye implements modules{
     }
 
 
-    function register($email, $password) {
+    function register($email, $password, $passwordAgain) {
         $email = htmlspecialchars(addslashes($email));
         $password = addslashes ( $password );
+        $passwordAgain = addslashes ( $passwordAgain );
 
         $errors = array();
 
@@ -184,6 +193,10 @@ class module_uye implements modules{
         if ( !$this->passwordValid ( $password ) ) {
             $errors['password'] = 'short';
         }
+        elseif ( $password != $passwordAgain ) {
+            $errors['password'] = "notSame";
+        }
+
 
         if( empty ( $errors ) ) {
             $this->registerUser( $email, $password );

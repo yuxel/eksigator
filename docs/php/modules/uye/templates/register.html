@@ -3,6 +3,7 @@
     <!--
     var emailError = 'Lütfen geçerli bir e-posta adresi girin'; 
     var passwordError =  'Girdiğiniz parola en az 6 karakter olmalıdır'; 
+    var passwordAgainError =  'Girdiğiniz parolalar uyuşmuyor'; 
     -->
 </script>
 {/literal}
@@ -38,18 +39,34 @@
                 {/if}
             </div>
         </div>
-        
+
         <div class="clear">    
             <div class="b1">Parola</div> 
             <div class="b2"> 
-                <input id="checkPassword" type="text" name="password" /> 
+                <input id="checkPassword" type="password" name="password" /> 
             </div>
             <div class="b3 passwordError"> 
-                {if $registerErrors.password.short}
+                {if $registerErrors.password eq "short"}
                     Girdiğiniz parola en az 6 karakter olmalıdır.
                 {/if}
             </div>
-        </div>
+        </div> <!-- clear -->
+
+        <div class="clear">    
+            <div class="b1">Parola Tekrar</div> 
+            <div class="b2"> 
+                <input id="checkPasswordAgain" type="password" name="passwordAgain" /> 
+            </div>
+            <div class="b3 passwordAgainError"> 
+                {if $registerErrors.password eq "notSame"}
+                    Girdiğiniz parolalar uyuşmuyor
+                {/if}
+            </div>
+        </div> <!-- clear -->
+
+
+
+
          <div class="clear submit">    
             <input id="submitButton" type="submit" value="Kayıt"/>
         </div>

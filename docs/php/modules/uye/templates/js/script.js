@@ -1,7 +1,7 @@
 $(document).ready( function() {
    
       $("#checkEmail").change( checkEmail ); 
-      $("#checkPassword").change( checkPassword ); 
+      $("#checkPassword, #checkPasswordAgain").change( checkPassword ); 
 
       $("#submitButton").click( submitForm );
 
@@ -15,8 +15,20 @@ function checkPassword() {
         if( value != undefined) {
 
             if(value.length > 5) {
+
+                again = $("#checkPasswordAgain").val();
                 $(".passwordError").html ( '' );
-                return true;
+
+                if( again != value ) {
+                    $(".passwordAgainError").html ( passwordAgainError );
+                    return false;
+                }
+                else{
+                    $(".passwordAgainError").html ( '' );
+                    return true;
+                }
+
+                
             }
             else {
                 $(".passwordError").html ( passwordError );
