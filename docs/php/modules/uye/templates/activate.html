@@ -1,8 +1,38 @@
 {if $activateStatus}
     <div class="white register">
        <div class="mailSent">
-            Hesabınız başarıyla etkinleştirildi         
+            Hesabınız başarıyla etkinleştirildi
        </div>
+
+       <div class="registerNote">
+           
+            <div class="noteRow"> 
+                <div class="noteLeft">
+                    Kullanıcı adınız 
+                </div>
+                <div class="noteDot">:</div>
+
+                <div class="noteRight">        
+                   {$activateStatus.email} 
+                </div>
+            </div>
+
+            <div class="noteRow">
+                <div class="noteLeft">
+                    API anahtarınız  
+                </div>
+                <div class="noteDot">:</div>
+                <div class="noteRight">        
+                     {$activateStatus.apiKey}
+                </div>
+            </div>
+
+        </div> <!-- registerNote-->
+
+        <div class="registerTip">
+            <b>Not:</b> API anahtarınızı, istediğiniz zaman sol taraftan giriş yaparak öğrenebilirsiniz
+        </div>
+
     </div>
 {else}
     <div class="loginError">

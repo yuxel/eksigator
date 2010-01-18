@@ -194,3 +194,18 @@ text-decoration:none;
 }
 
 .footer_bottom .copyleft a:hover { text-decoration:none}
+
+.registerNote {
+    width:450px;
+    margin:0 auto;
+    background:url('../images/note.png') no-repeat 0 50%;
+    padding-left:70px;
+}
+
+.registerNote .noteRow {height:30px; clear:both}
+.registerNote .noteLeft { float:left; width:100px; padding:8px 4px; font-size:13px}
+.registerNote .noteDot { float:left; width:3px; padding:8px 4px; font-size:13px; font-weight:bold}
+.registerNote .noteRight {  float:left; padding:4px; font-size:17px; font-weight:bold;}
+
+.registerTip  {font-size:11px; clear:both; text-align:center; padding:10px}
+.registerTip b {color:red; font-weight:bold;}

@@ -121,10 +121,10 @@ class module_uye implements modules{
         $email = addslashes($email);
         $hash  = addslashes($hash);
         
-        $sql = "select id from users where email='$email' and hash='$hash'";
+        $sql = "select email, apiKey from users where email='$email' and hash='$hash'";
         $result = $this->parent->model->fetch($sql);
        
-        $result = empty($result) ? false : true;
+        $result = empty($result) ? false : $result[0];
         
         if($result ) {
             $newHash = $this->getNewHash();
