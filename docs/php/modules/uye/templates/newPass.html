@@ -4,17 +4,20 @@
             Parolanız başarıyla değiştirildi
        </div>
     </div>
-{elseif $passStatus eq "notSame"}
-    <div class="loginError">
-    Girdiğiniz parolalar uyuşmuyor
-    </div>
 {elseif $passStatus eq "authError"}
     <div class="loginError">
         Parolanız değiştirilemedi, lütfen e-posta adresinizi kontrol edin
     </div>
 {else}
     <div class="white register">
-        <div class="header">Yeni Parola
+
+    {if $passStatus eq "notSame"}
+        <div class="loginError">
+            Girdiğiniz parolalar uyuşmuyor
+        </div>
+    {/if}
+
+        <div class="header">Yeni Parola </div>
         <form method="post" action="{$URL}{$URLStrings}" class="newPassForm">
             <div class="newPassRow">
                 <div>Parola</div>
@@ -29,6 +32,7 @@
             <div class="newPassRow submit">
                 <input type="submit" value="Parola değiştir" />
             </div>
+
         </form>
     </div>
 
