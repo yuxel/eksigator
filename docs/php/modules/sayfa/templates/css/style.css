@@ -40,6 +40,11 @@ height:400px;
 
 }
 
+.client_list li {
+}
+
+
+
 .browser32 {
     height:32px;
     display:block;
@@ -68,6 +73,10 @@ height:400px;
 
 .safari32 {
     background:url('../../img/safari.jpg') no-repeat left;
+}
+
+.qt32 {
+    background:url('../../img/qt.jpg') no-repeat left;
 }
 
 .browser_header {font-weight:bold;}
