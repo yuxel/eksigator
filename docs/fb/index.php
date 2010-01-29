@@ -6,7 +6,8 @@ $view = new Smarty();
 $facebook = new Facebook($appapikey, $appsecret);
 $facebook_user_id = $facebook->require_login();
 
-$view->display("notSigned");
+//$view->display("notSigned.html");
+$view->display("signed.html");
 
 
 $url = "http://api.eksigator.com/demo/demo/getList";
