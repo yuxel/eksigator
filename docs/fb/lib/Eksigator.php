@@ -8,7 +8,7 @@ class Eksigator
         $this->facebook = new Facebook($api_key, $secret, $generate_session_secret=false);
         
         $this->parseUrl();
-        $this->facebook->require_login();
+        $this->facebookUser = $this->facebook->require_login();
 
         $this->view = new Smarty();
         $this->urlHandler();
@@ -22,6 +22,11 @@ class Eksigator
 
 
     function urlHandler() {
+    
+        var_dump ( $this->facebookUser );
+
+        
+
         if( $this->actions[0] == "ayarlar" ) {
             $module = "UserSettings";
         }
@@ -33,7 +38,6 @@ class Eksigator
         }
 
         require_once( "lib/". $module. ".php" );
-
         $this->module = new $module();
         $this->module->setParent( $this->facebook );
     }
