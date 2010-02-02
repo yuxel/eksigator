@@ -11,6 +11,8 @@ require_once 'lib/ModuleBase.php';
 
 $eksigator = new Eksigator($apiKey, $apiSecret);
 
+exit;
+
 $view = new Smarty();
 
 //$view->display("notSigned.html");
