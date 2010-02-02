@@ -8,7 +8,7 @@ class Eksigator
         $this->facebook = new Facebook($api_key, $secret, $generate_session_secret=false);
         
         $this->parseUrl();
-        $this->require_login();
+        $this->facebook->require_login();
 
         $this->view = new Smarty();
         $this->urlHandler();
