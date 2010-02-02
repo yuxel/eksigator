@@ -1,6 +1,18 @@
 <?php
 
+
 require_once 'conf/application.php';
+
+require_once 3RDPARTY_DIR."/smarty/libs/Smarty.class.php";
+require_once 'facebookClient/facebook.php';
+require_once 'lib/Eksigator.php';
+
+
+$eksigator = new Eksigator($apiKey, $apiSecret);
+
+exit;
+
+
 $view = new Smarty();
 
 $facebook = new Facebook($appapikey, $appsecret);
