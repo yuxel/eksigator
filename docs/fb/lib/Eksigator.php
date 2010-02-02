@@ -30,7 +30,7 @@ class Eksigator
             if( $this->actions[0] == "ayarlar" ) {
                 $module = "UserSettings";
             }
-            else if( $this->actions[0] == "davetEt" ) {
+            else if( $this->actions[0] == "davet" ) {
                 $module = "InviteFriends";
             }
             else {
@@ -41,6 +41,9 @@ class Eksigator
         require_once( "lib/". $module. ".php" );
         $this->module = new $module();
         $this->module->setFacebookClient( $this->facebook );
+        $this->module->setAction( $this->actions[0] );
+        $this->module->initView();
+        $this->module->run();
     }
 
 

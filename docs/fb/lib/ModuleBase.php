@@ -4,11 +4,16 @@ class ModuleBase
 {
 
     function setFacebookClient($parent) {
-        $this->view = new Smarty();
         $this->facebook = $parent;
-
-        $this->run();
     }
 
+    function setAction($action) {
+        $this->action = $action;
+    }
+
+    function initView () {
+        $this->view = new Smarty();
+        $this->view->assign("action", $this->action );
+    }
 
 }
