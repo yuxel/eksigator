@@ -35,7 +35,7 @@ class Eksigator extends Facebook
         require_once( "lib/". $module. ".php" );
 
         $this->module = new $module();
-        $this->module->setParent( $this );
+        $this->module->setParent( self );
     }
 
 }
