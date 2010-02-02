@@ -14,6 +14,7 @@ class ModuleBase
     function initView () {
         $this->view = new Smarty();
         $this->view->assign("action", $this->action );
+        $this->view->assign("URL", "http://apps.facebook.com/eksigator");
     }
 
 }
