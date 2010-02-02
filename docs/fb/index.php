@@ -3,7 +3,7 @@
 
 require_once 'conf/application.php';
 
-require_once 3RDPARTY_DIR."/smarty/libs/Smarty.class.php";
+require_once THIRD_PARTY_DIR."/smarty/libs/Smarty.class.php";
 require_once 'facebookClient/facebook.php';
 require_once 'lib/Eksigator.php';
 
