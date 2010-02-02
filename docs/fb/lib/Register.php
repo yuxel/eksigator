@@ -2,12 +2,7 @@
 
 class Register extends ModuleBase
 {
-
-
     function run() {
-        $this->view->display("signed.html");
+        $this->view->display("notSigned.html");
     }
-
-
-
 }
