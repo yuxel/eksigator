@@ -1,12 +1,12 @@
 <?php
 
-class Eksigator extends Facebook
+class Eksigator
 {
 
 
     public function __construct($api_key, $secret, $generate_session_secret=false) {
-        parent::__construct($api_key, $secret, $generate_session_secret=false);
-
+        $this->facebook = new Facebook($api_key, $secret, $generate_session_secret=false);
+        
         $this->parseUrl();
         $this->require_login();
 
@@ -35,7 +35,7 @@ class Eksigator extends Facebook
         require_once( "lib/". $module. ".php" );
 
         $this->module = new $module();
-        $this->module->setParent( self );
+        $this->module->setParent( $this->facebook );
     }
 
 }
