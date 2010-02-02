@@ -3,8 +3,7 @@
 class FetchNews extends ModuleBase
 {
 
-    function __construct() {
-
+    function run(){
     }
 
 } 
