@@ -3,9 +3,8 @@
 class ModuleBase
 {
 
-    function setParent($parent) {
-        var_dump ( $parent );
-        $this->parent = $parent;
+    function setFacebookClient($parent) {
+        $this->facebook = $parent;
     }
 
 

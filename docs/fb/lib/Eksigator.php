@@ -39,7 +39,7 @@ class Eksigator
 
         require_once( "lib/". $module. ".php" );
         $this->module = new $module();
-        $this->module->setParent( $this->facebook );
+        $this->module->setFacebookClient( $this->facebook );
     }
 
 }
