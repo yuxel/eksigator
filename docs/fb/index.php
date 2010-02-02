@@ -10,7 +10,8 @@ require_once 'lib/Eksigator.php';
 
 $eksigator = new Eksigator($apiKey, $apiSecret);
 
-exit;
+
+var_dump ( $eksigator->actions );
 
 
 $view = new Smarty();

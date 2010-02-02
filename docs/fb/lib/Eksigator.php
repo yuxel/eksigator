@@ -12,7 +12,7 @@ class Eksigator extends Facebook
 
 
     function parseUrl(){
-        var_dump ($_GET);
+        $this->actions = explode("/", $_GET['q']);
     }
 
 
