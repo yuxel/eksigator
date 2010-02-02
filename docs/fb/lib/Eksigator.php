@@ -45,6 +45,7 @@ class Eksigator
 
 
     function getUserData($userId) {
+        return true;
         return false;
     }
 
