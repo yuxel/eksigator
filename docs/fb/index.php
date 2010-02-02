@@ -6,18 +6,12 @@ require_once 'conf/application.php';
 require_once THIRD_PARTY_DIR."/smarty/libs/Smarty.class.php";
 require_once 'facebookClient/facebook.php';
 require_once 'lib/Eksigator.php';
+require_once 'lib/ModuleBase.php';
 
 
 $eksigator = new Eksigator($apiKey, $apiSecret);
 
-
-var_dump ( $eksigator->actions );
-
-
 $view = new Smarty();
-
-$facebook = new Facebook($appapikey, $appsecret);
-$facebook_user_id = $facebook->require_login();
 
 //$view->display("notSigned.html");
 $view->display("signed.html");
