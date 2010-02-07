@@ -22,8 +22,9 @@
 }
 
 #register ol {
-    padding:10px 0;
-    margin:10px 0;
+    border:1px solid red;
+    padding:0;
+    margin:0 10px;
 }
 
 #register .header {
