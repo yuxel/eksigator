@@ -1,15 +1,18 @@
 #left { width:150px;
             float:left;
-                          min-height:150px; height:auto !important; height:150px;
+            min-height:150px; height:auto !important; height:150px;
+border:1px solid blue;
 }
 
 #left .logo { width:138px;
             margin:0 auto;
-                           background:url('http://eksigator.com/templates/images/logo_138.jpg') no-repeat left;
-                                              height:140px;
+            background:url('http://eksigator.com/templates/images/logo_138.jpg') no-repeat left;
+            height:140px;
 }
 
 
 
-#right { float:left;
+#right {
+    border:1px solid red; 
+    float:left;
 }
