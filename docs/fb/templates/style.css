@@ -50,6 +50,7 @@
 }
 
 #register .login .b1 {
+    font-weight:bold;
     float:left;
     width:150px;
     font-size:1.3em;
