@@ -32,3 +32,27 @@
 #register .login {
     background:#dcffac;
 }
+
+#register .login .b1 {
+float:left;
+width:100px;
+}
+
+#register .login .b2 {
+float:left;
+width:300px;
+}
+
+
+
+#register .login .b2 input {
+    padding:4px;
+    font-weight:bold;
+}
+
+
+#register .login .submit {
+    background:#88c73c;
+    font-weight:bold;
+    color:#457801;
+}
