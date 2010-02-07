@@ -5,7 +5,9 @@
         padding:10px;
 }
 
-#left .logo { width:138px;
+#left .logo { 
+            display:block;
+            width:138px;
             margin:0 auto;
             background:url('http://eksigator.com/templates/images/logo_138.jpg') no-repeat left;
             height:140px;
@@ -42,10 +44,10 @@
 }
 
 #register .login .b1 {
-    margin-top:10px;
     clear:both;
     float:left;
     width:150px;
+    font-size:1.3em;
 }
 
 #register .login .b2 {
@@ -62,11 +64,15 @@
 }
 
 
+#register .login {
+    text-align:center;
+}
 #register .login .submit {
-    width:100px;
-    margin:0 auto;
+    font-size:1.4em;
+    height:60px;
+    width:120px;
     border:1px solid #ffffff;
     background:#88c73c;
     font-weight:bold;
-    color:#457801;
+    color:#FFFFFF;
 }
