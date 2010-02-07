@@ -21,6 +21,10 @@
     float:left;
 }
 
+#register ol {
+    padding:0;
+    margin:0;
+}
 
 #register .header {
     margin-top:10px;
@@ -38,6 +42,8 @@
     background:#dcffac;
     padding:20px;
 }
+
+
 
 
 #register .login .row {
