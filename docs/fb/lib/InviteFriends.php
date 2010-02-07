@@ -4,7 +4,8 @@ class InviteFriends extends ModuleBase
 {
 
     function run(){
-        $this->view->display("news.html");
+        $this->rightContent = $this->view->fetch ("news.html");
     }
+
 
 } 
