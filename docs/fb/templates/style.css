@@ -40,7 +40,8 @@
 
 
 #register .login .row {
-    margin-top:14px;
+    height:30px; 
+    clear:both;
 }
 
 #register .login .header{
@@ -49,7 +50,6 @@
 }
 
 #register .login .b1 {
-    clear:both;
     float:left;
     width:150px;
     font-size:1.3em;
@@ -72,6 +72,7 @@
 #register .login {
     text-align:center;
 }
+
 #register .login .submit {
     margin-top:5px;
     font-size:1.4em;
