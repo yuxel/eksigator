@@ -33,6 +33,8 @@
 
 #register .login {
     background:#dcffac;
+    padding:20px;
+
 }
 
 #register .login .b1 {
@@ -56,6 +58,8 @@
 
 
 #register .login .submit {
+width:100px;
+margin:0 auto;
     border:1px solid #ffffff;
     background:#88c73c;
     font-weight:bold;
