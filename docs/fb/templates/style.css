@@ -50,6 +50,7 @@
 }
 
 #register .login .b1 {
+    padding-top:4px;
     width:140px;
     text-align:left;
     float:left;
