@@ -7,4 +7,7 @@ class FetchNews extends ModuleBase
         $this->view->display("news.html");
     }
 
+
+
+
 } 

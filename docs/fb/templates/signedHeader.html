@@ -1,5 +1,14 @@
-<fb:tabs>
-      <fb:tab-item href="{$URL}" {if !$action}selected="true"{/if}  title="Yenilikler" />
-      <fb:tab-item href="{$URL}/ayarlar" {if $action eq ayarlar}selected="true"{/if}      title="Ayarlar" />
-      <fb:tab-item href="{$URL}/davet" {if $action eq davet}selected="true"{/if}  title="Arkadaşlarını Davet Et" />
-</fb:tabs>
+<link rev="stylesheet" rel="stylesheet" media="screen" type="text/css" href="templates/style.css">
+<div id="left">
+
+Buraya biseyler gelebilir
+
+</div> <!-- left-->
+
+<div id="right">
+    <fb:tabs>
+          <fb:tab-item href="{$URL}" {if !$action}selected="true"{/if}  title="Yenilikler" />
+          <fb:tab-item href="{$URL}/ayarlar" {if $action eq ayarlar}selected="true"{/if}      title="Ayarlar" />
+          <fb:tab-item href="{$URL}/davet" {if $action eq davet}selected="true"{/if}  title="Arkadaşlarını Davet Et" />
+    </fb:tabs>
+</div> <!-- right -->

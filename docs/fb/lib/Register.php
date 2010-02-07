@@ -3,6 +3,6 @@
 class Register extends ModuleBase
 {
     function run() {
-        $this->view->display("notSigned.html");
+        $this->rigthContent = $this->view->fetch("notSigned.html");
     }
 }

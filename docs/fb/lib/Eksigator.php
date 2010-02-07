@@ -44,6 +44,7 @@ class Eksigator
         $this->module->setAction( $this->actions[0] );
         $this->module->initView();
         $this->module->run();
+        $this->module->printPage(); 
     }
 
 

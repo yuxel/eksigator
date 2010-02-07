@@ -1,0 +1,9 @@
+#left { width:140px; 
+        float:left;
+        padding-top:150px;
+        background:url('http://eksigator.com/templates/images/logo_138.jpg') no-repeat left;
+        min-height:150px; height:auto !important; height:150px;
+}
+
+#right { float:left;
+}
