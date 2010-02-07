@@ -1,6 +1,5 @@
 #left { width:150px;
         float:left;
-        border:1px solid blue;
         padding:10px;
 }
 
@@ -13,8 +12,19 @@
 
 
 #right {
-width:550px;
-padding:10px;
-    border:1px solid red; 
+    width:550px;
+    padding:10px;
     float:left;
+}
+
+
+#register .header {
+    font-size:1.4em;
+    color:#3b5998;
+    font-weight:bold;
+}
+
+#register .content {
+    line-height:22px;
+
 }
