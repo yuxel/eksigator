@@ -1,3 +1,5 @@
+.clear {clear:both}
+
 #left { width:150px;
         float:left;
         padding:10px;
@@ -49,10 +51,12 @@
 #register .login .b2 input {
     padding:4px;
     font-weight:bold;
+    width:280px;
 }
 
 
 #register .login .submit {
+    border:1px solid #ffffff;
     background:#88c73c;
     font-weight:bold;
     color:#457801;
