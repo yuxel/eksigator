@@ -65,7 +65,7 @@ class module_main_page implements modules{
         }
 
 
-        $maxEm = 100 / $title_length;
+        $maxEm = 800 / $title_length;
 
         if($maxEm > 5) {
             $maxEm = 5;
@@ -88,6 +88,8 @@ class module_main_page implements modules{
         foreach ( $tags as $key=>$tag) {
                 $ratio = $diffWithOne + ( $tag['count'] * $emRatio );
                 $ratio = number_format($ratio, 2, '.', '');
+
+                if( $ratio > 4 ) $ratio = 4;
                 
                 $fontWeight = ( ($key % 2) ==0 ) ? "bold" : "normal";
 
