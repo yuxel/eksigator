@@ -65,7 +65,7 @@ class module_main_page implements modules{
         }
 
 
-        $maxEm = 400 / $title_length;
+        $maxEm = 100 / $title_length;
 
         if($maxEm > 5) {
             $maxEm = 5;
