@@ -20,11 +20,15 @@
 
 #register .header {
     font-size:1.4em;
-    color:#3b5998;
+    color:#1aa55e;
     font-weight:bold;
 }
 
 #register .content {
+    font-size:1.1em;
     line-height:22px;
+}
 
+#register .login {
+    background:#dcffac;
 }
