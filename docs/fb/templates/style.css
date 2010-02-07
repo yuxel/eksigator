@@ -38,6 +38,11 @@
     padding:20px;
 }
 
+
+#register .logn .row {
+    margin-top:14px;
+}
+
 #register .login .header{
     font-size:1.6em;
     text-align:center;
@@ -68,8 +73,9 @@
     text-align:center;
 }
 #register .login .submit {
+    margin-top:5px;
     font-size:1.4em;
-    height:60px;
+    height:30px;
     width:120px;
     border:1px solid #ffffff;
     background:#88c73c;
