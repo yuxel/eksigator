@@ -36,12 +36,13 @@
     padding:20px;
 }
 
-#register .login {
+#register .login .header{
     font-size:1.6em;
     text-align:center;
 }
 
 #register .login .b1 {
+    margin-top:10px;
     clear:both;
     float:left;
     width:150px;
