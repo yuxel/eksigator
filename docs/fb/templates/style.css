@@ -1,7 +1,7 @@
 #left { width:150px;
         float:left;
         border:1px solid blue;
-        padding:4px;
+        padding:10px;
 }
 
 #left .logo { width:138px;
@@ -13,8 +13,8 @@
 
 
 #right {
-width:600px;
-padding:4px;
+width:550px;
+padding:10px;
     border:1px solid red; 
     float:left;
 }
