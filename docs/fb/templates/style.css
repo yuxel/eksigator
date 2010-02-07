@@ -34,13 +34,14 @@
 }
 
 #register .login .b1 {
-float:left;
-width:100px;
+    clear:both;
+    float:left;
+    width:100px;
 }
 
 #register .login .b2 {
-float:left;
-width:300px;
+    float:left;
+    width:300px;
 }
 
 
