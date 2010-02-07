@@ -1,7 +1,6 @@
 #left { width:150px;
-            float:left;
-            min-height:150px; height:auto !important; height:150px;
-border:1px solid blue;
+        float:left;
+        border:1px solid blue;
 }
 
 #left .logo { width:138px;
@@ -13,6 +12,7 @@ border:1px solid blue;
 
 
 #right {
+width:400px;
     border:1px solid red; 
     float:left;
 }
