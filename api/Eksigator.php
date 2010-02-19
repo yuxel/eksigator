@@ -271,15 +271,6 @@ class Eksigator{
      */
     function fetchAll(){
 
-        $auth = $_SESSION['eksigatorApi']['auth'];
-
-        //this method can be run from command line via cron job
-        $fromCommandLine = ($argv[1] == "fetchAll");
-
-        if( $auth != 2 && !$fromCommandLine) {
-            return false;
-        }
-
         //disable url caching
         $this->fetcher->setCacheLifeTime( -1 );
 

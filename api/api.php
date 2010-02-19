@@ -55,7 +55,14 @@ if( $eksigator->authenticateUser($userName,$apiKey) ) {
             break;
 
         case "fetchAll":
-            $eksigator->fetchAll();
+
+            //only admins can run this
+            $auth = $_SESSION['eksigatorApi']['auth'];
+
+            if( $auth == 2 ) {
+                $eksigator->fetchAll();
+            }
+
             break;
 
     } 
