@@ -61,7 +61,7 @@ if( $eksigator->authenticateUser($userName,$apiKey) ) {
     } 
 }
 //may be runned from command line interface, cron jobs will do that
-elseif( $argv[0]=="fetchAll" ){
+elseif( $argv[1]=="fetchAll" ){
     $eksigator->fetchAll();
 }
 else {
