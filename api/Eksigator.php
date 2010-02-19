@@ -60,6 +60,10 @@ class Eksigator{
      * @return boolean
      */
     function authenticateUser($userName, $apiKey){
+        if( !$userName || !$apiKey) {
+            return false;
+        }
+
         $userName = addslashes ( $userName );
         $apiKey   = addslashes ( $apiKey );
 
