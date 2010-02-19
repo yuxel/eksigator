@@ -273,7 +273,10 @@ class Eksigator{
 
         $auth = $_SESSION['eksigatorApi']['auth'];
 
-        if( $auth != 2 ) {
+        //this method can be run from command line via cron job
+        $fromCommandLine = ($argv[1] == "fetchAll");
+
+        if( $auth != 2 && !$fromCommandLine) {
             return false;
         }
 
