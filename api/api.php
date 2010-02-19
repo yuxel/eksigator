@@ -60,6 +60,10 @@ if( $eksigator->authenticateUser($userName,$apiKey) ) {
 
     } 
 }
-else{
+//may be runned from command line interface, cron jobs will do that
+elseif( $argv[0]=="fetchAll" ){
+    $eksigator->fetchAll();
+}
+else {
     $eksigator->toJson(array("message"=>"AUTH_FAILED") );
 }
