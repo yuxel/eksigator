@@ -281,7 +281,7 @@ class Eksigator{
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row['title'];
             $this->fetcher->getEntriesByTitleAfterGivenTime($title, $now);
-            echo $title."<br/>";
+            echo $title." <br/>\n";
         }
 
 
