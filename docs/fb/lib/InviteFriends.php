@@ -9,8 +9,8 @@ class InviteFriends extends ModuleBase
         "<fb:req-choice url=\"".$this->parent->fbUrl."\" label=\"Put ".$app_name." on your profile\"/>"; 
 
 
+       $content = htmlentities($content,ENT_COMPAT,'UTF-8');
         
-       var_dump ($content);
 
         $this->view->assign("reqContent", $content); 
     
