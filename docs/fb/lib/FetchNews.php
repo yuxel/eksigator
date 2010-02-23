@@ -5,7 +5,9 @@ class FetchNews extends ModuleBase
 
     function run(){
 
-        $this->getTitleStatus();
+        $news = $this->getTitleStatus();
+
+        $this->view->assign("news", $news);
 
         $this->rightContent = $this->view->fetch("news.html");
     }
@@ -18,14 +20,18 @@ class FetchNews extends ModuleBase
 
         $datas = $this->parent->getData($email, $apiKey);
 
-
         foreach($datas as $data) {
-
-            echo $data->title."<br/>";
+            $status = $data->status;
+            if($status == 1) {
+                $news[1][] = $data;
+            }
+            else{
+                $news[0][] = $data;
+            }
 
         }
 
-
+        return $news;
     }
 
 
