@@ -1,6 +1,7 @@
 <?
 class Db {
-	public function __construct($dbConf) {
+	public function __construct() {
+        include_once("../conf/db.php");
 		$conn = @mysql_pconnect ( $dbConf->host, $dbConf->user, $dbConf->pass ) or die("Veritabanina baglanilamiyor");
 		$dbSelect = @mysql_select_db ( $dbConf->name, $conn ) or die("veritabani secilemiyor");
 	}
