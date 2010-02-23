@@ -25,9 +25,21 @@ class ModuleBase
     }
 
     function printPage() {
+
+        $main = "main.html";
+        if ( $this->name == "InviteFriends" ) {
+            $main= "invite_main.html";
+        } 
+
+
         $this->view->assign("leftContent", $this->leftContent);
         $this->view->assign("rightContent", $this->rightContent);
-        $this->view->display("main.html");
+        $this->view->display($main);
+
+
+
+        } 
+
     }
 
 }
