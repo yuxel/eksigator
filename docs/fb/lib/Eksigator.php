@@ -12,6 +12,8 @@ class Eksigator
         $this->parseUrl();
 
         $this->urlHandler();
+
+        $this->db = new Db();
     }
 
 
@@ -61,7 +63,6 @@ class Eksigator
 
         $this->module->setAction( $this->actions[0] );
         $this->module->initView();
-        $this->module->initDb();
         $this->module->run();
         $this->module->printPage(); 
     }

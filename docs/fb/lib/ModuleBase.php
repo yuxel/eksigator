@@ -16,11 +16,6 @@ class ModuleBase
     }
 
 
-    function initDb(){
-        $this->db = new Db();
-    }
-
-
     function initView () {
         $this->view = new Smarty();
         $this->view->assign("action", $this->action );
