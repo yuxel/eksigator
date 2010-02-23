@@ -17,10 +17,7 @@ class ModuleBase
 
 
     function initDb(){
-        $db = new Db();
-
-        var_dump ( $db );
-         
+        $this->db = new Db();
     }
 
 
