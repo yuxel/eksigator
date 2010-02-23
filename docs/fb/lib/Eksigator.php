@@ -69,7 +69,18 @@ class Eksigator
 
     function getUserData($userId) {
 
-        var_dump ( $userId );
+        $userId = (int) $userId;
+
+        $query = "SELECT fb.fb_id, u.email, u.apiKey, fb.interval
+                  FROM `users` AS u, facebook AS fb
+                  WHERE u.active =1
+                  AND fb.eksigator_id = u.id
+                  and fb.fb_id = '$userId'";
+
+
+        $data = $this->fb->fetch($query);
+
+        var_dump ( $data );
 
         return true;
         return false;
