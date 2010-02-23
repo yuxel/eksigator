@@ -15,12 +15,22 @@
 
 
 {if $news.0}
-<h1>Diğer başlıklar</h1>  
 
-<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>
-<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Show this div</a>.
+{if $news.1}
+    {assign var="display" value="none"}
+    <h1>Yeni entry girilmemiş başlıklar</h1>  
 
-<ol id="titlesNotUpdated" style="display:none">
+    <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>
+    <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Show this div</a>.
+
+{else}
+
+    <h1>Aşağıdaki başlıklara yeni bir entry girilmemiş</h1>  
+    {assign var="display" value="block"}
+
+{/if}
+
+<ol id="titlesNotUpdated" style="display:{$display}">
     {foreach from=$news.0 item=item}
         {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
         <li><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>
@@ -29,4 +39,7 @@
 
 {/if}
 
+{if !$news.0 and !$news.1}
+    Takip edilen bir başlık yok, lütfen takip listenize bir başlık ekleyin
+{/if}
 
