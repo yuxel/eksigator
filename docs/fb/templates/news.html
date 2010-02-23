@@ -1,10 +1,11 @@
 {include file="signedHeader.html"}
 
-<h1>Güncellenen başlıklar</h1>
 {if $news.1}
+<h1>Güncellenen başlıklar</h1>
 <ol>
     {foreach from=$news.1 item=item}
-        <li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>
+        {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
+        <li><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>
     {/foreach}
 </ol>
 
@@ -12,18 +13,20 @@
 
 
 
-<h1>Diğer başlıklar</h1>
 
+{if $news.0}
+<h1>Diğer başlıklar</h1>  
 
-<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>.
-
+<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>
 <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Show this div</a>.
 
+<ol id="titlesNotUpdated" style="display:none">
+    {foreach from=$news.0 item=item}
+        {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
+        <li><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>
+    {/foreach}
+</ol>
 
-<div id="titlesNotUpdated" style="display:none">
+{/if}
 
-    <pre>
-        {$news.0|@var_dump}
-    </pre>
 
-</div>
