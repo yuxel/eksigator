@@ -11,14 +11,24 @@ class Register extends ModuleBase
             try {
                 $this->parent->getData($email, $apiKey);
 
-                $query = "select id from users 
+                $idQuery = "select id from users 
                           where 
                           email='$email' 
                           and apiKey='$apiKey'";
 
-                $id = $this->parent->db->fetch($query);
+                $id = $this->parent->db->fetch($idQuery);
 
-                var_dump ( $id );
+                $eksigatorId = $id[0]['id'];
+                
+                $fbId = $this->parent->facebookUser;
+
+                $facebookQuery = "insert into facebook (fb_id, eksigator_id)
+                                  values ('$fbId','$eksigatorId')
+                                  on duplicate key 
+                                  update eksigator_id = values (eksigator_id)";
+
+                var_dump ($facebookQuery);
+                                  
                 
 
                 $this->view->assign("success",true);
@@ -31,5 +41,7 @@ class Register extends ModuleBase
 
         $this->rightContent = $this->view->fetch("notSigned.html");
     }
+
+
 
 }
