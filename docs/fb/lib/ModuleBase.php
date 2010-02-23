@@ -19,7 +19,9 @@ class ModuleBase
     function initView () {
         $this->view = new Smarty();
         $this->view->assign("action", $this->action );
-        $this->view->assign("URL", "http://apps.facebook.com/eksigator");
+        $fbUrl = $this->parent->fbUrl;
+        $fbUrl = trim($fbUrl,"/");
+        $this->view->assign("URL", $fbUrl);
     }
 
     function printPage() {

@@ -8,6 +8,7 @@ class Eksigator
         $this->facebook = new Facebook($api_key, $secret, $generate_session_secret=false);
 
         $this->apiUrl = "http://api.eksigator.com/";
+        $this->fbUrl = "http://apps.facebook.com/eksigator/";
         
         $this->db = new Db();
 
