@@ -25,3 +25,16 @@ alter table entries add column added int(11) after lastRead;
 alter table entries add column deleted int(11) default '0';
 alter table entries add KEY deleted(deleted);
 ALTER TABLE entries MODIFY title VARCHAR( 120 ) ;
+
+
+-- facebook table
+CREATE TABLE `entries` (
+  `userId` int(10) unsigned NOT NULL DEFAULT 0,
+  `title` varchar(60),
+  `lastRead` int(11) DEFAULT 0,
+  `status` tinyint(2),
+  `lastId` int(11) DEFAULT 0,
+   FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+   INDEX userId (userId)
+);
+
