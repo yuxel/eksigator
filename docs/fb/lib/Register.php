@@ -29,6 +29,8 @@ class Register extends ModuleBase
 
                 $this->parent->db->query($facebookQuery);
 
+                $this->facebook->redirect("http://apps.facebook.com/eksigator");
+
                 $this->view->assign("success",true);
             }
             catch(Exception $e) {
