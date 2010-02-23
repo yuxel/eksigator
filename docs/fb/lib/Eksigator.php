@@ -80,10 +80,11 @@ class Eksigator
 
         $data = $this->db->fetch($query);
 
-        var_dump ( $data );
-
+        if(!$data) {
+            return false;
+        }
+        
         return true;
-        return false;
     }
 
 
