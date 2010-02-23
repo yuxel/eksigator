@@ -7,6 +7,17 @@
 
 
 <h1>Diğer başlıklar</h1>
-<pre>
-    {$news.0|@var_dump}
-</pre>
+
+
+<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>.
+
+<a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Show this div</a>.
+
+
+<div id="titlesNotUpdated" style="display:block">
+
+    <pre>
+        {$news.0|@var_dump}
+    </pre>
+
+</div>
