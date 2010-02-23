@@ -3,6 +3,10 @@
 class ModuleBase
 {
 
+    function setParent($parent) {
+        $this->parent = $parent;
+    }
+
     function setFacebookClient($parent) {
         $this->facebook = $parent;
     }
@@ -10,6 +14,12 @@ class ModuleBase
     function setAction($action) {
         $this->action = $action;
     }
+
+
+    function initDb(){
+         
+    }
+
 
     function initView () {
         $this->view = new Smarty();

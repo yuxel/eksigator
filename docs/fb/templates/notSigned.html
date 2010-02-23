@@ -41,7 +41,14 @@
 
     </span>
 
-    <form class="login" method="post" action="{$URL}">
+    <form class="login" method="post">
+
+        {if $success === "false"}
+            <div class="row">
+                Giriş başarısız
+            </div>
+        {/if}
+
         <div class="row">
             <div class="b1">
                 E-posta adresiniz
