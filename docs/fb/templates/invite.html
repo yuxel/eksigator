@@ -1,4 +1,25 @@
 {include file="signedHeader.html"}
+
+<fb:fbml>
+<fb:request-form method="POST" action="compare.php" content="some content" type="" invite="false">
+
+    <input id="first_overloaded_id" type="hidden" fb_protected="true" value="first_overloaded_value" name="first_overloaded_name"/>
+    <input id="second_overloaded_id" type="hidden" fb_protected="true" value="second_overloaded_value" name="second_overloaded_name"/>
+
+    <div class="clearfix" style="padding-bottom: 10px;">
+        <fb:multi-friend-selector condensed="true" style="width:80%;" />
+    </div>
+    <fb:request-form-submit />
+</fb:request-form>
+</fb:fbml>
+
+
+
+
+
+
+
+
 <fb:fbml>
 <fb:request-form action="index.php"  method="POST"  invite="true"  type="Eksigator" 
 content="Eksigatoru yukleyin" > 
