@@ -8,6 +8,7 @@ class InviteFriends extends ModuleBase
        $content = "<fb:req-choice url=\"http://apps.facebook.com/eksigator\" label=\"Put this on your profile\"/>"; 
 
         $content = htmlspecialchars($content);       
+        $content = htmlspecialchars($content);       
 
        
 
