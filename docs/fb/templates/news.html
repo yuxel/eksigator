@@ -4,7 +4,7 @@
 {if $news.1}
 <ol>
     {foreach from=$news.1 item=item}
-        <li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lsatId}" target="_blank">{$item->title}</a> </li>
+        <li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>
     {/foreach}
 </ol>
 
