@@ -9,11 +9,12 @@ class Eksigator
 
         $this->apiUrl = "http://api.eksigator.com/";
         
+        $this->db = new Db();
+
         $this->parseUrl();
 
         $this->urlHandler();
 
-        $this->db = new Db();
     }
 
 
