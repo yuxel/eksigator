@@ -11,8 +11,6 @@ class InviteFriends extends ModuleBase
        $content = htmlentities($content,ENT_COMPAT,'UTF-8');
         
 
-       var_dump ( $content );
-
         $this->view->assign("reqContent", $content); 
     
         $this->rightContent = $this->view->fetch ("invite.html");
