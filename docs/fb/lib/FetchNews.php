@@ -9,6 +9,10 @@ class FetchNews extends ModuleBase
 
         $this->view->assign("news", $news);
 
+        $eksiUrl = $this->parent->eksiUrl;
+
+        $this->view->assign("eksiUrl",$eksiUrl);
+
         $this->rightContent = $this->view->fetch("news.html");
     }
 
