@@ -10,6 +10,17 @@ class Register extends ModuleBase
         if($email && $apiKey) {
             try {
                 $this->parent->getData($email, $apiKey);
+
+                $query = "select id from users 
+                          where 
+                          email='$email' 
+                          and apiKey='$apiKey'";
+
+                $id = $this->parent->db->fetch($query);
+
+                var_dump ( $id );
+                
+
                 $this->view->assign("success",true);
             }
             catch(Exception $e) {
