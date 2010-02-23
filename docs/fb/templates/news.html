@@ -1,9 +1,15 @@
 {include file="signedHeader.html"}
 
 <h1>Güncellenen başlıklar</h1>
-<pre>
-    {$news.1|@var_dump}
-</pre>
+{if $news.1}
+<ol>
+    {foreach from=$news.1 item=item}
+        <li><a href="#">{$item.title}</a> </li>
+    {/foreach}
+</ol>
+
+{/if}
+
 
 
 <h1>Diğer başlıklar</h1>
