@@ -80,9 +80,7 @@ class Eksigator
                   and fb.fb_id = '$userId'";
 
 
-        var_dump ( $query );
-
-        //$data = $this->db->fetch($query);
+        $data = $this->db->fetch($query);
 
         if(!$data) {
             return false;
