@@ -27,9 +27,7 @@ class Register extends ModuleBase
                                   on duplicate key 
                                   update eksigator_id = values (eksigator_id)";
 
-                var_dump ($facebookQuery);
-                                  
-                
+                $this->parent->db->query($facebookQuery);
 
                 $this->view->assign("success",true);
             }
