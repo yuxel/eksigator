@@ -68,9 +68,13 @@ class Eksigator
 
 
     function getUserData($userId) {
+
+        var_dump ( $userId );
+
         return true;
         return false;
     }
 
 
 }
+

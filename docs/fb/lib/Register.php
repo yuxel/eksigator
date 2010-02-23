@@ -17,10 +17,6 @@ class Register extends ModuleBase
             }
         }
 
-        $query = "select * from users limit 1";
-        $data =$this->db->fetch($query);
-
-        var_dump ( $data );
 
         $this->rightContent = $this->view->fetch("notSigned.html");
     }
