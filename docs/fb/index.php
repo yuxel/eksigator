@@ -8,6 +8,7 @@ require_once 'conf/application.php';
 require_once THIRD_PARTY_DIR."/smarty/libs/Smarty.class.php";
 require_once 'facebookClient/facebook.php';
 require_once 'lib/Eksigator.php';
+require_once 'lib/Db.php';
 require_once 'lib/ModuleBase.php';
 
 
