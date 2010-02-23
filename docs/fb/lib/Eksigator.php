@@ -43,7 +43,9 @@ class Eksigator
    
         $this->facebookUser = $this->facebook->require_login();
 
-        if( !$this->getUserData($this->facebookUser) ){
+        $this->userData = $this->getUserData($this->facebookUser);
+
+        if( !$this->userData ){
             $module = "Register";
         } 
         else{
@@ -86,8 +88,8 @@ class Eksigator
         if(!$data) {
             return false;
         }
-        
-        return true;
+    
+        return $data[0];    
     }
 
 
