@@ -78,7 +78,7 @@ class Eksigator
                   and fb.fb_id = '$userId'";
 
 
-        $data = $this->fb->fetch($query);
+        $data = $this->db->fetch($query);
 
         var_dump ( $data );
 
