@@ -63,6 +63,7 @@ class Eksigator
 
         require_once( "lib/". $module. ".php" );
         $this->module = new $module();
+        $this->module->name = $module;
         $this->module->setFacebookClient( $this->facebook );
         $this->module->setParent ( $this );
 
