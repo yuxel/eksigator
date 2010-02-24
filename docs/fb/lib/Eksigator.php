@@ -81,6 +81,9 @@ class Eksigator
             else if( $this->actions[0] == "yardim" ) {
                 $module = "Help";
             }
+            else if( $this->actions[0] == "liste" ) {
+                $module = "List";
+            }
             else if( $this->actions[0] == "davet" ) {
                 $module = "InviteFriends";
             }
