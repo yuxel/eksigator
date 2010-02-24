@@ -1,11 +1,16 @@
-<link rev="stylesheet" rel="stylesheet" media="screen" type="text/css"
-href="http://fb.eksigator.com/templates/style.css?{php}echo time();{/php}">
+<link rev="stylesheet" rel="stylesheet" media="screen" type="text/css" href="http://fb.eksigator.com/templates/style.css?{php}echo time();{/php}">
+
+{if $loggedIn}
+    {include file="signedHeader.html"}
+{/if}
+
 <div id="left">
     <a href="http://apps.facebook.com/eksigator" class="logo"></a>
     <div class="news">
         {$leftContent}
     </div>
 </div> <!-- left-->
+
 
 <div id="right">
     {$rightContent}
