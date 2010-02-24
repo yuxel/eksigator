@@ -40,20 +40,30 @@ class Eksigator
     }
 
 
+    function installRemoveLog($status) {
+        
+        $id = $_REQUEST['fb_sig_user'];
+
+        $query = "insert into facebook_log (fb_id, status)
+                  values ( $id, $status )
+                  on duplicate entry
+                  update status = values (status)"; 
+
+        $this->db->query ( $query );
+
+        exit;
+
+    }
+
+
     function urlHandler() {
   
 
         if( $this->actions[0] == "userInstalled" ) {
-            $id = $_REQUEST['fb_sig_user'];
-            $text = "$id installed application \n";
-            file_put_contents("install.log", $text, FILE_APPEND );
-            exit;
+            $this->installRemoveLog(1);
         }
         elseif ($this->actions[0] == "userRemoved" ) {
-            $id = $_REQUEST['fb_sig_user'];
-            $text = "$id removed application \n";
-            file_put_contents("install.log", $text, FILE_APPEND );
-            exit;
+            $this->installRemoveLog(0);
         }
 
         $this->facebookUser = $this->facebook->require_login();
