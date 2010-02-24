@@ -5,6 +5,8 @@ class FetchNews extends ModuleBase
 
     function run(){
 
+        echo time();
+
         $news = $this->getTitleStatus();
 
         $this->view->assign("news", $news);
