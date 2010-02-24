@@ -79,6 +79,11 @@ height:400px;
     background:url('../../img/qt.jpg') no-repeat left;
 }
 
+.facebook32 {
+    background:url('../../img/fb.jpg') no-repeat left;
+}
+
+
 .browser_header {font-weight:bold;}
 .browser_item_content {margin:10px;}
 
