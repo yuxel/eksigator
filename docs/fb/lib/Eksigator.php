@@ -68,8 +68,11 @@ class Eksigator
 
     function setItemAsRead($hashed) {
 
+        $decoded = bas64_decode($hashed);
+
+        $array = unserialize($decoded);
        
-       var_dump($hashed); 
+       var_dump($array; 
 
         //$addUrl = $this->parent->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
         //file_get_contents($addUrl);
