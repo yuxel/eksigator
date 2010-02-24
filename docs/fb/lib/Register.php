@@ -3,11 +3,10 @@
 class Register extends ModuleBase
 {
     function run() {
-        $email = $_POST['eksigator'][0];
-        $apiKey = $_POST['eksigator'][1];
+        $email = addslashes(htmlspecialchars($_POST['eksigator'][0]));
+        $apiKey = addslashes(htmlspecialchars($_POST['eksigator'][1]));
 
-
-        if($email && $apiKey) {
+        if($email || $apiKey) {
             try {
                 $this->parent->getData($email, $apiKey);
 
