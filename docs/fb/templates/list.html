@@ -7,7 +7,7 @@
 <h1> Aşağıda, yeni bir entry geldiğinde size haber verilecek başlıklar bulunuyor </h1>
 
 {if $titles}
-<ul>
+<ul id="titleList">
     {foreach from=$titles item=item}
         <li> <a href="#" class="removeItem">X</a> {$item->title} </li>
     {/foreach}

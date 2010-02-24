@@ -118,9 +118,13 @@
     color:#cb0000;
 }
 
+#titleList li {
+    margin-bottom:10px;
+}
+
 .removeItem {
     font-size:1.2em; 
     font-weight:bold; 
     color:#cb0000;
-    padding-right:10px;
+    padding-right:2px;
 }
