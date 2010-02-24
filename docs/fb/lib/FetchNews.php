@@ -26,6 +26,14 @@ class FetchNews extends ModuleBase
 
         foreach($datas as $data) {
             $status = $data->status;
+
+
+            $hashArray = array($email, $apiKey, $data->title);
+            $hashSerialize = serialize($hashArray);
+            $hash64 = base64_encode($hashSerialize);
+
+            $data['url'] = $hash64;
+
             if($status == 1) {
                 $news[1][] = $data;
             }

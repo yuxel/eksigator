@@ -66,6 +66,19 @@ class Eksigator
     }
 
 
+    function setItemAsRead($hashed) {
+
+        
+
+        $addUrl = $this->parent->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
+        file_get_contents($addUrl);
+        exit;
+
+    }
+
+
+
+
     function urlHandler() {
   
 
@@ -74,6 +87,9 @@ class Eksigator
         }
         elseif ($this->actions[0] == "userRemoved" ) {
             $this->installRemoveLog(0);
+        }
+        elseif($this->actions[0] == "redirect") {
+           $this->setItemAsRead( $this->actions[1] );
         }
 
         $this->facebookUser = $this->facebook->require_login();

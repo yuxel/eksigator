@@ -13,5 +13,5 @@ require_once 'lib/ModuleBase.php';
 
 
 $cronInterval = $argv[2];
-
 $eksigator = new Eksigator($apiKey, $apiSecret, $cronInterval);
+
