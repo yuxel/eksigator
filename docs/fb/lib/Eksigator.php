@@ -53,7 +53,7 @@ class Eksigator
                       FROM `users` AS u, facebook AS fb
                       WHERE u.active =1
                       AND fb.eksigator_id = u.id
-                      and fb.interval in ($selectedInterval)";
+                      and fb.interval in ($selectedIntervalIn)";
 
 
 
