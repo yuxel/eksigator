@@ -76,7 +76,15 @@ class Eksigator
         $apiKey = $array[1];
         $title = $array[2];
 
+
+
+
         $addUrl = $this->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
+
+        var_dump($addUrl);
+
+        exit;
+
         file_get_contents($addUrl);
 
         $title = urlencode($title);
