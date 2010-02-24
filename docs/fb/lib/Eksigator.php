@@ -30,10 +30,7 @@ class Eksigator
 
     function sendNotificationsViaCron() {
 
-            $cronInterval = date("h");
-
-            echo $cronInterval;
-            exit;
+            $cronInterval = (int) date("h");
 
             if($cronInterval >= 1 ) {
                 $selectedInterval[] = 1;
@@ -65,15 +62,13 @@ class Eksigator
 
             $cronItems = $this->db->fetch($query);
 
+            $this->notificaton = new Notification();
             foreach($cronItems as $cron) {
                 $cronDatas = $this->getData($cron['email'], $cron['apiKey']);
                 if($this->checkForUpdatedTitles($cronDatas)) {
                     $uid = $cron['fb_id'];
-                    //$this->notificaton = new Notification();
-                    //$this->notificaton->sendNotificationToUser($uid); 
-
-                    echo "$uid  icin notification gonderildi";
-
+                    $this->notificaton->sendNotificationToUser($uid); 
+                    //echo "$uid  icin notification gonderildi";
                 } 
 
 
