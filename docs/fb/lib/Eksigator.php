@@ -79,7 +79,7 @@ class Eksigator
         $addUrl = $this->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
         file_get_contents($addUrl);
 
-        $eksiUrl = $this->eksiurl."show.asp?t=".$title;
+        $eksiUrl = $this->eksiUrl."show.asp?t=".$title;
 
         var_dump($eksiUrl);
         echo $eksiUrl;
