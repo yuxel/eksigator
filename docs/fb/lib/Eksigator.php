@@ -22,10 +22,53 @@ class Eksigator
 
         }
         else{ //cron
-            $uid = 525202689;
-            $this->notificaton = new Notification();
-            $this->notificaton->sendNotificationToUser($uid); 
+            $this->sendNotifications($cronInterval);
         }
+
+    }
+
+
+    function sendNotifications($cronInterval) {
+
+            if($cronInterval >= 1 ) {
+                $selectedInterval[] = 1;
+            }
+            if($cronInterval >= 3 ) {
+                $selectedInterval[] = 3;
+            }
+            if($cronInterval >= 6 ) {
+                $selectedInterval[] = 6;
+            }
+            if($cronInterval >= 12 ) {
+                $selectedInterval[] = 12;
+            }
+            if($cronInterval >= 24 ) {
+                $selectedInterval[] = 24;
+            }
+
+            $selectedIntervalIn = implode(",", $selectedInterval);
+
+
+            $query = "SELECT fb.fb_id, u.email, u.apiKey, fb.interval
+                      FROM `users` AS u, facebook AS fb
+                      WHERE u.active =1
+                      AND fb.eksigator_id = u.id
+                      and fb.interval in ($selectedInterval)";
+
+
+
+            var_dump ($query);
+
+
+
+
+
+
+            $uid = 525202689;
+            //$this->notificaton = new Notification();
+            //$this->notificaton->sendNotificationToUser($uid); 
+
+
 
     }
 
