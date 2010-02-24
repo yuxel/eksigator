@@ -1,4 +1,9 @@
-{$success|@var_dump}
+{if $success === false}
+    <div class="registerError">
+        HATA: E-posta adresinizi ve API anahtarınızı kontrol edin.
+    </div>
+{/if}
+
 
 <form method="post" action="{$URL}/ayarlar">
 
