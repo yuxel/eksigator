@@ -68,7 +68,7 @@ class Eksigator
 
     function setItemAsRead($hashed) {
 
-        $decoded = bas64_decode($hashed);
+        $decoded = base64_decode($hashed);
 
         $array = unserialize($decoded);
 
