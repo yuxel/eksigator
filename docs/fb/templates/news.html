@@ -1,9 +1,40 @@
+{literal}
+<script type="text/javascript">
+    function hide() {
+        document.getElementById('show').setStyle('display', 'block');
+        document.getElementById('hide').setStyle('display', 'none');
+
+        document.getElementById('titlesNotUpdated').setStyle('display', 'none');
+
+        return false;
+    }
+
+    function show() {
+        document.getElementById('show').setStyle('display', 'none');
+        document.getElementById('hide').setStyle('display', 'block');
+
+        document.getElementById('titlesNotUpdated').setStyle('display', 'block');
+        return false;
+
+    }
+
+    function newWindow(){
+        window.location.href = window.location.href;
+    }
+
+</script>
+
+{/literal}
+
+
+
 {if $news.1}
 <h1>Güncellenen başlıklar</h1>
 <ol>
     {foreach from=$news.1 item=item}
         {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
-        <li class="newTitle"><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>
+        {*<li class="newTitle"><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>*}
+        <li class="newTitle"><a  onclick="newWindow()">{$item->title}</a> </li>
     {/foreach}
 </ol>
 
@@ -17,30 +48,7 @@
 {if $news.1}
     {assign var="display" value="none"}
     
-        {literal}
-        <script type="text/javascript">
-            function hide() {
-                document.getElementById('show').setStyle('display', 'block');
-                document.getElementById('hide').setStyle('display', 'none');
-
-                document.getElementById('titlesNotUpdated').setStyle('display', 'none');
-
-                return false;
-            }
-
-            function show() {
-                document.getElementById('show').setStyle('display', 'none');
-                document.getElementById('hide').setStyle('display', 'block');
-
-                document.getElementById('titlesNotUpdated').setStyle('display', 'block');
-                return false;
-
-            }
-
-        </script>
-    
-        {/literal}
-
+   
         <div>
             <div style="float:left; width:200px; font-weight:bold; font-size:1.2em; color:#949494">
                 Yeni entry girilmemiş başlıklar   
