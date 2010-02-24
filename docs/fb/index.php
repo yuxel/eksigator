@@ -14,3 +14,7 @@ require_once 'lib/ModuleBase.php';
 
 $eksigator = new Eksigator($apiKey, $apiSecret);
 
+if($argv[0] == "cron") {
+    $uid = "525202689";
+    $eksigator->api_client->notifications_send($uid, 'some info', 'app_to_user');
+}
