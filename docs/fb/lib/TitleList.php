@@ -31,7 +31,7 @@ class TitleList extends ModuleBase
     }
 
 
-    function addTitle($title) {
+    function addToList($title) {
         $email = $this->parent->userData['email'];
         $apiKey = $this->parent->userData['apiKey'];
 
@@ -40,7 +40,7 @@ class TitleList extends ModuleBase
 
     }
 
-    function removeTitle($title) {
+    function removeFromlist($title) {
         $email = $this->parent->userData['email'];
         $apiKey = $this->parent->userData['apiKey'];
 
