@@ -22,13 +22,18 @@ class Eksigator
 
         }
         else{ //cron
-            $this->sendNotifications($cronInterval);
+            $this->sendNotificationsViaCron();
         }
 
     }
 
 
-    function sendNotifications($cronInterval) {
+    function sendNotificationsViaCron() {
+
+            $cronInterval = date("h");
+
+            echo $cronInterval;
+            exit;
 
             if($cronInterval >= 1 ) {
                 $selectedInterval[] = 1;
