@@ -92,3 +92,8 @@
     font-weight:bold;
     color:#FFFFFF;
 }
+
+.registerError {
+    color:#cb0000;
+    text-align:center;
+}
