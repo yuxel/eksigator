@@ -46,7 +46,7 @@ class Eksigator
 
         $query = "insert into facebook_log (fb_id, status)
                   values ( $id, $status )
-                  on duplicate entry
+                  on duplicate key
                   update status = values (status)"; 
 
         $this->db->query ( $query );
