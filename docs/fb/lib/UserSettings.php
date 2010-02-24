@@ -8,17 +8,20 @@ class UserSettings extends ModuleBase
         $email = addslashes(htmlspecialchars($_POST['eksigator'][0]));
         $apiKey = addslashes(htmlspecialchars($_POST['eksigator'][1]));
 
-        $interval = (int) $_POST['interval'];
+        $interval =  $_POST['interval'];
 
-        if( $interval == 0 || $interval == 1 || $interval == 3 || 
-            $interval == 6 || $interval == 12 || $interval == 24 ) {
-            $interval = $interval;
-        }
-        else {
-            $interval = 0;
-        }
+        if( isset($interval) ) {
 
-        $this->updateUserData ( $email, $apiKey, $interval );
+            if( $interval == 0 || $interval == 1 || $interval == 3 || 
+                $interval == 6 || $interval == 12 || $interval == 24 ) {
+                $interval = $interval;
+            }
+            else {
+                $interval = 0;
+            }
+ 
+            $this->updateUserData ( $email, $apiKey, $interval );
+        }
 
         $this->view->assign("userData", $this->parent->userData);
         $this->rightContent = $this->view->fetch("settings.html");
