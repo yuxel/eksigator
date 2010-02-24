@@ -76,13 +76,13 @@ class Eksigator
         $apiKey = $array[1];
         $title = $array[2];
 
-        echo "<pre>";
+        $addUrl = $this->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
+        file_get_contents($addUrl);
 
-            var_dump($array);
-        echo "</pre>";       
+        $eksiurl = $this->eksiurl."show.asp?t=".$title;
 
-        //$addUrl = $this->parent->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
-        //file_get_contents($addUrl);
+        header("Location: $eksiUrl");
+
         exit;
 
     }
