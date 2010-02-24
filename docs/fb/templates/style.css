@@ -112,3 +112,8 @@
 }
 
 .newTitle {font-weight:bold}
+
+.note {font-size:1.2em; 
+    font-weight:bold; 
+    color:#cb0000;
+}
