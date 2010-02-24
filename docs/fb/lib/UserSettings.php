@@ -41,10 +41,10 @@ class UserSettings extends ModuleBase
 
             $fbId = $this->parent->facebookUser;
 
-            $facebookQuery = "insert into facebook (fb_id, eksigator_id, interval)
+            $facebookQuery = "insert into facebook (fb_id, eksigator_id, `interval`)
                         values ('$fbId','$eksigatorId', '$interval')
                         on duplicate key 
-                        update eksigator_id = values (eksigator_id), interval= values (interval)";
+                        update eksigator_id = values (eksigator_id), `interval` = values (`interval`)";
 
             echo "<br/>".$facebookQuery."<br/>";
 
