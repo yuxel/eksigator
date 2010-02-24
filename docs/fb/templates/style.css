@@ -120,7 +120,7 @@
 
 
 #titleList li.odd {
-    background:#d3d3d3;
+    background:#dcffac;
 }
 
 #titleList li {
@@ -128,8 +128,7 @@
 }
 
 .removeItem {
-    font-size:1.2em; 
+    font-size:1.1em; 
     font-weight:bold; 
     color:#cb0000;
-    padding-right:2px;
 }
