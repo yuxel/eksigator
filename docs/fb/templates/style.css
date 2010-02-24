@@ -117,3 +117,10 @@
     font-weight:bold; 
     color:#cb0000;
 }
+
+.removeItem {
+    font-size:1.2em; 
+    font-weight:bold; 
+    color:#cb0000;
+    padding-right:10px;
+}

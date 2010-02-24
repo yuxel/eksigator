@@ -4,12 +4,12 @@
     </div>
 </form>
 
-<h1> Aşağıda, yeni bir entry geldiğinde size haber verilecek entry'ler bulunuyor </h1>,
+<h1> Aşağıda, yeni bir entry geldiğinde size haber verilecek başlıklar bulunuyor </h1>
 
 {if $titles}
 <ul>
     {foreach from=$titles item=item}
-        <li> <a href="#">X</a> {$item->title} </li>
+        <li> <a href="#" class="removeItem">X</a> {$item->title} </li>
     {/foreach}
 </ul>
 {/if}
