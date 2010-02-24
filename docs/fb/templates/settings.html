@@ -31,12 +31,12 @@
     
         <div class="b2">    
             <select name="interval">
-                <option value="0"> --- Bildirim gönderme --- </option>
-                <option value="1"> Saatte bir </option>
-                <option value="1"> 3 saatte bir </option>
-                <option value="1"> 6 saatte bir </option>
-                <option value="1"> 12 saatte bir </option>
-                <option value="1"> Günde bir </option>
+                <option value="0" {if $userData.interval eq 0}selected{/if}> --- Bildirim gönderme --- </option>
+                <option value="1" {if $userData.interval eq 1}selected{/if}      > Saatte bir </option>
+                <option value="3"  {if $userData.interval eq 3}selected{/if}   > 3 saatte bir </option>
+                <option value="6"   {if $userData.interval eq 6}selected{/if}   > 6 saatte bir </option>
+                <option value="12"  {if $userData.interval eq 12}selected{/if}   > 12 saatte bir </option>
+                <option value="24"   {if $userData.interval eq 24}selected{/if}   > Günde bir </option>
             </select>
         </div>
 
