@@ -20,16 +20,16 @@
         {literal}
         <script type="text/javascript">
             function hide() {
-                document.getElementById('show').setStyle('display', 'none');
-                document.getElementById('hide').setStyle('display', 'block');
+                document.getElementById('show').setStyle('display', 'block');
+                document.getElementById('hide').setStyle('display', 'none');
 
                 Animation(document.getElementById('titlesNotUpdated')).hide().go(); 
                 return false;
             }
 
             function show() {
-                document.getElementById('show').setStyle('display', 'block');
-                document.getElementById('hide').setStyle('display', 'none');
+                document.getElementById('show').setStyle('display', 'none');
+                document.getElementById('hide').setStyle('display', 'block');
 
                 Animation(document.getElementById('titlesNotUpdated')).show().go(); 
                 return false;
