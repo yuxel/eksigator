@@ -18,9 +18,10 @@
 
     }
 
-    function newWindow(){
-        document.setLocation('http://apps.facebook.com/eksigator/');
+    function refreshMainWindow(){
+        setTimeout("document.setLocation('http://apps.facebook.com/eksigator/')",5000);
     }
+
 
 </script>
 
@@ -34,7 +35,7 @@
     {foreach from=$news.1 item=item}
         {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
         {*<li class="newTitle"><a href="{$eksiUrl}show.asp?t={$item->title}" target="_blank">{$item->title}</a> </li>*}
-        <li class="newTitle"><a  onclick="newWindow()" href="{$URL}/redirect/{$item->url}" target="_blank"  >{$item->title}</a> </li>
+        <li class="newTitle"><a  onclick="refreshMainWindow()" href="{$URL}/redirect/{$item->url}" target="_blank"  >{$item->title}</a> </li>
         
     {/foreach}
 </ol>
