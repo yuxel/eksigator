@@ -50,6 +50,7 @@ class Eksigator
             $module = "Register";
         } 
         else{
+            $this->view->assign("signed",true);
             if( $this->actions[0] == "ayarlar" ) {
                 $module = "UserSettings";
             }
