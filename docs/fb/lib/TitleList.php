@@ -16,9 +16,15 @@ class TitleList extends ModuleBase
             $this->removeFromList($title);
         }
 
+
+        $removeUrl = $this->parent->fbUrl."liste?sil=";
+
+
+
         $titles = $this->getTitles();
 
         $this->view->assign("titles", $titles);
+        $this->view->assign("removeUrl", $removeUrl);
         $this->rightContent = $this->view->fetch ("list.html");
     }
 
