@@ -41,7 +41,21 @@ class Eksigator
 
 
     function urlHandler() {
-   
+  
+
+        if( $this->actions[0] == "userInstalled" ) {
+            $id = $_REQUEST['fb_sig_user'];
+            $text = "$id installed application \n";
+            file_put_contents("install.log", $text, FILE_APPEND );
+            exit;
+        }
+        elseif ($this->actions[0] == "userRemoved" ) {
+            $id = $_REQUEST['fb_sig_user'];
+            $text = "$id removed application \n";
+            file_put_contents("install.log", $text, FILE_APPEND );
+            exit;
+        }
+
         $this->facebookUser = $this->facebook->require_login();
 
         $this->userData = $this->getUserData($this->facebookUser);

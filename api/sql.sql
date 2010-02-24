@@ -35,3 +35,11 @@ CREATE TABLE `facebook` (
    UNIQUE fb_id (fb_id)
 );
 
+-- facebook access log
+CREATE TABLE `facebook_log` (
+  `fb_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `status` tinyint DEFAULT 1,
+   UNIQUE fb_id (fb_id)
+);
+
+
