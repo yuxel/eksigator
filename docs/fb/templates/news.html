@@ -18,9 +18,30 @@
     {assign var="display" value="none"}
     <h1>
     
+        {literal}
+        <script type="text/javascript">
+            function hide() {
+                Animation(document.getElementById('titlesNotUpdated')).hide().go(); 
+                Animation(document.getElementById('show')).hide().go(); 
+                Animation(document.getElementById('hide')).show().go(); 
+                return false;
+            }
+
+            function show() {
+                Animation(document.getElementById('titlesNotUpdated')).show().go(); 
+                Animation(document.getElementById('show')).show().go(); 
+                Animation(document.getElementById('hide')).hide().go(); 
+                return false;
+
+            }
+
+        </script>
+    
+        {/literal}
+        
         Yeni entry girilmemiş başlıklar   
-        <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Gizle -</a>
-        <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Göster + </a>.
+        <a style="cursor:pointer" id="hide" onclick="hide()">Gizle -</a>
+        <a style="cursor:pointer; display:none" id="show" onclick="show()">Göster + </a>.
 
     </h1>  
 
