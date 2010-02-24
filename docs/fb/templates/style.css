@@ -56,7 +56,7 @@
     text-align:center;
 }
 
-#register .login .b1 {
+.b1 {
     padding-top:4px;
     width:140px;
     text-align:left;
@@ -64,14 +64,14 @@
     font-size:1.3em;
 }
 
-#register .login .b2 {
+.b2 {
     float:left;
     width:300px;
 }
 
 
 
-#register .login .b2 input {
+.b2 input {
     padding:4px;
     font-weight:bold;
     width:280px;

@@ -1,32 +1,44 @@
 <form method="post" action="{$URL}/ayarlar">
 
     <div class="row">
-        E-posta adresiniz
-
-        <input type="text" name="eksigator[0]"/>
+        <div class="b1">
+            E-posta adresiniz
+        </div>
+        <div class="b2">
+            <input type="text" name="eksigator[0]"/>
+        </div>
 
     </div>
 
 
     <div class="row">
-        API anahtarınız
+        <div class="b1">
+            API anahtarınız
+        </div>
 
-        <input type="text" name="eksigator[1]"/>
+        <div class="b2">
+            <input type="text" name="eksigator[1]"/>
+        </div>
+
     </div>
 
 
     <div class="row">
     
-        Bilgilendirilme
-        
-        <select name="interval">
-            <option value="0"> --- Bildirim gönderme --- </option>
-            <option value="1"> Saatte bir </option>
-            <option value="1"> 3 saatte bir </option>
-            <option value="1"> 6 saatte bir </option>
-            <option value="1"> 12 saatte bir </option>
-            <option value="1"> Günde bir </option>
-        </select>
+        <div class="b1">
+            Bilgilendirilme aralığı
+        </div>
+    
+        <div class="b2">    
+            <select name="interval">
+                <option value="0"> --- Bildirim gönderme --- </option>
+                <option value="1"> Saatte bir </option>
+                <option value="1"> 3 saatte bir </option>
+                <option value="1"> 6 saatte bir </option>
+                <option value="1"> 12 saatte bir </option>
+                <option value="1"> Günde bir </option>
+            </select>
+        </div>
 
     </div>
 
