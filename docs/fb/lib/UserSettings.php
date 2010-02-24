@@ -4,7 +4,9 @@ class UserSettings extends ModuleBase
 {
 
     function run(){
-       $this->rightContent = $this->view->fetch("settings.html");
+
+        var_dump ( $this->userData );
+        $this->rightContent = $this->view->fetch("settings.html");
     }
 
 } 
