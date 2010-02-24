@@ -49,9 +49,11 @@ class UserSettings extends ModuleBase
                         on duplicate key 
                         update eksigator_id = values (eksigator_id), `interval` = values (`interval`)";
 
-            echo "<br/>".$facebookQuery."<br/>";
-
             $this->parent->db->query($facebookQuery);
+
+            $fbUrl = $this->parent->fbUrl."ayarlar";
+
+            $this->facebook->redirect($fbUrl);
 
             $this->view->assign("success",true);
         }
