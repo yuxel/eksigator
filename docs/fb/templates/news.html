@@ -16,7 +16,6 @@
 
 {if $news.1}
     {assign var="display" value="none"}
-    <h1>
     
         {literal}
         <script type="text/javascript">
@@ -38,12 +37,20 @@
         </script>
     
         {/literal}
-        
-        Yeni entry girilmemiş başlıklar   
-        <a style="cursor:pointer; display:none" id="hide" onclick="hide()">Gizle -</a>
-        <a style="cursor:pointer;" id="show" onclick="show()">Göster + </a>.
 
-    </h1>  
+        <div>
+            <div class="float:left">
+            Yeni entry girilmemiş başlıklar   
+            </div>
+            <div class="float:left; margin-left:10px">
+                <a style="cursor:pointer; display:none" id="hide" onclick="hide()">Gizle -</a>
+                <a style="cursor:pointer;" id="show" onclick="show()">Göster + </a>
+            </div>
+
+            <div style="clear:both"></div>
+        
+        </div>
+
 
 
 {else}
