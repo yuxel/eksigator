@@ -16,10 +16,14 @@
 
 {if $news.1}
     {assign var="display" value="none"}
-    <h1>Yeni entry girilmemiş başlıklar</h1>  
+    <h1>
+    
+        Yeni entry girilmemiş başlıklar   
+        <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Gizle -</a>
+        <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Göster + </a>.
 
-    <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).hide().go(); return false;">Hide this div</a>
-    <a href="#" onclick="Animation(document.getElementById('titlesNotUpdated')).show().go(); return false;">Show this div</a>.
+    </h1>  
+
 
 {else}
 
