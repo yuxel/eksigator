@@ -23,7 +23,8 @@
                 document.getElementById('show').setStyle('display', 'block');
                 document.getElementById('hide').setStyle('display', 'none');
 
-                Animation(document.getElementById('titlesNotUpdated')).hide().go(); 
+                document.getElementById('titlesNotUpdated').setStyle('display', 'none');
+
                 return false;
             }
 
@@ -31,7 +32,7 @@
                 document.getElementById('show').setStyle('display', 'none');
                 document.getElementById('hide').setStyle('display', 'block');
 
-                Animation(document.getElementById('titlesNotUpdated')).show().go(); 
+                document.getElementById('titlesNotUpdated').setStyle('display', 'block');
                 return false;
 
             }
