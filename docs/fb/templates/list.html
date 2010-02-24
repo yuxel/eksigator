@@ -1,5 +1,11 @@
 Yeni başlık ekleyin <input type="text"/> <br/>
 
-<pre>
-{$titles|@var_dump}
-</pre>
+
+{if $titles}
+<ul>
+    {foreach from=$titles item=item}
+        <li> <a href="#">X</a> {$item->title} </li>
+    {/foreach}
+</ul>
+{/if}
+
