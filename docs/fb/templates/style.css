@@ -78,6 +78,14 @@
 }
 
 
+.b2 select {
+    padding:4px;
+    font-weight:bold;
+    width:280px;
+}
+
+
+
 #register .login {
     text-align:center;
 }
