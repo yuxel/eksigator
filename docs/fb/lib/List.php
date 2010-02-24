@@ -1,6 +1,6 @@
 <?php
 
-class List extends ModuleBase
+class TitleList extends ModuleBase
 {
 
     function run(){
