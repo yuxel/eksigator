@@ -62,12 +62,16 @@ class Eksigator
 
             $cronItems = $this->db->fetch($query);
 
-            $this->notificaton = new Notification();
+            $this->notification = new Notification();
+            $this->notification->setFacebookClient( $this->facebook );
+            $this->notification->setParent ( $this );
+
+
             foreach($cronItems as $cron) {
                 $cronDatas = $this->getData($cron['email'], $cron['apiKey']);
                 if($this->checkForUpdatedTitles($cronDatas)) {
                     $uid = $cron['fb_id'];
-                    $this->notificaton->sendNotificationToUser($uid); 
+                    $this->notification->sendNotificationToUser($uid); 
                     echo "$uid  icin bildirim gonderildi\n\n";
                 } 
 
