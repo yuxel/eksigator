@@ -8,8 +8,9 @@
 
 {if $titles}
 <ul id="titleList">
-    {foreach from=$titles item=item}
-        <li> <a href="#" class="removeItem">X</a> {$item->title} </li>
+    {foreach from=$titles item=item key=key}
+        {if $key%2 eq 0} {assign var="class" value="odd"} {else}   {assign var="class" value="even"} {/if}
+        <li class="{$class}"> <a href="#" class="removeItem">X</a> {$item->title} </li>
     {/foreach}
 </ul>
 {/if}

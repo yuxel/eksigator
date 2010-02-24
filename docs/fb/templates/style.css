@@ -118,8 +118,13 @@
     color:#cb0000;
 }
 
+
+#titleList li.odd {
+    background:#d3d3d3;
+}
+
 #titleList li {
-    margin-bottom:10px;
+    padding:3px;
 }
 
 .removeItem {
