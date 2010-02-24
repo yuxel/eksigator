@@ -19,7 +19,11 @@
     }
 
     function refreshMainWindow(){
-        setTimeout("document.setLocation('http://apps.facebook.com/eksigator/')",5000);
+        setTimeout(refreshMain,5000);
+    }
+
+    function refreshMain() {
+        document.setLocation('http://apps.facebook.com/eksigator/');
     }
 
 
@@ -27,6 +31,8 @@
 
 {/literal}
 
+
+<a href="#" onclick="refreshMainWindow()">test</a>
 
 
 {if $news.1}
