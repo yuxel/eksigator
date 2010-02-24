@@ -46,15 +46,19 @@
 
 
 
-#register .login .row {
-    height:30px; 
-    clear:both;
-}
-
 #register .login .header{
     font-size:1.6em;
     text-align:center;
 }
+
+
+.row {
+    height:30px; 
+    clear:both;
+}
+
+
+
 
 .b1 {
     padding-top:4px;
