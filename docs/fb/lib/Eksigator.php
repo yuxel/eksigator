@@ -79,11 +79,8 @@ class Eksigator
         $addUrl = $this->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
         file_get_contents($addUrl);
 
+        $title = urlencode($title);
         $eksiUrl = $this->eksiUrl."show.asp?t=".$title;
-
-        var_dump($eksiUrl);
-        echo $eksiUrl;
-        exit;
 
         $this->facebook->redirect($eksiUrl);
         exit;
