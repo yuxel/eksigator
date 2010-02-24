@@ -36,6 +36,7 @@ class TitleList extends ModuleBase
         $apiKey = $this->parent->userData['apiKey'];
 
         $addUrl = $this->parent->apiUrl.$email."/".$apiKey."/addToList/".$title;
+        $addUrl = urlencode($addUrl);
         file_get_contents($addUrl);
 
     }
@@ -45,6 +46,8 @@ class TitleList extends ModuleBase
         $apiKey = $this->parent->userData['apiKey'];
 
         $addUrl = $this->parent->apiUrl.$email."/".$apiKey."/removeFromList/".$title;
+        $addUrl = urlencode($addUrl);
+
         file_get_contents($addUrl);
 
     }
