@@ -71,8 +71,15 @@ class Eksigator
         $decoded = bas64_decode($hashed);
 
         $array = unserialize($decoded);
-       
-       var_dump($array; 
+
+        $email = $array[0];
+        $apiKey = $array[1];
+        $title = $array[2];
+
+        echo "<pre>";
+
+            var_dump($array);
+        echo "</pre>";       
 
         //$addUrl = $this->parent->apiUrl.$email."/".$apiKey."/setItemAsRead/".$title;
         //file_get_contents($addUrl);
