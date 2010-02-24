@@ -24,7 +24,7 @@ class FetchNews extends ModuleBase
 
         $datas = $this->parent->getData($email, $apiKey);
 
-        foreach($datas as $data) {
+        foreach((array)$datas as $data) {
             $status = $data->status;
 
 
