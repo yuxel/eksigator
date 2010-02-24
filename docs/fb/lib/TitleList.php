@@ -10,16 +10,18 @@ class TitleList extends ModuleBase
             $title = urlencode($title);
             $this->addToList($title);
         }
-         
+        else if($_GET['sil']) {
+            $title = $_GET['sil'];
+            $title = urlencode($title);
+            $this->removeFromList($title);
+        }
 
         $titles = $this->getTitles();
 
         $this->view->assign("titles", $titles);
         $this->rightContent = $this->view->fetch ("list.html");
-
-
-
     }
+
 
     function getTitles() {
 
