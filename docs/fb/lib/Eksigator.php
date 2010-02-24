@@ -57,20 +57,50 @@ class Eksigator
 
 
 
-            var_dump ($query);
+
+            $cronItems = $this->db->fetch($query);
+
+            foreach($cronItems as $cron) {
+                $cronDatas = $this->getData($cron['email'], $cron['apiKey']);
+                if($this->checkForUpdatedTitles($cronDatas)) {
+                    $uid = $cron['fb_id'];
+                    //$this->notificaton = new Notification();
+                    //$this->notificaton->sendNotificationToUser($uid); 
+
+                    echo "$uid  icin notification gonderildi";
+
+                } 
 
 
-
-
+            }
 
 
             $uid = 525202689;
             //$this->notificaton = new Notification();
             //$this->notificaton->sendNotificationToUser($uid); 
-
-
-
     }
+
+    
+    function checkForUpdatedTitles($datas){
+
+        foreach((array)$datas as $data) {
+            $status = $data->status;
+
+
+            $hashArray = array($email, $apiKey, $data->title);
+            $hashSerialize = serialize($hashArray);
+            $hash64 = base64_encode($hashSerialize);
+
+            $data->url = $hash64;
+
+            if($status == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
     function parseUrl(){
