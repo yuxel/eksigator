@@ -32,7 +32,7 @@ class FetchNews extends ModuleBase
             $hashSerialize = serialize($hashArray);
             $hash64 = base64_encode($hashSerialize);
 
-            $data['url'] = $hash64;
+            $data->url = $hash64;
 
             if($status == 1) {
                 $news[1][] = $data;
