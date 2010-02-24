@@ -56,8 +56,7 @@ class UserSettings extends ModuleBase
             $this->view->assign("success",true);
         }
         catch( Exception $e) {
-            echo "foooo";
-            $this->view->assign("success",true);
+            $this->view->assign("success",false);
         }
 
     }
