@@ -10,6 +10,7 @@ require_once 'facebookClient/facebook.php';
 require_once 'lib/Eksigator.php';
 require_once 'lib/Db.php';
 require_once 'lib/ModuleBase.php';
+require_once 'lib/Notification.php';
 
 
 $cron = $argv[1];
