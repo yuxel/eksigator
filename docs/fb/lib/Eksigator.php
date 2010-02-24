@@ -68,7 +68,7 @@ class Eksigator
                 if($this->checkForUpdatedTitles($cronDatas)) {
                     $uid = $cron['fb_id'];
                     $this->notificaton->sendNotificationToUser($uid); 
-                    //echo "$uid  icin notification gonderildi";
+                    echo "$uid  icin bildirim gonderildi\n\n";
                 } 
 
 
