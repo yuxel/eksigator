@@ -32,20 +32,24 @@ class Eksigator
 
             $cronInterval = (int) date("h");
 
-            if($cronInterval >= 1 ) {
-                $selectedInterval[] = 1;
+            if( $cronInterval == 0) {
+                $cronInterval = 24;
             }
-            if($cronInterval >= 3 ) {
-                $selectedInterval[] = 3;
+
+            if($cronInterval % 24 == 0 ) {
+                $selectedInterval = array("24","12","6","3","1");
             }
-            if($cronInterval >= 6 ) {
-                $selectedInterval[] = 6;
+            elseif( $cronInterval % 12 == 0 ) {
+                $selectedInterval = array("12","6","3","1");
             }
-            if($cronInterval >= 12 ) {
-                $selectedInterval[] = 12;
+            elseif( $cronInterval % 6 == 0 ) {
+                $selectedInterval = array("6","3","1");
             }
-            if($cronInterval >= 24 ) {
-                $selectedInterval[] = 24;
+            elseif( $cronInterval % 3 == 0 ) {
+                $selectedInterval = array("3","1");
+            }
+            elseif( $cronInterval % 1 == 0 ) {
+                $selectedInterval = array("1");
             }
 
             $selectedIntervalIn = implode(",", $selectedInterval);
