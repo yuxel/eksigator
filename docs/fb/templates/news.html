@@ -75,7 +75,7 @@
 <ol id="titlesNotUpdated" style="display:{$display}">
     {foreach from=$news.0 item=item}
         {*<li><a href="{$eksiUrl}show.asp?t={$item->title}&i={$item->lastId}#{$item->lastId}" target="_blank">{$item->title}</a> </li>*}
-        <li><a href="{$URL}redirect/{$item->url}" target="_blank">{$item->title}</a> </li>
+        <li><a href="{$URL}/redirect/{$item->url}" target="_blank">{$item->title}</a> </li>
     {/foreach}
 </ol>
 
