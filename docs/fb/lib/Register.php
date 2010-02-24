@@ -36,6 +36,12 @@ class Register extends ModuleBase
             }
             catch(Exception $e) {
                 $this->view->assign("success",false);
+
+
+                $fbId = $this->parent->facebookUser;
+                $facebookQuery = "delete from facebook where fb_id = $fbId";
+                $this->parent->db->query($facebookQuery);
+
             }
         }
 
