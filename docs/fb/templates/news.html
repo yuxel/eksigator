@@ -19,7 +19,11 @@
     }
 
     function refreshMainWindow(){
-        setTimeout("document.setLocation('http://apps.facebook.com/eksigator/')",5000);
+        setTimeout(refresh,5000);
+    }
+
+    function refresh() {
+        document.setLocation('http://apps.facebook.com/eksigator/');
     }
 
 
