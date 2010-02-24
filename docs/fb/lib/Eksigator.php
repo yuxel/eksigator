@@ -81,8 +81,7 @@ class Eksigator
 
         $eksiurl = $this->eksiurl."show.asp?t=".$title;
 
-        header("Location: $eksiUrl");
-
+        $this->facebook->redirect($eksiUrl);
         exit;
 
     }
