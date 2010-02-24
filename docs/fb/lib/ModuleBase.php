@@ -22,6 +22,7 @@ class ModuleBase
         $fbUrl = $this->parent->fbUrl;
         $fbUrl = trim($fbUrl,"/");
         $this->view->assign("URL", $fbUrl);
+        $this->view->assign("fbApiUrl", $this->parent->fbApiUrl);
         $this->view->assign("loggedIn", $this->parent->userLoggedIn);
     }
 

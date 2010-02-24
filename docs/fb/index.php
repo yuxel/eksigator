@@ -12,9 +12,6 @@ require_once 'lib/Db.php';
 require_once 'lib/ModuleBase.php';
 
 
-$eksigator = new Eksigator($apiKey, $apiSecret);
+$cronInterval = $argv[2];
 
-if($argv[0] == "cron") {
-    $uid = "525202689";
-    $eksigator->api_client->notifications_send($uid, 'some info', 'app_to_user');
-}
+$eksigator = new Eksigator($apiKey, $apiSecret, $cronInterval);

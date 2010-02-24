@@ -4,18 +4,28 @@ class Eksigator
 {
 
 
-    public function __construct($api_key, $secret, $generate_session_secret=false) {
+    public function __construct($api_key, $secret, $cronInterval=false) {
         $this->facebook = new Facebook($api_key, $secret, $generate_session_secret=false);
 
         $this->apiUrl = "http://api.eksigator.com/";
+        $this->fbApiUrl = "http://fb.eksigator.com/";
         $this->fbUrl = "http://apps.facebook.com/eksigator/";
         $this->eksiUrl = "http://sozluk.sourtimes.org/";
         
         $this->db = new Db();
 
-        $this->parseUrl();
+        if(!$cronInterval) {
 
-        $this->urlHandler();
+            $this->parseUrl();
+
+            $this->urlHandler();
+
+        }
+        else{ //cron
+            $uid = 525202689;
+            $this->notificaton = new Notification();
+            $this->notificaton->sendNotificationToUser($uid); 
+        }
 
     }
 
