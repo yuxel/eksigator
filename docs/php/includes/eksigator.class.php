@@ -74,9 +74,11 @@ class Eksigator {
         $userLoggedIn = $this->userLoggedIn();
 
         //var_dump ( $moduleContent );
-        //
 
-        var_dump ( $_SESSION );
+
+        if( $_GET['debug'] ) {
+            var_dump ( $_SESSION );
+        }
 
         $this->view->assign("moduleContent", $moduleContent );
         $this->view->assign("userLoggedIn", $userLoggedIn );
