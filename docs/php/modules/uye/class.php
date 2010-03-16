@@ -309,15 +309,23 @@ class module_uye implements modules{
 
 
     function generateTicketForSozluk($nick) {
-        var_dump ( $nick );
+
+        require_once 'conf/eksisozluk.php';
+        $now = time();
+        $text = $nick.":::".$now;
+        $secret = $eksisozlukConf['secret']; 
+
+        $encrypted = Encryption::encrypt($text,$secret);
+        var_dump ( $encrypted );
     }
 
     function authenticateViaSozluk($nick, $ticket) {
+        require_once 'conf/eksisozluk.php';
+        $secret = $eksisozlukConf['secret'];
+
         var_dump ( $nick, $ticket);
     }
 
 
 }
 
-
-?>

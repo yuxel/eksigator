@@ -6,6 +6,8 @@ require_once 'includes/db.class.php';
 require_once '3rdParty/smarty/libs/Smarty.class.php';
 require_once 'includes/eksigator.class.php';
 require_once 'includes/urlhandler.class.php';
+require_once 'includes/encryption.class.php';
+
 session_start();
 
 $eksigator = new Eksigator();
