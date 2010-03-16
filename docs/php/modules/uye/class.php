@@ -23,6 +23,13 @@ class module_uye implements modules{
 
                     break;
 
+                case "sozluk":
+                    echo "foo";
+
+
+
+                    break;
+
                 case "kayit":
                         $email = $_POST['email'];
                         $password = $_POST['password'];

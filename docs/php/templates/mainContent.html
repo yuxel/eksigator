@@ -36,13 +36,17 @@
                             <div style="text-align:center">
                                 <div style="text-decoration:underline">
                                     <a href="{$URL}goster">Başlıkları Göster</a> <br/> <br/>
-                                    {if !$suser}
-                                    <a href="{$URL}uye/yeniParola">Parola değiştir</a> <br/><br/>
-                                    {/if}
-                                </div>
+                               </div>
 
-                                <div style="text-decoration:underline">API Anahtarınız</div>
-                                <span class="apiKey">{$userLoggedIn.eksigator.apiKey}</span> <br/>
+                                {if !$suser}
+                                    <div style="text-decoration:underline">
+                                        <a href="{$URL}uye/yeniParola">Parola değiştir</a> <br/><br/>
+                                   </div>
+     
+                                    <div style="text-decoration:underline">API Anahtarınız</div>
+                                    <span class="apiKey">{$userLoggedIn.eksigator.apiKey}</span> <br/>
+                                {/if}
+
                                 <div class="kayitParola">
                                     <a href="{$URL}uye/cikis">Çıkış</a> 
                                 </div>
