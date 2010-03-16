@@ -315,15 +315,19 @@ class module_uye implements modules{
         $text = $nick.":::".$now;
         $secret = $eksisozlukConf['secret']; 
 
+
+
         $encrypted = Encryption::encrypt($text,$secret);
-        var_dump ( $encrypted );
+        var_dump ( $text, $encrypted );
     }
 
     function authenticateViaSozluk($nick, $ticket) {
         require_once 'conf/eksisozluk.php';
         $secret = $eksisozlukConf['secret'];
 
-        var_dump ( $nick, $ticket);
+        $decrypted = Encryption::decrypt($ticket, $secret);
+
+        var_dump ( $decrypted);
     }
 
 
