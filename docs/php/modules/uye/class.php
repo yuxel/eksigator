@@ -24,7 +24,7 @@ class module_uye implements modules{
                     break;
 
                 case "sozluk":
-
+                    $_SESSION['eksigator']['suser'] = "yuxel";
                     break;
 
                 case "kayit":
