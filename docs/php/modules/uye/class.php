@@ -24,9 +24,6 @@ class module_uye implements modules{
                     break;
 
                 case "sozluk":
-                    echo "foo";
-
-
 
                     break;
 
