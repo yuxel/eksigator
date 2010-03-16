@@ -1,0 +1,97 @@
+.loginError {
+    width:670px;
+    background:#b42419;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:20px;
+    padding:20px;
+    text-align:center;
+}
+
+.info {
+    background:#88c73c;
+     color:#FFFFFF;
+    font-weight:bold;
+    font-size:20px;
+    padding:20px;
+    text-align:center;
+}
+
+
+
+.white {
+    width:670px; 
+    background:#FFFFFF;
+    color:#000000;
+    padding:5px;    
+}
+
+.register {font-size:18px}
+
+.register .loginError {width:630px;}
+
+
+
+.register .header {
+    font-size:1.3em;
+    color:#457801;
+    font-weight:bold;
+
+}
+
+.register input {
+    padding:5px;
+}
+
+.register .b1 {
+    padding-top:5px;
+    width:130px;
+    float:left;
+}
+
+.register .b2 {
+    float:left;
+}
+
+.register .b3 {
+    margin-left:4px;
+    color:red;
+    font-size:8px;
+    font-weight:bold;
+    padding-top:12px;
+    float:left;
+}
+
+
+.register .submit {padding-left:130px}
+
+.register .submit input.formError {
+        background:red;
+}
+
+.register .submit input {
+    border:1px solid #457801;
+    background:#89c83d;
+    color:#FFFFFF;
+}
+
+.register .clear {
+    height:45px;
+}
+
+
+.lostPassword.emailError {
+    color:red;
+
+}
+
+.mailSent { border:2px dotted #188500 ; margin:30px; padding:20px; background:#dcffac; text-align:center; font-size:14px}
+
+.newPassForm {margin-top:10px;}
+
+.newPassRow {clear:both; height:50px}
+
+.newPassRow div {float:left; width:100px; font-size:14px; color:#000000; padding-top:10px}
+.newPassRow input {float:left}
+
+.newPassRow.submit {clear:both; padding:20 0; margin-left:0; padding-left:0}
