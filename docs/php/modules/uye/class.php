@@ -24,7 +24,17 @@ class module_uye implements modules{
                     break;
 
                 case "sozluk":
-                    $_SESSION['eksigator']['suser'] = "yuxel";
+                    $nick = addslashes($_GET['u']);
+                    $ticket = addslashes($_GET['t']);
+                
+                    $action2 = $this->parent->url->urlStrings->param_2;
+
+                    if ( $action2 == "getTicket" ) {
+                        $this->generateTicketForSozluk($nick);
+                    }
+                    else {
+                        $this->authenticateViaSozluk($nick);
+                    }
                     break;
 
                 case "kayit":
@@ -296,6 +306,16 @@ class module_uye implements modules{
             $message = $this->parent->view->fetch("../modules/uye/mails/lostpassword.html");    
             $this->parent->sendEmail($email,"Parola hatirlatma",$message); 
     }
+
+
+    function generateTicketForSozluk($nick) {
+        var_dump ( $nick );
+    }
+
+    function authenticateViaSozluk($nick, $ticket) {
+        var_dump ( $nick, $ticket);
+    }
+
 
 }
 
