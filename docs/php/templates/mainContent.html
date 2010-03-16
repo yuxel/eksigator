@@ -34,16 +34,11 @@
                         <div class="clear space"></div>
                         {if $userLoggedIn}
                             <div style="text-align:center">
-
-                                {if $userLoggedIn.eksigator.auth gt 0}
-                                    <a href="{$URL}admin">Yönetim Paneli</a> <br/> <br/>
-                                    <br/>
-                                {/if}
-
-
                                 <div style="text-decoration:underline">
-                                <a href="{$URL}admin">Yönetim Paneli</a> <br/> <br/>
+                                    <a href="{$URL}admin">Başlıkları Göster</a> <br/> <br/>
+                                    {if !$suser}
                                     <a href="{$URL}uye/yeniParola">Parola değiştir</a> <br/><br/>
+                                    {/if}
                                 </div>
 
                                 <div style="text-decoration:underline">API Anahtarınız</div>
