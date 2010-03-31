@@ -33,7 +33,7 @@ class module_uye implements modules{
                         $this->generateTicketForSozluk($nick);
                     }
                     else {
-                        $this->authenticateViaSozluk($nick);
+                        return $this->authenticateViaSozluk($nick, $ticket);
                     }
                     break;
 
@@ -308,26 +308,119 @@ class module_uye implements modules{
     }
 
 
+
+
+
+
+
+    function checkForValidIp(){
+
+        $ip ="188.132.200."; 
+        $remote = $_SERVER['REMOTE_ADDR'];
+
+        if( preg_match("/^$ip/",$remote) ) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+
+
     function generateTicketForSozluk($nick) {
 
+        if( !checkForValidIp() ) {
+            return false;
+        }
+        //@todo ip control
         require_once 'conf/eksisozluk.php';
         $now = time();
         $text = $nick.":::".$now;
         $secret = $eksisozlukConf['secret']; 
 
-
-
         $encrypted = Encryption::encrypt($text,$secret);
-        var_dump ( $text, $encrypted );
+        $encrypted = urlencode($encrypted);
+
+        echo $encrypted;
+
+        exit;
     }
 
+
+
+
+
+
     function authenticateViaSozluk($nick, $ticket) {
+
+        if( !checkForValidIp() ) {
+            return $this->parent->getModuleTemplate("loginFailed");
+        }
+
+        //@todo ip kontrol
         require_once 'conf/eksisozluk.php';
         $secret = $eksisozlukConf['secret'];
 
         $decrypted = Encryption::decrypt($ticket, $secret);
 
-        var_dump ( $decrypted);
+        list($nick, $time) = explode(":::", $decrypted);
+
+        $now = time();
+
+        $ticketDuration = abs($now - $time);
+
+        if( $ticketDuration < 360 ) {
+
+            $sql = "select e.eksigator_id, e.suser_nick, u.auth, u.email, u.apiKey from eksisozluk as e, users as u where
+                    e.suser_nick='$nick' and e.eksigator_id = u.id and u.active=1";
+
+            $result = $this->parent->model->fetch($sql);
+
+            if(!$result) {
+                    
+                $email = "$nick@eksisozluk";
+                $hash = $this->getNewHash();
+                $apiKey = md5($hash);
+
+                $userSql = "insert into users (email, apiKey, auth, active, hash)
+                            values ('$email', '$apiKey', 1,1, '$hash')";
+            
+                $this->parent->model->query($userSql);
+                $lastIdQ = "select id from users  where email='$email'";
+
+                $result = $this->parent->model->fetch($lastIdQ);
+
+                $lastId = $result[0]['id'];
+
+                $eksiSql = "insert into eksisozluk (suser_nick, eksigator_id) 
+                                values ('$nick', '$lastId')";
+
+
+                $this->parent->model->query($eksiSql);
+                    
+                $sql = "select e.eksigator_id, e.suser_nick, u.auth, u.email, u.apiKey from eksisozluk as e, users as u where
+                    e.suser_nick='$nick' and e.eksigator_id = u.id and u.active=1";
+                $result = $this->parent->model->fetch($sql);
+
+
+            }
+
+            $_SESSION['eksigator'] = $result[0];
+
+
+            $redirect = $this->parent->url->docRoot. "goster";
+
+            header("Location: $redirect");
+
+            exit;
+        }
+        else {
+            return $this->parent->getModuleTemplate("loginFailed");
+        }
+
     }
 
 
