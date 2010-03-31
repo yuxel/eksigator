@@ -332,7 +332,7 @@ class module_uye implements modules{
 
     function generateTicketForSozluk($nick) {
 
-        if( !checkForValidIp() ) {
+        if( !$this->checkForValidIp() ) {
             return false;
         }
         //@todo ip control
@@ -356,7 +356,7 @@ class module_uye implements modules{
 
     function authenticateViaSozluk($nick, $ticket) {
 
-        if( !checkForValidIp() ) {
+        if( !$this->checkForValidIp() ) {
             return $this->parent->getModuleTemplate("loginFailed");
         }
 
