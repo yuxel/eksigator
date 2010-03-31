@@ -335,7 +335,6 @@ class module_uye implements modules{
         if( !$this->checkForValidIp() ) {
             return false;
         }
-        //@todo ip control
         require_once 'conf/eksisozluk.php';
         $now = time();
         $text = $nick.":::".$now;
@@ -360,7 +359,6 @@ class module_uye implements modules{
             return $this->parent->getModuleTemplate("loginFailed");
         }
 
-        //@todo ip kontrol
         require_once 'conf/eksisozluk.php';
         $secret = $eksisozlukConf['secret'];
 

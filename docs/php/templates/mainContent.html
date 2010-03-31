@@ -35,9 +35,9 @@
                         {if $userLoggedIn}
                             <div style="text-align:center">
 
-                                 {$suser}
-                                 <br/>
-                                 <br/>
+                                {if $suser}
+                                 {$suser} <br/> <br/>
+                                {/if}
                                 <div style="text-decoration:underline">
                                     <a href="{$URL}goster">Başlıkları Göster</a> <br/> <br/>
                                </div>
