@@ -1,3 +1,57 @@
-<div class="white">
-    buraya gelecek
+<div class="white sayfa">
+
+
+    <div class="inputFields">
+        <input type="text" name="newTitle" id="newTitle" class="wait"/> <input type="button" value="Ekle" id="newTitleButton"/>
+        <div class="clear"></div>
+    </div>
+
+    <div style="height:10px"></div>
+
+        <div id="updated">
+            {if $usersList.1}
+
+                <div class="header">
+                    Güncellenen başlıklar
+                </div>
+
+                {foreach from=$usersList.1 item=item key=key}
+                    {assign var=classId value=$key%2}
+                    <div class="row line{$classId}">
+                            &nbsp; <span class="remove">x</span> &nbsp; 
+                            <a class="setReadAndGoToTitle" id="title{$key}_{$item->lastId}">{$item->title}</a>
+                    </div>
+                {/foreach}
+
+            {else}
+                Güncellenen başlık yok.
+            {/if}
+        </div>
+
+
+
+        <div id="notUpdated">
+            <div class="header toggle toggleUp">
+                Diğer başlıkları görüntüle
+            </div>
+
+                <div id="hiddenTitles">
+
+                    {if $usersList.0}
+                        {foreach from=$usersList.0 item=item key=key}
+                            {assign var=classId value=$key%2}
+                            <div class="row line{$classId}">
+                                    &nbsp; <span class="remove">x</span> &nbsp; 
+                                    <a class="goToTitle" id="title{$key}_{$item->lastId}">{$item->title}</a>
+                            </div>
+                        {/foreach}
+
+                    {/if}
+                </div>
+            
+
+        </div>
+
+
+
 </div>

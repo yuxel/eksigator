@@ -1,97 +1,90 @@
-.loginError {
-    width:670px;
-    background:#b42419;
-    color:#FFFFFF;
-    font-weight:bold;
-    font-size:20px;
-    padding:20px;
-    text-align:center;
-}
-
-.info {
-    background:#88c73c;
-     color:#FFFFFF;
-    font-weight:bold;
-    font-size:20px;
-    padding:20px;
-    text-align:center;
-}
-
-
-
-.white {
-    width:670px; 
+.sayfa {
+    width:690px;
     background:#FFFFFF;
+    padding:0px 10px 20px 10px;
     color:#000000;
-    padding:5px;    
+    line-height:18px;
+    overflow:auto;
+    height:400px;
 }
 
-.register {font-size:18px}
+.inputFields {
+    margin-top:10px;
+}
 
-.register .loginError {width:630px;}
+.inputFields #newTitle{
+    display:block;
+    float:left;
+    height:30px;
+    width:400px;
+    font-size:20px;
+    border:1px dotted #7c7c7c;
+    padding:0 4px;
+}
 
 
+#newTitle.wait{
+    color:#d4d2c7;
+}
 
-.register .header {
-    font-size:1.3em;
-    color:#457801;
+
+.inputFields #newTitleButton {
+    display:block;
+    float:left;
+    padding:0;
+    margin:0;
+    height:32px;
+    margin-left:5px;
+    width:160px;
+    border:none;
+    background:#5ba63a;
     font-weight:bold;
-
-}
-
-.register input {
-    padding:5px;
-}
-
-.register .b1 {
-    padding-top:5px;
-    width:130px;
-    float:left;
-}
-
-.register .b2 {
-    float:left;
-}
-
-.register .b3 {
-    margin-left:4px;
-    color:red;
-    font-size:8px;
-    font-weight:bold;
-    padding-top:12px;
-    float:left;
-}
-
-
-.register .submit {padding-left:130px}
-
-.register .submit input.formError {
-        background:red;
-}
-
-.register .submit input {
-    border:1px solid #457801;
-    background:#89c83d;
     color:#FFFFFF;
 }
 
-.register .clear {
-    height:45px;
+.row {
+    margin:3px 0;
+    border:1px solid transparent;
+}
+
+.row:hover {
+    border:1px dotted #242f31;
+}
+
+#updated .line0{
+    background:#dbffbb;
+}
+
+#updated .line1{
+    background:#eaffcc;
+}
+
+#notUpdated .line0 {
+    background:#ececec;
+}
+
+#notUpdated .line1 {
+    background:#f8f8f8;
+}
+
+.header {
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+.toggle{
+    padding-left:20px;
+    background:url('../../images/toggleDown.png') no-repeat center left;
+    cursor:pointer;
+}
+
+.toggleUp {
+    background-image:url('../../images/toggleUp.png');
 }
 
 
-.lostPassword.emailError {
-    color:red;
-
+.remove {
+    font-weight:bold;
+    cursor:pointer;
+    color:#bd0101;
 }
-
-.mailSent { border:2px dotted #188500 ; margin:30px; padding:20px; background:#dcffac; text-align:center; font-size:14px}
-
-.newPassForm {margin-top:10px;}
-
-.newPassRow {clear:both; height:50px}
-
-.newPassRow div {float:left; width:100px; font-size:14px; color:#000000; padding-top:10px}
-.newPassRow input {float:left}
-
-.newPassRow.submit {clear:both; padding:20 0; margin-left:0; padding-left:0}
