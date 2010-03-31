@@ -75,7 +75,7 @@ class Eksigator {
 
         //var_dump ( $moduleContent );
 
-        $this->view->assign("suser", $_SESSION['eksigator']['suser'] );
+        $this->view->assign("suser", $_SESSION['eksigator']['suser_nick'] );
         
         $this->view->assign("moduleContent", $moduleContent );
         $this->view->assign("userLoggedIn", $userLoggedIn );
