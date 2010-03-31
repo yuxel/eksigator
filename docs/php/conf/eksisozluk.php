@@ -2,4 +2,4 @@
 
 global $eksisozlukConf;
 
-$eksisozlukConf['secret'] = "burası secret key";
+$eksisozlukConf['secret'] = "HERE_COMES_SECRET_KEY";
