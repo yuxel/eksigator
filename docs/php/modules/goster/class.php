@@ -4,6 +4,7 @@ class module_goster implements modules{
     public function controller() {
 
         $this->userEmail = $_SESSION['eksigator']['email'];
+        $this->userEmail = urlencode($this->userEmail);
         $this->userApiKey = $_SESSION['eksigator']['apiKey'];
         $this->apiUrl = "http://api.eksigator.com/";
         $this->requestUrl = $this->apiUrl.$this->userEmail."/".$this->userApiKey."/";
