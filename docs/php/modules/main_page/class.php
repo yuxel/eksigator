@@ -65,6 +65,7 @@ class module_main_page implements modules{
         }
 
 
+        /*
         $maxEm = 800 / $title_length;
 
         if($maxEm > 5) {
@@ -73,6 +74,8 @@ class module_main_page implements modules{
         if($maxEm < 3) {
             $maxEm = 3;
         }
+        */
+        $maxEm = 1.5;
 
         $maxCount = $first['count'];
         $minCount = $last['count'];
@@ -89,11 +92,11 @@ class module_main_page implements modules{
                 $ratio = $diffWithOne + ( $tag['count'] * $emRatio );
                 $ratio = number_format($ratio, 2, '.', '');
 
-                if( $ratio > 4 ) $ratio = 4;
+                if( $ratio > 3 ) $ratio = 3;
                 
                 $fontWeight = ( ($key % 2) ==0 ) ? "bold" : "normal";
 
-                $cloud[] = array("title"=> $tag['title'],
+                $cloud[] = array("title"=> $tag['title']." $ratio",
                                  "ratio"=> $ratio,
                                  "fontWeight" => $fontWeight,
                                  "count"=> $tag['count'] );
