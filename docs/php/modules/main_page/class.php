@@ -96,7 +96,7 @@ class module_main_page implements modules{
                 
                 $fontWeight = ( ($key % 2) ==0 ) ? "bold" : "normal";
 
-                $cloud[] = array("title"=> $tag['title']." $ratio",
+                $cloud[] = array("title"=> $tag['title'],
                                  "ratio"=> $ratio,
                                  "fontWeight" => $fontWeight,
                                  "count"=> $tag['count'] );
