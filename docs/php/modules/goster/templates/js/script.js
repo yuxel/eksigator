@@ -54,6 +54,10 @@ function checkInputFieldOut() {
 
 function addTitleToList() {
     title = $("#newTitle").val();
+
+    //if text not changed do not add 
+    if ( title == inputText ) return false;
+
     command = siteUrl + "addToList/?ajax=1";
 
     $.post(command, {"title": title}, function(data) {

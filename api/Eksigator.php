@@ -290,4 +290,40 @@ class Eksigator{
 
 
 
+    /**
+     * fetches some title according to an algorightm by time
+     */
+    function fetchByLimit(){
+
+        $now = time();
+
+        $currentHour = date("H");
+        $maxQuery = 1000; //max query per hour
+
+        //disable url caching
+        $this->fetcher->setCacheLifeTime( -1 );
+
+        $sql = "select count(distinct(title)) as count from entries where deleted=0";
+        $result = mysql_query($sql, $this->dbLink);
+        
+        $row = mysql_fetch_assoc($result);
+        $total = $row['count'];
+
+        $howManyTimes = ceil( $total / $maxQuery );
+
+        $currentBlock = $currentHour % $howManyTimes;
+
+        $start = $maxQuery * $currentBlock;
+
+
+        $sql = "select distinct(title) as count from entries where deleted=0 limit $start,$maxQuery";
+        $result = mysql_query($sql, $this->dbLink);
+        
+        while ($row = mysql_fetch_assoc($result)) {
+            $title = $row['title'];
+            $this->fetcher->getEntriesByTitleAfterGivenTime($title, $now);
+            echo $title." <br/>\n";
+        }
+
+    }
 }

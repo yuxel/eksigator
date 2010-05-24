@@ -71,6 +71,9 @@ if( $eksigator->authenticateUser($userName,$apiKey) ) {
 elseif( $argv[1]=="fetchAll" ){
     $eksigator->fetchAll();
 }
+elseif( $argv[1]=="fetchByLimit" ){
+    $eksigator->fetchByLimit();
+}
 else {
     $eksigator->toJson(array("message"=>"AUTH_FAILED") );
 }
