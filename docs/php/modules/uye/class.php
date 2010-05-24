@@ -315,8 +315,6 @@ class module_uye implements modules{
 
     function checkForValidIp(){
 
-        return true;
-
         $ip ="188.132.200."; 
         $remote = $_SERVER['REMOTE_ADDR'];
 
