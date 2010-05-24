@@ -19,7 +19,7 @@
                     {assign var=classId value=$key%2}
                     <div class="row line{$classId}">
                             &nbsp; <span class="remove">x</span> &nbsp; 
-                            <a class="setReadAndGoToTitle" id="title{$key}_{$item->lastId}">{$item->title}</a>
+                            <a class="setReadAndGoToTitle" id="title{$key}_{$item.lastId}">{$item.title}</a>
                     </div>
                 {/foreach}
 
@@ -42,7 +42,7 @@
                             {assign var=classId value=$key%2}
                             <div class="row line{$classId}">
                                     &nbsp; <span class="remove">x</span> &nbsp; 
-                                    <a class="goToTitle" id="title{$key}_{$item->lastId}">{$item->title}</a>
+                                    <a class="goToTitle" id="title{$key}_{$item.lastId}">{$item.title}</a>
                             </div>
                         {/foreach}
 

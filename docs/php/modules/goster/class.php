@@ -45,7 +45,7 @@ class module_goster implements modules{
                 exit;
             }
             else{
-                $data = json_decode($data);
+                $data = json_decode($data,true);
                 $this->parent->view->assign("usersList", $data);
             }
 
