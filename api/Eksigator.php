@@ -316,7 +316,7 @@ class Eksigator{
         $start = $maxQuery * $currentBlock;
 
 
-        $sql = "select distinct(title) as count from entries where deleted=0 limit $start,$maxQuery";
+        $sql = "select distinct(title) from entries where deleted=0 limit $start,$maxQuery";
         $result = mysql_query($sql, $this->dbLink);
         
         while ($row = mysql_fetch_assoc($result)) {
