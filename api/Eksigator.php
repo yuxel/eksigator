@@ -298,7 +298,7 @@ class Eksigator{
         $now = time();
 
         $currentHour = date("H");
-        $maxQuery = 1000; //max query per hour
+        $maxQuery = 500; //max query per hour
 
         //disable url caching
         $this->fetcher->setCacheLifeTime( -1 );
