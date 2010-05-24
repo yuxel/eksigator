@@ -355,10 +355,6 @@ class module_uye implements modules{
 
     function authenticateViaSozluk($nick, $ticket) {
 
-        if( !$this->checkForValidIp() ) {
-            return $this->parent->getModuleTemplate("loginFailed");
-        }
-
         require_once 'conf/eksisozluk.php';
         $secret = $eksisozlukConf['secret'];
 
