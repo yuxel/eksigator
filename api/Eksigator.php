@@ -16,7 +16,7 @@ class Eksigator{
 
     const MAX_ID = 2099999999;
 
-    const CACHE_TIME = 3600; //seconds
+    const CACHE_TIME = 10600; //seconds
 
     const USER_CACHE_FILE_PREFIX = "/tmp/eksigator_";
     
