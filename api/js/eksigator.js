@@ -8,7 +8,9 @@ var pageTitle = "";
 var isOnList = false;
 var itemStatus = 0;
 
-var baseUrl="http://sozluk.sourtimes.org/";
+//var baseUrl="http://sozluk.sourtimes.org/"; //good old days
+
+var baseUrl="http://www.eksisozluk.com/";
 var sourPHPUrl=apiURL+ userName + "/" + userApiKey +"/";
 
 //language constants
