@@ -58,9 +58,12 @@ function addTitleToList() {
     //if text not changed do not add 
     if ( title == inputText ) return false;
 
+    title = title.replace("+","%2B");
+
     command = siteUrl + "addToList/?ajax=1";
 
-    $.post(command, {"title": title}, function(data) {
+    titleToPost = fixUriChars(title);
+    $.post(command, {"title": titleToPost}, function(data) {
 
         if( isTitleExists(title) ) {
             alert("Bu başlığı zaten takip ediyorsunuz");
@@ -93,7 +96,8 @@ function setReadAndGoToTitle() {
 
     urlToGo = sozlukUrl + "show.asp?t="+title+"&i="+lastId;
     command = siteUrl + "setItemAsRead/?ajax=1";
-    $.post(command, {"title": title}, function(data) {
+    titleToPost = fixUriChars(title);
+    $.post(command, {"title": titleToPost}, function(data) {
         window.open (urlToGo );
         window.location.href = siteUrl;
     });
@@ -106,7 +110,8 @@ function goToTitle() {
     title = $(this).html();
     lastId = split[1];
 
-    urlToGo = sozlukUrl + "show.asp?t="+title+"&i="+lastId;
+    titleToPost = fixUriChars(title);
+    urlToGo = sozlukUrl + "show.asp?t="+titleToPost+"&i="+lastId;
     window.open (urlToGo );
 }
 
@@ -122,7 +127,8 @@ function removeTitleFromList() {
     if (answer){
 
         command = siteUrl + "removeFromList/?ajax=1";
-        $.post(command, {"title": title}, function(data) {
+        titleToPost = fixUriChars(title);
+        $.post(command, {"title": titleToPost}, function(data) {
             $(parentDiv).hide();
             reOrderList();
 
@@ -159,4 +165,10 @@ function isTitleExists(title) {
     });
 
     return false;
+}
+
+function fixUriChars(text) {
+    text = text.replace(/\+/g, "%2B");
+
+    return text;
 }
