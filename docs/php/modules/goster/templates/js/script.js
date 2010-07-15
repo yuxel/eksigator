@@ -60,7 +60,6 @@ function addTitleToList() {
 
     command = siteUrl + "addToList/?ajax=1";
 
-    titleToPost = fixUriChars(title);
     $.post(command, {"title": titleToPost}, function(data) {
 
         if( isTitleExists(title) ) {
@@ -94,7 +93,6 @@ function setReadAndGoToTitle() {
 
     urlToGo = sozlukUrl + "show.asp?t="+title+"&i="+lastId;
     command = siteUrl + "setItemAsRead/?ajax=1";
-    titleToPost = fixUriChars(title);
     $.post(command, {"title": titleToPost}, function(data) {
         window.open (urlToGo );
         window.location.href = siteUrl;
@@ -125,7 +123,6 @@ function removeTitleFromList() {
     if (answer){
 
         command = siteUrl + "removeFromList/?ajax=1";
-        titleToPost = fixUriChars(title);
         $.post(command, {"title": titleToPost}, function(data) {
             $(parentDiv).hide();
             reOrderList();
