@@ -22,7 +22,6 @@ $apiKey = $params[1];
 $function = $params[2];
 $functionParam = stripslashes($params[3]);
 
-$functionParam = $eksigator->fixUriChars($functionParam);
 
 //try to authenticate
 if( $eksigator->authenticateUser($userName,$apiKey) ) {
