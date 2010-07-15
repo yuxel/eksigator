@@ -305,7 +305,7 @@ function getItemsAsHtml (readStatus ) {
         if( itemStatus == itemsWanted ) {
             count ++;
             itemTitle = item.attr("title");
-            itemUrl = baseUrl + "show.asp?t="+itemTitle+"&i="+item.attr("lastId");
+            itemUrl = baseUrl + "show.asp?t="+fixUriChars(itemTitle)+"&i="+item.attr("lastId");
 
             itemTitleTruncated = itemTitle;
             if(itemTitleTruncated.length > 17) {
