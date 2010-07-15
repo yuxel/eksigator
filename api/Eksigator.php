@@ -45,6 +45,16 @@ class Eksigator{
     }
 
     /**
+     * This is for eksi++ issue
+     */
+    function fixUriChars($string){
+        $replaceThese = array(' ');
+        $intoThese = array('+');
+        return str_replace($replaceThese, $intoThese, $string);
+    }
+
+
+    /**
      * connect to db
      */
     function connectDb(){
