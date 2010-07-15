@@ -3,5 +3,5 @@ php_flag magic_quotes_gpc On
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ api.php?q=$1 [QSA,L]
+    RewriteRule ^(.*)$ api.php?q=$1 [QSA,L,B]
 </IfModule>
