@@ -201,6 +201,7 @@ function getSubscriptionListData(){
  * @param string pageTitle
  */
 function addToList(pageTitle){
+    pageTitle = fixUriChars(pageTitle);
     url = sourPHPUrl + "addToList/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
@@ -240,6 +241,7 @@ function clickRemove(parentLi) {
  * @param string pageTitle
  */
 function removeFromList(pageTitle){
+    pageTitle = fixUriChars(pageTitle);
     url = sourPHPUrl + "removeFromList/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
@@ -264,6 +266,7 @@ function removeFromList(pageTitle){
  * @param string pageTitle
  */
 function setItemAsRead(pageTitle){
+    pageTitle = fixUriChars(pageTitle);
     url = sourPHPUrl + "setItemAsRead/"+pageTitle+"/";
     url += "?&jsoncallback=?";
 
@@ -444,3 +447,11 @@ function includeCSS(){
   document.getElementsByTagName("head")[0].appendChild(fileref);
 }
 
+
+/**
+ * Fixes uri chars for eksi++ issue
+ */
+function fixUriChars(text) {
+   text = text.replace(/\+/g,"%2B"); 
+   return text;
+}
