@@ -58,8 +58,6 @@ function addTitleToList() {
     //if text not changed do not add 
     if ( title == inputText ) return false;
 
-    title = title.replace("+","%2B");
-
     command = siteUrl + "addToList/?ajax=1";
 
     titleToPost = fixUriChars(title);
