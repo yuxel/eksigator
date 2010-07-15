@@ -60,7 +60,7 @@ function addTitleToList() {
 
     command = siteUrl + "addToList/?ajax=1";
 
-    $.post(command, {"title": titleToPost}, function(data) {
+    $.post(command, {"title": title}, function(data) {
 
         if( isTitleExists(title) ) {
             alert("Bu başlığı zaten takip ediyorsunuz");
@@ -91,9 +91,9 @@ function setReadAndGoToTitle() {
     title = $(this).html();
     lastId = split[1];
 
-    urlToGo = sozlukUrl + "show.asp?t="+title+"&i="+lastId;
+    urlToGo = sozlukUrl + "show.asp?t="+fixUriChars(title)+"&i="+lastId;
     command = siteUrl + "setItemAsRead/?ajax=1";
-    $.post(command, {"title": titleToPost}, function(data) {
+    $.post(command, {"title": title}, function(data) {
         window.open (urlToGo );
         window.location.href = siteUrl;
     });
@@ -123,7 +123,7 @@ function removeTitleFromList() {
     if (answer){
 
         command = siteUrl + "removeFromList/?ajax=1";
-        $.post(command, {"title": titleToPost}, function(data) {
+        $.post(command, {"title": title}, function(data) {
             $(parentDiv).hide();
             reOrderList();
 
