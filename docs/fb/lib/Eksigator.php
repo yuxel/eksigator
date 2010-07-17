@@ -10,7 +10,7 @@ class Eksigator
         $this->apiUrl = "http://api.eksigator.com/";
         $this->fbApiUrl = "http://fb.eksigator.com/";
         $this->fbUrl = "http://apps.facebook.com/eksigator/";
-        $this->eksiUrl = "http://sozluk.sourtimes.org/";
+        $this->eksiUrl = "http://www.eksisozluk.com/";
         
         $this->db = new Db();
 

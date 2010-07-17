@@ -1,7 +1,7 @@
 var inputText="Takip etmek istediğiniz başlığı girin";
 var siteUrl = "http://" + window.location.hostname + "/goster/";
 var currentUrl = window.location.href;
-var sozlukUrl = "http://sozluk.sourtimes.org/";
+var sozlukUrl = "http://www.eksisozluk.com/";
 var maxID = 299999999999;
 var newTitleCount=0;
 
