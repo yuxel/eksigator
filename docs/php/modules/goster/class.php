@@ -19,7 +19,8 @@ class module_goster implements modules{
             
             $action = $page->param_1;
             $title  = $_POST['title'];
-            $title  = urlencode($title);
+            //$title  = urlencode($title);
+            $title = str_replace(" ","%20",$title);
 
             switch($action) {
                 case "addToList":
@@ -71,7 +72,6 @@ class module_goster implements modules{
     }
 
     public function addToUsersList($title) {
-        var_dump($title);
         $command = $this->requestUrl . "addToList/".$title;
         $json = file_get_contents($command);
 
