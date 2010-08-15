@@ -18,6 +18,8 @@ class Eksigator{
 
     const CACHE_TIME = 3600; //seconds
 
+    const TIME_DIFF = 10500; 
+
     const USER_CACHE_FILE_PREFIX = "/tmp/eksigator_";
     
     const URL_CACHE_PREFIX = "/tmp/url_";
@@ -228,6 +230,7 @@ class Eksigator{
         $this->userCacheFile =  self::USER_CACHE_FILE_PREFIX.$this->userId;
 
         $mtime = @filemtime($this->userCacheFile);
+        $mtime = $mtime + self::TIME_DIFF;
         $now = $this->now;
         $timeDiff = $now - $mtime;
 
