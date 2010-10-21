@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets">
+	<name>Ek$igator</name>
+	<description>Ekşisözlük Başlık Takip Aparatı</description>
+	<author href="http://yuxel.net/" email="yuxel@sonsuzdongu.com">Osman Yüksel</author>
+	<icon src="icons/logo_32.png"/>
+</widget>
