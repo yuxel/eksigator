@@ -5,17 +5,13 @@
 	<meta charset="UTF-8">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script>
+
+        
         $(document).ready(function(){
-            var data = localStorage.getItem("foo"); 
-
             $("h1").html('eksigator');
-            $("h1").click( function(){
-                alert('deneme');
-            });
+            opera.extension.postMessage("foo");
+            opera.postError("mesaj gitti");
 
-            $("#save").click( function(){
-                localStorage.setItem("foo", $("#foo").val());
-            });
         });
     </script>
 	<style>
