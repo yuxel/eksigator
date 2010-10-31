@@ -10,19 +10,15 @@
         $(document).ready( function() {
             Eksigator.createToolbarButton();
             Eksigator.initTimer();
-            //Eksigator.showBadge().setBadgeContent("car");
+            Eksigator.listenUserDataChangeEvents();
 
+            //localStorage.setItem('foo','bar');
+           
+            //opera.postError(localStorage.getItem("eksigator.userName"));
+            //opera.postError(localStorage.getItem("eksigator.apiKey"));
 
-            /*
-            opera.extension.onmessage = function(e){
-                opera.postError(e.data);
-                Eksigator.setBadgeContent(e.data);
-            };
-            */
-
-
+            alert(window.location.href);
 		});
-
 
 	</script>
 </head>

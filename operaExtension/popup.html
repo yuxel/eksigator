@@ -3,25 +3,185 @@
 <head>
 	<title>Ek$igator</title>
 	<meta charset="UTF-8">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
     <script>
+       
+        var Eksigator = {};
+        (function(Eksigator, $){
+            Eksigator.getUsername = function(){
+                return localStorage.getItem("eksigator.userName");
+            };
 
+            Eksigator.getApiKey = function(){
+                return localStorage.getItem("eksigator.apiKey");
+            };
+
+            Eksigator.setUsername = function(userName){
+                opera.extension.postMessage("eksigator.userName="+userName);
+                return localStorage.setItem("eksigator.userName", userName);
+            };
+
+            Eksigator.setApiKey = function(apiKey){
+                opera.extension.postMessage("eksigator.apiKey="+apiKey);
+                return localStorage.setItem("eksigator.apiKey", apiKey);
+            };
+
+        })(Eksigator, jQuery);
         
+
         $(document).ready(function(){
-            $("h1").html('eksigator');
+            $("#tabs ul li").click( function(e){
+                e.preventDefault();
+                var className = $(this).find("a").attr("class");
+                var tabId = "#tab_" + className;
+
+                $(".tabContent").hide();
+                $(tabId).show();
+            });
+
+            $("#username").val( Eksigator.getUsername());
+            $("#apiKey").val( Eksigator.getApiKey());
+
+
+            $("#tab_settings input[type=submit]").click( function(){
+                Eksigator.setUsername( $("#username").val());
+                Eksigator.setApiKey( $("#apiKey").val());
+            });
+
+            $("h1").html( Eksigator.getUsername() );
+
+
+            /*
             opera.extension.postMessage("foo");
             opera.postError("mesaj gitti");
 
+            opera.extension.onmessage = function(e){
+                opera.postError(e.data);
+                $("h1").html(e.data);
+            };
+            */
         });
     </script>
 	<style>
+        body {
+            font-size:12px;
+            font-family:arial;
+            padding:0;
+            margin:0;    
+        }
+
+        .hidden {
+            display:none;
+        }
+
+        .clear {
+            clear:both;
+        }
+
+        #tabs {
+            background:#dcffac;
+            height:30px;
+        }
+
+        #tabs ul{
+            padding:0;
+            margin:0;
+            list-style-type:none;
+        }
+
+
+        #tabs li.active {
+            opacity : 0.8;
+        }
+
+        #tabs li {
+            height:19px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            padding:0;
+            margin:0;
+            cursor:pointer;
+            list-style-type:none;
+            float:left;
+            background:#457801;
+            padding:6px 5px 0 5px;
+            margin-left:5px;
+            margin-top:5px;
+            color:#FFFFFF;
+            font-size:12px;
+            font-weight:bold;
+            text-shadow: 2px 2px 2px #111;
+        }
+
+        .tabContent strong, .tabContent input {
+            display:block;
+        }
+
+        #tab_settings input {
+            width:100%;
+            margin-bottom:5px;
+            border:1px dashed #BBB;
+        }
+
+        #tab_settings strong {
+            margin-top:2px;
+        }
+
+
+        #tab_settings input.submit {
+            border:none;
+            background:#88c73c;
+            color:#FFFFFF; 
+            text-shadow: 2px 2px 2px #111;
+            font-weight:bold;
+            border-radius: 5px;
+        }
+
+        .error {
+            margin:10px 5px;
+            background:#d42525;
+            border:1px dashed #FF0000; 
+            padding:5px;
+            color:#FFFFFF;
+            font-weight:bold;
+            text-align:center;
+            text-shadow: 2px 2px 2px #e08686;
+            border-radius: 6px;
+        }
 	</style>
 </head>
 <body>
-    <div style="width:100%; height:100%; overflow:hidden;background:#BBB">
-	    <h1>Hello World!</h1>
-
-        <input type="text" id="foo"/> <input type="button" id="save"/>
+    <div id="tabs">
+        <ul>
+            <li>
+                <a class="list">
+                    List
+                </a>
+            </li>
+            <li>
+                <a class="settings">
+                    Ayarlar
+                </a>
+            </li>
+        </ul>
     </div>
+    <div class="clear"></div>
+    <div id="tab_list" class="tabContent">
+        <div class="error">
+            Bir hata oluştu
+        </div>
+        <div id="liste">
+            Buraya liste gelecek
+        </div>
+
+    </div> <!-- #tab_list -->
+
+    <div id="tab_settings" class="tabContent hidden">
+        <strong>Kullanıcı adı</strong>
+        <input type="text" id="username"/>
+        <strong>API anahtarı</strong>
+        <input type="text" id="apiKey"/>
+        <input type="submit" class="submit" value="Kaydet"/>
+    </div> <!-- #tab_settings -->
 </body>
 </html>

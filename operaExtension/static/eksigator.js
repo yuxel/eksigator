@@ -5,6 +5,8 @@ if (!window.console) {window.console = {};}
 if (!window.console.log) {window.console.log = function() {};}
 
 (function(Eksigator, opera, $){
+    Eksigator.sortedList = undefined;
+
     var userName = "yuxel@sonsuzdongu.com";
     var userApiKey = "5695743ebdebd5b05a0e756c26f63cc3";
 
@@ -12,13 +14,14 @@ if (!window.console.log) {window.console.log = function() {};}
 
     var checkInterval = 60*30*1000; //30 min
     var timer;
+    var defaultLogo = "icons/logo_32.png";
  
 
     var toolbarButton;
     var toolbarButtonProperties = {
         disabled: false,
         title: 'Ek$igator',
-        icon: 'icons/logo_32.png',
+        icon: defaultLogo,
         popup: {
             href: 'popup.html',
             width: 200,
@@ -33,17 +36,42 @@ if (!window.console.log) {window.console.log = function() {};}
     };
 
 
+    var loading = {
+        loadingTimer : undefined,
+        current : 0,
+        start: function(){
+            if(this.current > 0) {
+                return false;
+            }
+            clearInterval(this.loadingTimer);
+            this.loadingTimer = setInterval( function(){
+                var currentImage = (loading.current % 4);
+                currentImage = "icons/loading/"+currentImage+".png";
+                toolbarButton.icon = currentImage;
+                loading.current++;
+                Eksigator.hideBadge();
+            }, 250);
+        },
+        stop: function(){
+            toolbarButton.icon = defaultLogo;
+            Eksigator.showBadge();
+            clearInterval(this.loadingTimer);
+            this.current = 0;
+        }
+    };
+
     var authFailed = function(){
-        console.log('auth failed');
         Eksigator.setBadgeContent("HATA");
+        clearInterval(timer);
     };
 
 
     var getJSONData = function(url, callback){
+        loading.start();
         callback = callback || function(){};
         url += "?jsoncallback=?";
         $.getJSON(url, function(data){
-
+            loading.stop();
             if(data.message == "AUTH_FAILED") {
                 return authFailed();
             }
@@ -65,6 +93,7 @@ if (!window.console.log) {window.console.log = function() {};}
             currentList[currentList.length] = listItem;
         }
 
+        Eksigator.sortedList = sortedList;
         return sortedList;
     };
 
@@ -103,6 +132,8 @@ if (!window.console.log) {window.console.log = function() {};}
     };
 
     Eksigator.getLoginUrl = function(){
+        var userName = localStorage.getItem("eksigator.userName");
+        var userApiKey = localStorage.getItem("eksigator.apiKey");
         return apiURL + userName + "/" + userApiKey + "/";
     };
 
@@ -123,13 +154,29 @@ if (!window.console.log) {window.console.log = function() {};}
         return this;
     };
 
+    Eksigator.listenUserDataChangeEvents = function(){
+        opera.extension.onmessage = function(e){
+            var messageSplit = e.data.split("=");
+            if( e.data.indexOf("eksigator.userName")>-1 ){
+                localStorage.setItem("eksigator.userName", messageSplit[1]);
+            }
+            if (e.data.indexOf("eksigator.apiKey")>-1){
+                localStorage.setItem("eksigator.apiKey", messageSplit[1]);
+            }
+
+            Eksigator.getList();
+        };
+    };
 
 
     Eksigator.initTimer = function(){
+        clearInterval(timer);
         Eksigator.getList();
-        timer = setInterval( function(){
-            Eksigator.getList();
-        }, checkInterval);
+        if(!timer) {
+            timer = setInterval( function(){
+                Eksigator.getList();
+            }, checkInterval);
+        }
     };
 
 })(Eksigator, opera, jQuery);
