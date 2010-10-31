@@ -12,12 +12,28 @@
             Eksigator.initTimer();
             Eksigator.listenUserDataChangeEvents();
 
-            //localStorage.setItem('foo','bar');
-           
-            //opera.postError(localStorage.getItem("eksigator.userName"));
-            //opera.postError(localStorage.getItem("eksigator.apiKey"));
+            opera.extension.onmessage = function(e){
+                var messageSplit = e.data.split("=");
+                var messageValue = messageSplit[1];
+                if (e.data.indexOf("eksigator.apiKey")>-1){
+                    localStorage.setItem("eksigator.apiKey", messageValue);
+                }
+                if (e.data.indexOf("eksigator.userName")>-1){
+                    localStorage.setItem("eksigator.userName", messageValue);
+                }
+                if (e.data.indexOf("getUsernameAndApiKey")>-1){
+                    var username = localStorage.getItem("eksigator.userName");
+                    var password = localStorage.getItem("eksigator.apiKey");
+                    var enabled = localStorage.getItem("eksigator.enabled");
+                    var messageText = username+"|"+password+"|"+enabled;
+                    e.source.postMessage("usernameAndApiKey="+messageText);
+                }
+                if (e.data.indexOf("userDataUpdated")>-1){
+                    Eksigator.getList();
+                    opera.postError( Eksigator.getBadgeContent() ); 
+                }
+            };
 
-            alert(window.location.href);
 		});
 
 	</script>

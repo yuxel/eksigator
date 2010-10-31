@@ -24,17 +24,23 @@ var Eksigator = {};
     Eksigator.elements.apiKey = undefined;
     Eksigator.elements.enabled = 0;
 
+    Eksigator.script = undefined;
+
     Eksigator.includeJs = function(file) { 
         var apiURL = "http://api.eksigator.com/";
         var scriptBase = apiURL + 'js/';
         var script  = document.createElement('script');
         //add dayOfMonth to disable caching
         var dayOfMonth = new Date().getMinutes();
-        script.src  = scriptBase + file + ".js?"+dayOfMonth;
+        //script.src  = scriptBase + file + ".js?"+dayOfMonth;
+        script.src  = scriptBase + file + ".js";
 
         script.type = 'text/javascript';
 
-        document.getElementsByTagName('head').item(0).appendChild(script);
+        if(!Eksigator.script) {
+            document.getElementsByTagName('head').item(0).appendChild(script);
+            Eksigator.script = script;
+        }
     };
 
 
@@ -64,11 +70,10 @@ var Eksigator = {};
     function run() {
 
         Eksigator.createHiddenElements();
-        Eksigator.elements.username.value = "demo";
-        Eksigator.elements.apiKey.value = "demo";
-        Eksigator.elements.enabled.value = "1";
+        //Eksigator.elements.username.value = "demo";
+        //Eksigator.elements.apiKey.value = "demo";
+        Eksigator.elements.enabled.value = "0";
 
-        Eksigator.includeJs("opera");
 
         setInterval( function(){
             var selector = "#eksigator_panel .eksigator_panel_button span";
@@ -77,6 +82,24 @@ var Eksigator = {};
             var unreadCount = parseInt(spanText, 10) || 0;
             //alert(unreadCount);
         }, 30000);
+
+        opera.extension.postMessage("getUsernameAndApiKey");
+        opera.extension.onmessage = function(e){
+            opera.postError(e.data);
+            var messageSplit = e.data.split("=");
+            if( e.data.indexOf("usernameAndApiKey=")>-1 ){
+                var usernameAndApiKey = messageSplit[1].split("|");
+                var username = usernameAndApiKey[0];
+                var apiKey = usernameAndApiKey[1];
+                var enabled = usernameAndApiKey[2];
+
+                Eksigator.elements.username.value = username;
+                Eksigator.elements.apiKey.value = apiKey;
+                Eksigator.elements.enabled.value = enabled;
+
+                Eksigator.includeJs("operaExtension");
+            }
+        };
     };
 
 })(Eksigator);

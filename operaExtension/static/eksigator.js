@@ -24,8 +24,8 @@ if (!window.console.log) {window.console.log = function() {};}
         icon: defaultLogo,
         popup: {
             href: 'popup.html',
-            width: 200,
-            height: 400
+            width: 200, /* 200 */
+            height: 200 /* 400 */
         },
         badge: {
             display: "none",
@@ -117,7 +117,6 @@ if (!window.console.log) {window.console.log = function() {};}
     };
 
     
-
     Eksigator.createToolbarButton = function(){
         if( opera && opera.contexts ) {
             toolbarButton = opera.contexts.toolbar.createItem(toolbarButtonProperties);
@@ -146,6 +145,10 @@ if (!window.console.log) {window.console.log = function() {};}
     Eksigator.hideBadge = function(){
         toolbarButton.badge.display = "none";
         return this;
+    };
+
+    Eksigator.getBadgeContent = function(){
+        return toolbarButton.badge.textContent;
     };
 
     Eksigator.setBadgeContent = function(text){

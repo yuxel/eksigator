@@ -8,12 +8,21 @@
        
         var Eksigator = {};
         (function(Eksigator, $){
+            Eksigator.getEnabled = function(){
+                return localStorage.getItem("eksigator.enabled") || 0;
+            };
+
             Eksigator.getUsername = function(){
                 return localStorage.getItem("eksigator.userName");
             };
 
             Eksigator.getApiKey = function(){
                 return localStorage.getItem("eksigator.apiKey");
+            };
+
+            Eksigator.setEnabled = function(isEnabled){
+                opera.extension.postMessage("eksigator.enabled="+isEnabled);
+                return localStorage.setItem("eksigator.enabled", isEnabled);
             };
 
             Eksigator.setUsername = function(userName){
@@ -29,30 +38,41 @@
         })(Eksigator, jQuery);
         
 
+
+        
+
         $(document).ready(function(){
-            $("#tabs ul li").click( function(e){
-                e.preventDefault();
-                var className = $(this).find("a").attr("class");
-                var tabId = "#tab_" + className;
-
-                $(".tabContent").hide();
-                $(tabId).show();
-            });
-
             $("#username").val( Eksigator.getUsername());
             $("#apiKey").val( Eksigator.getApiKey());
 
+            if( Eksigator.getEnabled() == "0") {
+                $(".error").show();
+                $(".success").hide();
+            }
 
             $("#tab_settings input[type=submit]").click( function(){
+                var username = $("#username").val();
+                var apiKey = $("#apiKey").val();
                 Eksigator.setUsername( $("#username").val());
                 Eksigator.setApiKey( $("#apiKey").val());
-            });
 
-            $("h1").html( Eksigator.getUsername() );
+
+                var url = "http://api.eksigator.com/" + username + "/" + apiKey + "/getList?jsoncallback=?";
+                $.getJSON(url, function(data) {
+                    if( data.message && data.message == "AUTH_FAILED") {
+                        Eksigator.setEnabled(0);
+                    }
+                    else {
+                        Eksigator.setEnabled(1);
+                   }
+
+                    opera.extension.postMessage("userDataUpdated");
+                });
+
+            });
 
 
             /*
-            opera.extension.postMessage("foo");
             opera.postError("mesaj gitti");
 
             opera.extension.onmessage = function(e){
@@ -64,6 +84,7 @@
     </script>
 	<style>
         body {
+            overflow:hidden;
             font-size:12px;
             font-family:arial;
             padding:0;
@@ -117,6 +138,10 @@
             display:block;
         }
 
+        #tab_settings {
+            width:99%;
+        }
+
         #tab_settings input {
             width:100%;
             margin-bottom:5px;
@@ -129,8 +154,10 @@
 
 
         #tab_settings input.submit {
+            cursor:pointer;
+            padding:10px;
             border:none;
-            background:#88c73c;
+            background:#9d9d9d;
             color:#FFFFFF; 
             text-shadow: 2px 2px 2px #111;
             font-weight:bold;
@@ -138,9 +165,10 @@
         }
 
         .error {
+            display:none;
             margin:10px 5px;
             background:#d42525;
-            border:1px dashed #FF0000; 
+            border:2px dashed #FF0000; 
             padding:5px;
             color:#FFFFFF;
             font-weight:bold;
@@ -148,35 +176,31 @@
             text-shadow: 2px 2px 2px #e08686;
             border-radius: 6px;
         }
+
+        .success {
+            margin:10px 5px;
+            background:#64ba50;
+            border:2px dashed green; 
+            padding:5px;
+            color:#FFFFFF;
+            font-weight:bold;
+            text-align:center;
+            text-shadow: 2px 2px 2px green;
+            border-radius: 6px;
+        }
+
 	</style>
 </head>
 <body>
-    <div id="tabs">
-        <ul>
-            <li>
-                <a class="list">
-                    List
-                </a>
-            </li>
-            <li>
-                <a class="settings">
-                    Ayarlar
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="clear"></div>
-    <div id="tab_list" class="tabContent">
+    <div id="tab_settings" class="tabContent">
+        <div class="success">
+            Ek$igator etkin!
+        </div>
         <div class="error">
-            Bir hata oluştu
-        </div>
-        <div id="liste">
-            Buraya liste gelecek
+            Lütfen kullanıcı bilgilerinizi kontrol edin
         </div>
 
-    </div> <!-- #tab_list -->
 
-    <div id="tab_settings" class="tabContent hidden">
         <strong>Kullanıcı adı</strong>
         <input type="text" id="username"/>
         <strong>API anahtarı</strong>
