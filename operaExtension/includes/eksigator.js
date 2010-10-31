@@ -74,18 +74,20 @@ var Eksigator = {};
         //Eksigator.elements.apiKey.value = "demo";
         Eksigator.elements.enabled.value = "0";
 
-
+        //notify extension on every 10 second about changes
         setInterval( function(){
             var selector = "#eksigator_panel .eksigator_panel_button span";
             var span= document.querySelectorAll(selector)[0];
-            var spanText = span.innerHTML.replace("(","");
-            var unreadCount = parseInt(spanText, 10) || 0;
+            if(span) {
+                var spanText = span.innerHTML.replace("(","");
+                var unreadCount = parseInt(spanText, 10) || 0;
+                opera.extension.postMessage("setUnreadCount="+unreadCount);
+            }
             //alert(unreadCount);
-        }, 30000);
+        }, 10000);
 
         opera.extension.postMessage("getUsernameAndApiKey");
         opera.extension.onmessage = function(e){
-            opera.postError(e.data);
             var messageSplit = e.data.split("=");
             if( e.data.indexOf("usernameAndApiKey=")>-1 ){
                 var usernameAndApiKey = messageSplit[1].split("|");

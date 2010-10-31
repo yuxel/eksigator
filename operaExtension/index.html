@@ -28,9 +28,16 @@
                     var messageText = username+"|"+password+"|"+enabled;
                     e.source.postMessage("usernameAndApiKey="+messageText);
                 }
+                if (e.data.indexOf("setUnreadCount")>-1){
+                    var unreadCount = parseInt(messageValue, 10);
+                    Eksigator.hideBadge();
+                    if(unreadCount > 0){
+                        Eksigator.setBadgeContent(unreadCount);
+                        Eksigator.showBadge();
+                    }
+                }
                 if (e.data.indexOf("userDataUpdated")>-1){
                     Eksigator.getList();
-                    opera.postError( Eksigator.getBadgeContent() ); 
                 }
             };
 
