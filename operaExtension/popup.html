@@ -3,7 +3,7 @@
 <head>
 	<title>Ek$igator</title>
 	<meta charset="UTF-8">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="static/jquery.min.js"></script>
     <script>
        
         var Eksigator = {};
@@ -56,11 +56,14 @@
                 Eksigator.setUsername( $("#username").val());
                 Eksigator.setApiKey( $("#apiKey").val());
 
+                Eksigator.setEnabled(1);
+                opera.extension.postMessage("userDataUpdated");
 
-                var url = "http://api.eksigator.com/" + username + "/" + apiKey + "/getList?jsoncallback=?";
+                /*
+                var url = "http://api.eksigator.com/" + username + "/" + apiKey + "/getList";
                 $.getJSON(url, function(data) {
                     if( data.message && data.message == "AUTH_FAILED") {
-                        Eksigator.setEnabled(0);
+                        Eksigator.setEnabled(1);
                     }
                     else {
                         Eksigator.setEnabled(1);
@@ -68,6 +71,7 @@
 
                     opera.extension.postMessage("userDataUpdated");
                 });
+                */
 
             });
 

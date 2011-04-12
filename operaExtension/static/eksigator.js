@@ -109,6 +109,7 @@ if (!window.console.log) {window.console.log = function() {};}
     };
 
     Eksigator.getList = function(){
+        return false;
         var getListUrl = Eksigator.getLoginUrl() + "getList";
         getJSONData(getListUrl, function(data) {
             var sortedList = sortList(data); 
