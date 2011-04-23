@@ -6,7 +6,7 @@
  */
 
 //path to your amqp-php library
-require_once('php-amqplib/amqp.inc');
+require_once('php_amqplib/amqp.inc');
 
 class MessageSender {
     //set configs
