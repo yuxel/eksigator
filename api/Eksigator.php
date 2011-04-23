@@ -3,6 +3,7 @@ require_once("../SourPHP/classes/SourPHP.php");
 require_once("../SourPHP/classes/SourPHPUrlCacheToFile.php");
 
 include_once("mysqlConf.php"); //db conf
+include_once("amqp/MessageSender.php"); //amqp message sender
 
 /**
  * Eksigator
@@ -24,6 +25,8 @@ class Eksigator{
     
     const URL_CACHE_PREFIX = "/tmp/url_";
 
+    const USE_RABBIT_MQ = true;
+
 
     /**
      * init db and fetcher
@@ -34,6 +37,16 @@ class Eksigator{
         $this->connectDb(); 
         $this->fetcher = new SourPHP();
         $cacheHandler = new SourPHPUrlCacheToFile();
+
+        if (self::USE_RABBIT_MQ) {
+            $fetchSender = new MessageSender();
+
+            $urlFetcher = function($url, $hash, $cacheHandler) {
+                $fetchSender->send($url, $hash);
+            };
+
+            $this->fetcher->setUrlFetcher($urlFetcher);
+        }
 
         $this->fetcher->setCacheLifeTime( self::CACHE_TIME );
         $this->fetcher->setCacheHandler ( $cacheHandler );
