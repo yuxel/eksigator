@@ -109,10 +109,14 @@ class rabbitMQEksigatorQueue:
             print "Something went wrong : ",error
 
     def fetchUrl(self,msg):
-        message = json.loads(msg.body)
-        url = message['url']
-        filename = message['hash']
-        self.fetcher.fetch(url, filename)
+        try:
+            message = json.loads(msg.body)
+            url = message['url']
+            filename = message['hash']
+            self.fetcher.fetch(url, filename)
+        except Exception, error :
+            print "Cant fetch url"
+
 
 eksigatorQueue = rabbitMQEksigatorQueue()
 eksigator = eksigator()
