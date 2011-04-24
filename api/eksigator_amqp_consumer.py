@@ -51,6 +51,7 @@ class eksigator():
             print "fetching " + url
             content = self.fetch_content(url)
             print "saving content to  " + file
+            time.sleep(5)
             self.write_content_to_file(content, file)
             print "done ..."
 
