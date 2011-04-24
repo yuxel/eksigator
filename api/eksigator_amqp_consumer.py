@@ -13,7 +13,6 @@ class eksigator():
     def __init__(self):
         self.max_time = 1800 # half an hour
         self.base_url = "www.eksisozluk.com"
-        self.http_conn = httplib.HTTPConnection(self.base_url)
     def check_file_to_fetch(self, file):
         exists=os.path.exists(file)
         
@@ -32,12 +31,12 @@ class eksigator():
             return True
 
     def fetch_content(self, url):
-        #conn = httplib.HTTPConnection(self.base_url)
+        conn = httplib.HTTPConnection(self.base_url)
         #conn.request("GET", "/amqp/test.php")
-        self.http_conn.request("GET", url)
-        r1 = self.http_conn.getresponse()
+        conn.request("GET", url)
+        r1 = conn.getresponse()
         data = r1.read()
-        #self.http_conn.close()
+        conn.close()
         return data
 
     def write_content_to_file(self, content, file):
@@ -116,6 +115,7 @@ class rabbitMQEksigatorQueue:
             self.fetcher.fetch(url, filename)
         except Exception, error :
             print "Cant fetch url"
+            print error
 
 
 eksigatorQueue = rabbitMQEksigatorQueue()
