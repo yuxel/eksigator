@@ -39,9 +39,9 @@ class Eksigator{
         $cacheHandler = new SourPHPUrlCacheToFile();
 
         if (self::USE_RABBIT_MQ) {
-            $fetchSender = new MessageSender();
-
+            
             $urlFetcher = function($url, $hash, $cacheHandler) {
+                $fetchSender = new MessageSender();
                 $fetchSender->send($url, $hash);
             };
 
