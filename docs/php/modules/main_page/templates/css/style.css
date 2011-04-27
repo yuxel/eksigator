@@ -12,8 +12,9 @@
 .bubble_items1{
         padding-left:15px;
         width:450px;
-        height:180px;
-        padding-top:60px;
+        height:270px;
+        overflow: hidden;
+        padding-top:50px;
         margin-left:100px;
 
 }
