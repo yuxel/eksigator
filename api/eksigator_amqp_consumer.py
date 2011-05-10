@@ -31,7 +31,7 @@ class eksigator():
             return True
 
     def fetch_content(self, url):
-        conn = httplib.HTTPConnection(self.base_url)
+        conn = httplib.HTTPConnection(self.base_url, timeout=10)
         #conn.request("GET", "/amqp/test.php")
         conn.request("GET", url)
         r1 = conn.getresponse()
