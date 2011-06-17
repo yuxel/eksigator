@@ -1,4 +1,4 @@
-""" 
+"""
 AMQP consumer to fetch url
 
 @author Osman Yuksel < yuxel |ET| sonsuzdongu |DOT| com >
@@ -6,7 +6,7 @@ AMQP consumer to fetch url
 """
 
 from amqplib import client_0_8 as amqp
-import simplejson as json 
+import simplejson as json
 import os.path, time, httplib
 
 class eksigator():
@@ -15,7 +15,7 @@ class eksigator():
         self.base_url = "www.eksisozluk.com"
     def check_file_to_fetch(self, file):
         exists=os.path.exists(file)
-        
+
         if exists :
             now = time.time()
             filemtime=os.path.getmtime(file)
@@ -23,7 +23,7 @@ class eksigator():
             if time_diff > self.max_time :
                 #print "true time elpase"
                 return True
-            else : 
+            else :
                 #print "false, time not elpase"
                 return False
         else :
@@ -33,7 +33,8 @@ class eksigator():
     def fetch_content(self, url):
         conn = httplib.HTTPConnection(self.base_url, timeout=10)
         #conn.request("GET", "/amqp/test.php")
-        conn.request("GET", url)
+        headers = {'User-Agent':'Eksigator'}
+        conn.request("GET", url, {}, headers)
         r1 = conn.getresponse()
         data = r1.read()
         conn.close()
@@ -42,7 +43,7 @@ class eksigator():
     def write_content_to_file(self, content, file):
         f = open(file, 'w')
         f.write(content)
-        f.close() 
+        f.close()
 
     def fetch(self, url, file) :
         if self.check_file_to_fetch(file) :
@@ -81,22 +82,22 @@ class rabbitMQEksigatorQueue:
             chan = conn.channel()
 
             chan.queue_declare( self.queueConf['name'],
-                                durable=True,  
+                                durable=True,
                                 exclusive=False,
-                                auto_delete=False) 
+                                auto_delete=False)
 
             chan.exchange_declare(self.queueConf['exchange'],
-                                  type="direct", 
-                                  durable=True, 
-                                  auto_delete=False,) 
+                                  type="direct",
+                                  durable=True,
+                                  auto_delete=False,)
 
             # bind queue with exchange
             chan.queue_bind(self.queueConf['name'], self.queueConf['exchange'])
 
             # set consumers callback method
-            chan.basic_consume(self.queueConf['name'], 
+            chan.basic_consume(self.queueConf['name'],
                                no_ack=True,
-                               callback=self.fetchUrl) 
+                               callback=self.fetchUrl)
             # start listening
             while True:
                 chan.wait()
