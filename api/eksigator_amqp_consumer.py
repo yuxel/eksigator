@@ -33,7 +33,7 @@ class eksigator():
     def fetch_content(self, url):
         conn = httplib.HTTPConnection(self.base_url, timeout=10)
         #conn.request("GET", "/amqp/test.php")
-        headers = {'User-Agent':'Eksigator'}
+        headers = {'User-Agent':'Eksigator', "Connection": "close"}
         conn.request("GET", url, {}, headers)
         r1 = conn.getresponse()
         data = r1.read()
