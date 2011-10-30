@@ -12,7 +12,7 @@ height:400px;
 
 #main.sayfa .header {
             color:#457801;
-            font-size:1.6em; 
+            font-size:1.6em;
             font-weight:bold;
             text-decoration:underline;
             margin:10px 0;
@@ -34,7 +34,7 @@ height:400px;
 
 .browser_list li {
             height:35px;
-            width:130px; 
+            width:130px;
             float:left;
             margin-left:4px;
 
@@ -79,6 +79,11 @@ height:400px;
     background:url('../../img/qt.jpg') no-repeat left;
 }
 
+.android32 {
+    background:url('../../img/android.png') no-repeat left;
+}
+
+
 .facebook32 {
     background:url('../../img/fb.jpg') no-repeat left;
 }
@@ -87,19 +92,19 @@ height:400px;
 .browser_header {font-weight:bold;}
 .browser_item_content {margin:10px;}
 
-.paid_services { 
+.paid_services {
         height:270px;
         background:url('../../img/hizmetler.jpg') no-repeat right;
         padding-right:300px;
 }
 
 
-.paid_services div{ 
+.paid_services div{
         padding-top:120px;
         font-size:1.4em;
 }
 
 
 .screenshots .item {width:200px; height:170px; float:left; text-align:center;  margin:0 10px}
-.screenshots img {width:180px; height:135px; padding:2px; border:1px solid #BBBBBB} 
+.screenshots img {width:180px; height:135px; padding:2px; border:1px solid #BBBBBB}
 .screenshots .item a {display:block}
